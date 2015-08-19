@@ -1,0 +1,113 @@
+{% extends 'MGAdminBundle:Bases:base.html.twig' %}
+
+{% block customstyle %}
+    <link rel="stylesheet" type="text/css" href="{{ asset('bundles/adminbundle/css/jquery.mCustomScrollbar.css') }}"
+          xmlns="http://www.w3.org/1999/html">
+{% endblock %}
+
+{% block content %}
+    <div class="container">
+        <div class="span12" style="min-width: 320px">
+            <div class="row">
+                <div class="span11" style="padding: 15px 25px; border-bottom: 1px solid #cccccc;">
+                    <h2>Solicitud información</h2>
+                    {% for contacto in conversacion.mensajesCli  %}
+                        {% if contacto.publicidad == true %}
+                            {% set publi = true %}
+                            {% set fechaAcepta = contacto.fechaEnvio %}
+                        {% endif %}
+                        {% if loop.last == true %}
+                        <div class="span5">
+                           <h4>Asunto: {{ contacto.asunto }}</h4>
+                            <p>Fecha envío: {{ contacto.fechaEnvio|date('d-m-Y') }}</p>
+                            <p>Solicitante: {{ contacto.nombre }}</p>
+                            <p>Email: {{ contacto.email}}</p>
+                            {% if publi == true %}
+                                <p>Al usuario <b class="text-success">SI se le puede enviar</b> publicidad</p>
+                                <p>Aceptado el día {{ fechaAcepta|date('d-m-Y') }}</p>
+                            {% else %}
+                                <p>Al usuario <b class="text-error">NO se le puede enviar</b> publicidad</p>
+                            {% endif %}
+                            </div>
+                            <div class="span5">
+                              <h4>Mensaje:</h4>
+                              <p style="text-align: justify">
+                                  {{ contacto.mensaje|nl2br }}
+                              </p>
+                            </div>
+                        {% endif %}
+                    {% endfor %}
+                </div>
+                <div class="span11 ">
+                    <div class="span5 scrollable-container-msg pull-left">
+                        <h3>Mensajes anteriores cliente</h3>
+                        <ul class="nolist">
+                            {% for mensj in conversacion.mensajesCli %}
+                                {% if conversacion.mensajesCli|length < 2 %}
+                                    <li><h4>No hay mensajes anteriores</h4></li>
+                                {% else %}
+                                    {% if loop.last == false %}
+                                        <li style="border-bottom: 1px solid #cccccc; padding: 5px 0">
+                                            <p>Fecha envío: {{ mensj.fechaEnvio|date('d-m-Y') }}</p>
+                                            <p>Mensaje:</p>
+                                            <p>{{ mensj.mensaje|nl2br }}</p>
+                                        </li>
+                                    {% endif %}
+                                {% endif %}
+
+                            {% endfor %}
+                        </ul>
+                    </div>
+                    <div class="span5 scrollable-container-msg pull-right">
+                        <h3>Mensajes anteriores propios</h3>
+                        <ul class="nolist">
+                            {% for mensajes in conversacion.mensajesRes|reverse %}
+                                {% if conversacion.mensajesRes|length < 1 %}
+                                    <li><h4>No hay mensajes anteriores</h4></li>
+                                {% else %}
+                                    <li style="border-bottom: 1px solid #cccccc; padding: 5px 0">
+                                        <p>Fecha respuesta: {{ mensajes.fechaRespuesta|date('d-m-Y') }}</p>
+                                        <p>Mensaje:</p>
+                                        <p>{{ mensajes.mensaje|nl2br }}</p>
+                                    </li>
+                                {% endif %}
+
+                            {% endfor %}
+                        </ul>
+                    </div>
+                </div>
+                <div class="span10 offset1 ">
+                    <form action="{{ path('mg_public_conver_detail', {'idConv':conversacion.id}) }}" method="POST" class="create-msg-form">
+                        <fieldset>
+                            {{ form_errors(respuesta) }}
+                            {{ form_widget(respuesta) }}
+                            {{ form_rest(respuesta) }}
+                        </fieldset>
+                        <input type="submit" class="btn btn-success" value="Enviar">
+                        <a class="btn btn-danger" href="{{ path('mg_contactos_homepage', {'page': 1}) }}">Volver</a>
+                    </form>
+                </div>
+            </div>
+        </div>
+
+    </div>
+{% endblock %}
+
+{% block customjs %}
+    <script src="{{ asset('bundles/adminbundle/js/custom.js') }}"></script>
+    <script src="{{ asset('bundles/adminbundle/js/jquery.mCustomScrollbar.min.js') }}"></script>
+    <script src="{{ asset('bundles/adminbundle/js/jquery.mousewheel.min.js') }}"></script>
+    <script>
+        (function($){
+            $(window).load(function(){
+                $(".scrollable-container-msg").mCustomScrollbar({
+                    scrollButtons:{
+                        enable:true
+                    },
+                    theme:"dark"
+                });
+            });
+        })(jQuery);
+    </script>
+
+{% endblock %}

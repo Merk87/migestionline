@@ -1,0 +1,109 @@
+{% extends 'MGDemoBundle:Bases:base_admin.html.twig' %}
+
+
+{% block customstyle %}
+    <link rel="stylesheet" type="text/css" href="{{ asset('bundles/adminbundle/css/jquery.mCustomScrollbar.css') }}"
+          xmlns="http://www.w3.org/1999/html">
+{% endblock %}
+
+{% block content %}
+    <div class="container">
+        <div class="span12 hero-unit" style="min-width: 320px">
+           <div class="row">
+               <div class="span6">
+                   <h4>Detalles Repositorio</h4>
+                   <table class="table table-bordered table-condensed table-striped">
+                       <tr>
+                           <td>Descripción</td>
+                           <td>ASESORÍA TAVERNES S.L.</td>
+                       </tr>
+                       <tr>
+                           <td>Limite de archivos</td>
+                           <td>10000</td>
+                       </tr>
+                       <tr>
+                           <td>Total de archivos guardados</td>
+                           <td>150</td>
+                       </tr>
+                       <tr>
+                           <td>Capacidad de archivos restante</td>
+                           <td>9850</td>
+                       </tr>
+
+                           <tr class="success">
+                               <td>Estado</td>
+                               <td class="success">Activo</td>
+                           </tr>
+                       <tr>
+                           <td>Empresa</td>
+                           <td>ASESORÍA TAVERNES S.L.</td>
+                       </tr>
+
+                   </table>
+               </div>
+               <div class="span3 ">
+                <h4>Usuarios repositorio</h4>
+                     <div class="scrollable-user-list">
+                         <table class="table table-bordered table-condensed table-striped">
+                                <tr>
+                                     <td>Empleado/a</td>
+                                     <td>María Jiménez</td>
+                                </tr>
+                                <tr>
+                                    <td>Empleado/a</td>
+                                    <td>Ana Sánchez</td>
+                                </tr>
+
+                         </table>
+                     </div>
+               </div>
+               <div class="span3">
+                       <h4>Clientes repositorio</h4>
+                       <div class="scrollable-user-list">
+                           <table class="table table-bordered table-condensed table-striped">
+                               <tr>
+                                   <td>Cliente</td>
+                                   <td>Santiago Peralta  </td>
+                               </tr>
+                               <tr>
+                                   <td>Cliente</td>
+                                   <td>Víctor Olmedo</td>
+                               </tr>
+                           </table>
+                       </div>
+
+               </div>
+           </div>
+
+            <div class="span9">
+              <a href="{{ path('mg_demo_repo_by_empresa') }}" class="btn btn-large margined">Volver</a>
+            </div>
+
+        </div>
+
+    </div>
+{% endblock %}
+
+{% block customjs %}
+    <script src="{{ asset('bundles/adminbundle/js/custom.js') }}"></script>
+    <script src="{{ asset('bundles/adminbundle/js/jquery.mCustomScrollbar.min.js') }}"></script>
+    <script src="{{ asset('bundles/adminbundle/js/jquery.mousewheel.min.js') }}"></script>
+    <script>
+        (function($){
+            $(window).load(function(){
+                $(".scrollable-user-list").mCustomScrollbar({
+                    scrollButtons:{
+                        enable:true
+                    },
+                    theme:"dark"
+                });$(".scrollable-client-list").mCustomScrollbar({
+                    scrollButtons:{
+                        enable:true
+                    },
+                    theme:"dark"
+                });
+            });
+        })(jQuery);
+    </script>
+
+{% endblock %}

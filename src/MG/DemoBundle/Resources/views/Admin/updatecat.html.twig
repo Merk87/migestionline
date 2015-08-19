@@ -1,0 +1,43 @@
+{% extends 'MGDemoBundle:Bases:base_admin.html.twig' %}
+
+{% block content %}
+    <div class="container">
+        <div class="span12">
+            <div class="row">
+                <h3>Modificar Categoría</h3>
+                <form method="POST" class="update_form">
+                    <fieldset>
+                        <div id="mg_repobundle_categoriatype"><div>
+                                <label for="mg_repobundle_categoriatype_nombre" class="required">Nombre</label>
+                                <input type="text" id="mg_repobundle_categoriatype_nombre" name="mg_repobundle_categoriatype[nombre]" required="required" maxlength="255" value="Categoría Demo 1">
+                            </div>
+                            <div>
+                                <label for="mg_repobundle_categoriatype_descripcion" class="required">Descripcion</label>
+                                <input type="text" id="mg_repobundle_categoriatype_descripcion" name="mg_repobundle_categoriatype[descripcion]" required="required" maxlength="255" value="Categoría de Demostración 1">
+                            </div>
+                            <div>
+                                <label for="mg_repobundle_categoriatype_enabled" class="required">Enabled</label>
+                                <select id="mg_repobundle_categoriatype_enabled" name="mg_repobundle_categoriatype[enabled]" required="required">
+                                    <option value="1">Activo</option>
+                                    <option value="0">Desactivado</option>
+                                </select>
+                            </div>
+                            <div>
+                                <label for="mg_repobundle_categoriatype_servicio" class="required">Servicio</label>
+                                <select id="mg_repobundle_categoriatype_servicio" name="mg_repobundle_categoriatype[servicio]" required="required">
+                                    <option>- Seleccione un Servicio -</option>
+                                    <option>Fiscal PYMES</option>
+                                    <option>Fiscal Autónomos</option>
+                                    <option>Laboral</option>
+                                    <option>Jurídico</option>
+                                </select>
+                                <a data-content="Las categorías son aquellas subdivisiones de tus servicios, lo que la usuario le permitirá concretar más el área sobre el que tratara su gestión." data-original-title="¿Por qué he de seleccionar un servicio?" class="btn toolTip">?</a>
+                            </div>
+                    </fieldset>
+                    <input type="submit" class="btn btn-success" value="Guardar">
+                    <a class="btn margined" href="{{ path('mg_demo_catadmin_homepage') }}">Volver</a>
+                </form>
+            </div>
+        </div>
+    </div>
+{% endblock %}

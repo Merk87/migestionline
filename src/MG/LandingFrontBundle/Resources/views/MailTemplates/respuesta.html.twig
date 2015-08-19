@@ -1,0 +1,24 @@
+<html>
+<head>
+</head>
+
+<body>
+<header>
+    <div><a id="ans" href="{{ app.request.scheme ~'://' ~ path('mg_landing_front_homepage') }}"><img src="{{ app.request.scheme ~'://' ~ app.request.httpHost ~ asset('bundles/landingfront/images/logo.png') }}" alt="migestion logo"></a></div>
+</header>
+<h1 style="color:#005580">Respuesta a tu consulta</h1>
+<p>{{ message|nl2br }}</p>
+<div style="margin-top: 30px">
+    <a href="{{ app.request.scheme ~'://' ~ app.request.httpHost ~ path('mg_public_client_response', {'hash': hash}) }}" style="color:#fff;font-weight:bold;text-shadow:0 -1px 0 rgba(0,0,0,.25);background-color:#49afcd;background-image:-moz-linear-gradient(top,#5bc0de,#2f96b4);background-image:-webkit-gradient(linear,0 0,0 100%,from(#5bc0de),to(#2f96b4));background-image:-webkit-linear-gradient(top,#5bc0de,#2f96b4);background-image:-o-linear-gradient(top,#5bc0de,#2f96b4);background-image:linear-gradient(to bottom,#5bc0de,#2f96b4);background-repeat:repeat-x;filter:progid:DXImageTransform.Microsoft.gradient(startColorstr='#ff5bc0de', endColorstr='#ff2f96b4', GradientType=0);border-color:#2f96b4 #2f96b4 #1f6377;border-color:rgba(0,0,0,.1) rgba(0,0,0,.1) rgba(0,0,0,.25);filter:progid:DXImageTransform.Microsoft.gradient(enabled=false);padding:10px;text-decoration:none">¡Contestar!</a>
+</div>
+<div style="width: 60%; border-top: 1px solid #cccccc; text-align: justify; margin-top: 30px">
+    <p style="font-size: 10px">Copyright ©2013 Mi Gestion Online. · Todos los derechos reservados<p>
+    <p style="font-size: 10px">SABER NUEVAS TECNOLOGÍAS, S.L · Plaza Azteca, s/n local 50012 Zaragoza (España) · Tel. 976436030 / 679182420</p>
+    <p style="font-size: 10px">Ten en c app.request.httpHost ~ patuenta que este es un mensaje automático, por lo que si lo respondes no recibirás ninguna contestación.</p>
+    <p style="font-size: 10px">Para asegurar que recibes nuestros correos electrónicos, por favor, añade la dirección
+        noreply@migestionline.com a tu lista de remitentes seguros.</p>
+    <p style="font-size: 10px">Si quieres saber cómo tratamos tus datos personales, consulta nuestra <a href="{{ app.request.scheme ~'://' ~ app.request.httpHost ~ path('mg_front_politica') }}">política de privacidad.</a></p>
+    <p style="font-size: 10px">Este correo electrónico y la información que contiene son confidenciales. Si lo ha recibido por error, infórmenos inmediatamente. No deberá copiarlo bajo ningún propósito ni revelar su contenido a un tercero. Las comunicaciones por Internet no son seguras y, por tanto, Mi Gestión Online no asume ninguna responsabilidad jurídica por el contenido de este mensaje, ya que se ha difundido en una red pública. Si sospecha que el mensaje puede haber sido interceptado o modificado, póngase en contacto con nosotros.</p>
+</div>
+</body>
+</html>

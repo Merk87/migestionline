@@ -1,0 +1,33 @@
+{% extends 'MGDemoBundle:Bases:base_admin.html.twig' %}
+
+{% block content %}
+
+    <div class="container-fluid" style="margin-top: 50px;">
+        <div class="span5">
+           <ul class="front-buttons">
+                <li>
+                    <a href="{{ path('mg_demo_gest_admin_new') }}" class="btn btn-info btn-large newGest" style="margin-bottom: 10px">Nueva Gestión</a>
+                    <button id="showPop" data-content="Será la forma en que los usuarios te solicitarán de tus servicios." data-original-title="¿Que es una Gestión?" class="btn toolTip ">?</button>
+                </li>
+                <li>
+                    <a href="{{ path('mg_demo_serv_create')}}" class="btn btn-success btn-large" style="margin-bottom: 10px">Nuevo Servicio</a>
+                    <button id="showPop2" data-content="Los servicios serán las divisiones identificativas de los servicios que ofreces a través de Mi Gestión Online. Por ejemplo Servicios Fiscales, Laborales, etc." data-original-title="¿Que es un Servicio?" class="btn toolTip">?</button>
+                </li>
+                <li>
+                    <a href="{{ path('mg_demo_cat_create')}}" class="btn btn-success btn-large" style="margin-bottom: 10px">Nueva Categoría</a>
+                    <button id="showPop3" data-content="Las categorías son aquellas subdivisiones de tus servicios, que servirán para categorizar las gestiones que tus clientes te soliciten." data-original-title="¿Que es un Categoría?" class="btn toolTip">?</button>
+                </li>
+                <li>
+                    <a href="{{ path('mg_demo_user_create')}}" class="btn btn-success btn-large" style="margin-bottom: 10px">Nuevo Usuario</a>
+                    <button id="showPop4" data-content="Un usuario puede ser un cliente o un empleado, diferenciado por rol." data-original-title="¿Que es un Usuario?" class="btn toolTip">?</button>
+                </li>
+
+           </ul>
+        </div>
+    </div>
+
+{% endblock %}
+
+{% block customjs %}
+    <script src="{{ asset('bundles/adminbundle/js/custom.js') }}"></script>
+{% endblock %}

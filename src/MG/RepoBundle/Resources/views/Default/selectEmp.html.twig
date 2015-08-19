@@ -1,0 +1,51 @@
+{% extends 'MGRepoBundle:Base:basenolat.html.twig' %}
+
+{% block content %}
+
+   <div class="main">
+       <div class="container" style="margin-top: 50px">
+          <div class="span12">
+              <h1>Selecciona la empresa para comenzar con tus gestiones.</h1>
+          </div>
+           <div class="span12" style="margin-top: 50px">
+               <ul class="thumbnails">
+                   {% for empresa in empresas %}
+                       {% if empresa.enabled == 1 %}
+                           <li class="span3">
+                               <a class="accessLink" href="{{ path('mg_user_panel', {'empName':empresa.nombre, 'page':1}) }}">
+                               <div class="thumbnail">
+                                   <div class="img-wrap"><img src="{{ asset(empresa.logoPath()) }}" alt="{{ empresa.logoAlt }}"></div>
+                                   <h3>{{ empresa.nombre }}</h3>
+                                    <div class="caption">
+                                        <label class="font-weight: bold">Servicios contratados</label>
+                                        <ul>
+                                        {% if servicios|length >= 1 %}
+                                            {% for serv in servicios %}
+                                                {% if serv.empresaId == empresa.id %}
+                                                    <li>{{ serv.nombre }}</li>
+                                                {% endif %}
+                                            {% endfor %}
+                                        {% endif %}
+                                        </ul>
+                                    </div>
+                               </div></a>
+                           </li>
+                       {% endif %}
+                   {% endfor %}
+               </ul>
+           </div>
+           <div class="span12" style="margin-top: 35px">
+               <h2>Solicitar nuevos servicios.</h2>
+               <h3></h3>
+               <p>Si necesitas ampliar los servicios contratados no dudes en utilizar nuestra herramienta diseñada exclusivamente para ello, con solo un par de clics podrás comunicarnos
+                   tus necesidades y en un breve espacio de tiempo, te ofreceremos una selección delas mejores opciones para ti.</p>
+               <a href="{{ path('mg_home_contratacion') }}" class="btn btn-large btn-success">Solicitar nuevos servicios</a>
+           </div>
+       </div>
+   </div>
+
+{% endblock %}
+
+{% block customjs %}
+    <script src="{{ asset('bundles/adminbundle/js/custom.js') }}"></script>
+{% endblock %}

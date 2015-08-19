@@ -1,0 +1,170 @@
+<!DOCTYPE html>
+<html>
+{% block header %}
+    <head>
+        <meta name="author" content="Merkury" />
+        <meta name="description" content="Panel administración Mi Gestión Online" />
+        <meta name="robots" content="index, follow"/>
+        <meta name="Language" content="ES" />
+        <meta name="country" content="ES" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+        {% block stylesheet %}
+            <link rel="stylesheet" type="text/css" href="{{ asset('bundles/adminbundle/css/bootstrap.css') }}">
+            <link rel="stylesheet" type="text/css" href="{{ asset('bundles/adminbundle/css/custom_admin.css') }}">
+            <link rel="stylesheet" type="text/css" href="{{ asset('bundles/demobundle/css/tooltipstyles.css') }}">
+        {% endblock %}
+        {% block customstyle %}
+        {% endblock %}
+        {% block scripts %}
+            <script src="//ajax.googleapis.com/ajax/libs/jquery/2.0.0/jquery.min.js"></script>
+            <script src="//ajax.googleapis.com/ajax/libs/jqueryui/1.10.2/jquery-ui.min.js"></script>
+        {% endblock %}
+        {% block customscripts %}
+        {% endblock %}
+        <link rel="shortcut icon" href="{{ asset('bundles/adminbundle/img/favicon.ico') }}" type="image/x-icon">
+        <link rel="icon" href="{{ asset('bundles/adminbundle/img/favicon.ico') }}" type="image/x-icon">
+        <title>{% block title %}Panel de Administracion - Mi Gestión Online{% endblock %}</title>
+    </head>
+{% endblock %}
+<body>
+{% block body %}
+    {% block top_line %}
+        <div class="navbar navbar-inverse">
+            <div class="navbar-inner">
+                <div class="container">
+                    {% block inner_top_line %}
+
+                        <a class="btn btn-navbar" data-toggle="collapse" data-target=".nav-collapse">
+                            <span class="icon-bar"></span>
+                            <span class="icon-bar"></span>
+                            <span class="icon-bar"></span>
+                        </a>
+
+                        <div class="nav-collapse collapse">
+                            <ul class="nav">
+                                <li>
+                                    <a href="{{ path('mg_admin_homepage') }}" style="font-weight: bold; color: white; padding: 6px">
+                                        <img class="logo" style="" src="{{ asset('bundles/adminbundle/img/logo.png') }}">
+                                    </a>
+                                </li>
+
+                                <li>
+                                    <a href="{{ path('mg_useradmin_homepage', {'page': 1}) }}">Usuarios</a>
+                                </li>
+
+                                {% if is_granted('ROLE_SUPER_ADMIN') %}
+                                    <li>
+                                        <a href="{{ path('mg_empadmin_homepage', {'page': 1}) }}">Empresas</a>
+                                    </li>
+                                    <li class="dropdown">
+                                        <a id="tot_cont" data-toggle="dropdown" href="#" data-path="{{path('mg_all_contratacion_alert')}}">Contrataciones
+                                            <b class="caret"></b>
+                                            <span class="notifications gcont" data-toggle="none"></span>
+                                        </a>
+                                        <ul class="dropdown-menu" role="menu">
+                                            <li>
+                                                <a id="acont" href="{{ path('mg_cont_homepage', {'page': 1}) }}" data-path="{{path('mg_contratacion_alert')}}">Solicitudes Contratación
+                                                    <span class="notifications cont" data-toggle="none"></span>
+                                                </a>
+                                            </li>
+                                            <li>
+                                                <a id="clie_cont" href="{{ path('mg_client_cont_homepage', {'page': 1}) }}" data-path="{{path('mg_contratacion_client_alert')}}">Solicitudes Ampliacion Servicios
+                                                    <span class="notifications ccont" data-toggle="none"></span>
+                                                </a>
+                                            </li>
+                                        </ul>
+                                    </li>
+
+                                    <li>
+                                        <a id="amsgCont" href="{{ path('mg_contactos_homepage', {'page': 1}) }}" data-path="{{ path('mg_msg_contact_alerts') }}">Mensajes Contacto
+                                            <span class="notifications msgCont" data-toggle="none"></span>
+                                        </a>
+                                    </li>
+                                {% endif %}
+
+                                <li>
+                                    <a href="{{ path('mg_repoadmin_homepage', {'page': 1}) }}">Repositorios</a>
+                                </li>
+
+                                <li>
+                                    <a href="{{ path('mg_servadmin_homepage', {'page': 1}) }}">Servicios</a>
+                                </li>
+
+                                {% if is_granted('ROLE_ADMIN') %}
+                                    <li>
+                                        <a href="{{ path('mg_catadmin_homepage', {'page': 1}) }}">Categorías</a>
+                                    </li>
+                                {% endif %}
+
+                                <li>
+                                    <a id="agest" href="{{ path('mg_gest_homepage', {'page':1, 'ord':0}) }}" data-path="{{path('mg_gest_alerts')}}">Gestiones
+                                        <span class="notifications gest" data-toggle="none"></span>
+                                    </a>
+                                </li>
+
+                                <li>
+                                    <a id="amsg" href="{{ path('mg_mensajeria_homepage', {'page':1}) }}" data-path="{{path('mg_msg_alerts')}}">Mensajes
+                                        <span class="notifications msg" data-toggle="none"></span>
+                                    </a>
+                                </li>
+
+                                <li>
+                                    <a href="{{ path('mg_show_notificaciones_admin', {'page':1}) }}" id="cenot" data-path="{{ path('mg_change_estado_alert') }}">
+                                        <span class="noback"> Nuevas notificaciones</span><span class="notifications gestchange" data-toggle="none"></span>
+                                    </a>
+                                </li>
+                                <li>
+                                    <a href="{{ path('mg_new_clients') }}" id="newus" data-path="{{ path('mg_new_clients_alert') }}">
+                                        <span class="noback"> Nuevos usuarios</span><span class="notifications newUser" data-toggle="none"></span>
+                                    </a>
+                                </li>
+
+                            </ul>
+                            <ul class="nav pull-right">
+                                <li><a href="{{ path('mg_user_profile') }}" class="btn-info" style="color: white">Perfil</a></li>
+                                <li><a href="{{ path('fos_user_security_logout') }}" class="btn-danger" style="color: white">Salir</a></li>
+                            </ul>
+
+                        </div>
+
+                    {% endblock %}
+                </div>
+            </div>
+        </div>
+    {% endblock %}
+
+    {% block flashmessages %}
+        {% for flashMessage in app.session.flashbag.get('notice') %}
+            <div class="container">
+                <div class="span6 offset2 alert alert-success">
+                    <button type="button" class="close" data-dismiss="alert">&times;</button>
+                    {{ flashMessage }}
+                </div>
+            </div>
+        {% endfor %}
+
+        {% for flashMessage in app.session.flashbag.get('fail') %}
+            <div class="container">
+                <div class="span6 offset2 alert alert-danger">
+                    <button type="button" class="close" data-dismiss="alert">&times;</button>
+                    {{ flashMessage }}
+                </div>
+            </div>
+        {% endfor %}
+    {% endblock %}
+    {% block content %}
+
+    {% endblock %}
+{% endblock %}
+</body>
+{% block footer %}
+    {% block js %}
+       <script src="{{ asset('bundles/adminbundle/js/bootstrap.min.js') }}"></script>
+       <script src="{{ asset('bundles/adminbundle/js/ajaxcalls.js') }}"></script>
+    {% endblock %}
+    {% block customjs %}
+
+    {% endblock %}
+{% endblock %}
+</html>

@@ -1,0 +1,143 @@
+<!DOCTYPE html>
+
+<html lang="es">
+<head>
+    <meta charset="utf-8">
+    <title>Mi Gestión Online</title>
+    <meta name="description" content="">
+    <meta name="author" content="Mi Gestión Online (Merkury)">
+
+    <!-- Mobile Specific Meta -->
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+
+    <!-- Stylesheets -->
+    {% block css %}
+        <link rel="stylesheet" href="{{ asset('bundles/landingfront/css/bootstrap.css') }}" />
+        <link rel="stylesheet" href="{{ asset('bundles/landingfront/css/styles.css') }}" />
+    {% endblock %}
+
+    {% block customcss %}
+
+    {% endblock %}
+
+    <!-- Scripts -->
+    {% block scripts %}
+        <script src="//ajax.googleapis.com/ajax/libs/jquery/2.0.0/jquery.min.js"></script>
+        <script src="//ajax.googleapis.com/ajax/libs/jqueryui/1.10.2/jquery-ui.min.js"></script>
+        <!--[if lt IE 9]>
+        <script src="http://html5shim.googlecode.com/svn/trunk/html5.js"></script>
+        <![endif]-->
+
+        <!--[if lt IE 10]>
+        <script src="http://html5shim.googlecode.com/svn/trunk/html5.js"></script>
+        <![endif]-->
+    {% endblock %}
+    <!-- Favicon and Apple Touch Icons -->
+    <link rel="shortcut icon" href="{{ asset('bundles/adminbundle/img/favicon.ico') }}">
+</head>
+<body>
+<div class="topamsg alert alert-warning">
+    <button type="button" class="close" data-dismiss="alert" id="closemsg">&times;</button>
+    <div class="container">
+        <div class="span12">
+            <p>Nuestro sitio utiliza cookies para mejorar nuestros servicios. Si continuas navegando aceptas el uso que hacemos de las cookies.</p>
+        </div>
+    </div>
+</div>
+<!-- HEADER -->
+<header class="container" id="top">
+{% block cabecera %}
+    <div class="row">
+
+        <div class="span4">
+
+            <h1 class="logo"><a href="{{ path('mg_public_client_browse_servs') }}" class="ir">Mi Gestión Online</a></h1>
+
+        </div> <!-- end span4 -->
+
+        <div class="span8">
+
+            <ul class="header-information">
+
+                <li class="phone-info">
+                    <p>¿Preguntas?</p>
+                    <p><strong>Llama al 976-436-030</strong></p>
+                </li>
+                <li class="email-info">
+                    <p>Envíanos un email a:</p>
+                    <p><a href="mailto:dudas@migestionline.com">dudas@migestionline.com</a></p>
+                </li>
+            </ul>
+
+        </div> <!-- end span8 -->
+        <div class="span12">
+            {% block customtopbar %}
+            {% endblock %}
+        </div>
+        {% block flashmessages %}
+            {% for flashMessage in app.session.flashbag.get('notice') %}
+                <div class="container">
+                    <div class="span6 offset2 alert alert-success">
+                        <button type="button" class="close" data-dismiss="alert">&times;</button>
+                        {{ flashMessage }}
+                    </div>
+                </div>
+            {% endfor %}
+
+            {% for flashMessage in app.session.flashbag.get('fail') %}
+                <div class="container">
+                    <div class="span6 offset2 alert alert-danger">
+                        <button type="button" class="close" data-dismiss="alert">&times;</button>
+                        {{ flashMessage }}
+                    </div>
+                </div>
+            {% endfor %}
+        {% endblock %}
+    </div> <!-- end row -->
+{% endblock %}
+</header> <!-- end container -->
+
+{% block content %}
+
+{% endblock %}
+
+<div class="copyright-container">
+    <ul class="footerul">
+        <li><a id="show_pp_b" class="no-link" data-path="{{ path('mg_front_politica') }}" >Política de privacidad</a></li>
+        <li><a id="show_av_b" class="no-link" data-path="{{ path('mg_front_aviso') }}">Aviso Legal</a></li>
+        <li><a id="show_cc_b" class="no-link" data-path="{{ path('mg_front_condiciones') }}">Condiciones de contratación</a></li>
+        <li><span>&copy; 2013 Mi Gestión Online.</span></li>
+    </ul>
+
+    <!-- COPYRIGHT -->
+</div>
+{% block modales %}
+{% endblock %}
+</body>
+{% block footer %}
+
+    {% block customjs %}
+
+    {% endblock %}
+    {% block js %}
+        <script src="{{ asset('bundles/landingfront/js/bootstrap.min.js') }}"></script>
+        <script src="{{ asset('bundles/landingfront/js/jquery.cookie.js') }}"></script>
+        <script src="{{ asset('bundles/landingfront/js/functions.js') }}"></script>
+    {% endblock %}
+
+{% endblock %}
+{% block analytics %}
+    <script>
+
+        (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+            (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+                m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+        })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+        ga('create', 'UA-44569448-1', 'migestionline.com');
+        ga('send', 'pageview');
+
+    </script>
+{% endblock %}
+
+</html>

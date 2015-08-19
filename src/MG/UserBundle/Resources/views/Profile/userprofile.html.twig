@@ -1,0 +1,110 @@
+{% extends 'MGRepoBundle:Base:basenolat.html.twig' %}
+
+{% block content %}
+    <div class="main">
+        <div class="container-fluid" style="margin-top: 50px">
+            <div class="span12">
+                <h1>Perfil de usuario</h1>
+            </div>
+            <div class="span12" style="margin-top: 50px">
+                <table class="table table-bordered table-condensed table-striped">
+                    {% if user.locked == 1 %}
+                        <tr class="error">
+                            <td colspan="2" style="font-weight: bold">Bloqueado</td>
+                        </tr>
+                    {% endif %}
+                    <tr>
+                        <td>Usuario</td>
+                        <td>{{ user.username }}</td>
+                    </tr>
+
+                    <tr>
+                        <td>Email</td>
+                        <td>{{ user.email }}</td>
+                    </tr>
+
+                    {% if user.enabled == 1 %}
+                        <tr class="success">
+                            <td>Estado</td>
+                            <td class="success">Activo</td>
+                        </tr>
+                    {% else %}
+                        <tr class="warning">
+                            <td>Estado</td>
+                            <td class="error">Inactivo</td>
+                        </tr>
+                    {% endif %}
+                    <tr>
+                        <td>Última conexión</td>
+                        <td>{{ user.lastLogin|date('d-m-Y H:i:s') }}</td>
+                    </tr>
+                    <tr>
+                        <td>Nombre</td>
+                        <td>{{ user.name }}</td>
+                    </tr>
+                    <tr>
+                        <td>Apellidos</td>
+                        <td>{{ user.apellidos }}</td>
+                    </tr>
+                    <tr>
+                        <td>NIF</td>
+                        <td>{{ user.nif }}</td>
+                    </tr>
+                    <tr>
+                        <td>Fecha Nacimiento</td>
+                        <td>{{ user.fechaNacimiento|date('d-m-Y') }}</td>
+                    </tr>
+                    <tr>
+                        <td>Telefono</td>
+                        <td>{{ user.telefono }}</td>
+                    </tr>
+                    <tr>
+                        <td>Tfno. Móvil</td>
+                        <td>{{ user.telefonoMvl }}</td>
+                    </tr>
+                    <tr>
+                        <td>Dirección</td>
+                        <td>{{ user.direccion }}</td>
+                    </tr>
+                    <tr>
+                        <td>Ciudad</td>
+                        <td>{{ user.ciudad }}</td>
+                    </tr>
+                    <tr>
+                        <td>Codigo Postal</td>
+                        <td>{{ user.codigoPostal }}</td>
+                    </tr>
+                    <tr>
+                        <td>País</td>
+                        <td>{{ user.pais }}</td>
+                    </tr>
+                    <tr>
+                        {% if empresas|length > 1 %}
+                            <td>Empresas</td>
+                            <td>
+                                <table class="inner-table">
+                                    {% for empresa in empresas %}
+                                        <tr><td style="border-style: none">
+                                                {{ empresa.nombre }}
+                                            </td></tr>
+                                    {% endfor %}
+                                </table>
+                            </td>
+                        {% elseif empresas|length == 1 %}
+                            <td>Empresa</td>
+                            <td>{{ empresas[0].nombre }}</td>
+                        {% endif %}
+                    </tr>
+                </table>
+                <div class="span9">
+                    <a class="btn btn-info " href="{{ path('mg_client_update') }}">Editar</a>
+                    <a class="btn btn-primary" href="{{ path('fos_user_change_password') }}">Cambiar contraseña</a>
+                    <a class="btn " href="{{ path('mg_repo_homepage') }}">Volver</a>
+
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+{% endblock %}

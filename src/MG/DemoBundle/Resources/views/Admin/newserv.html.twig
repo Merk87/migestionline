@@ -1,0 +1,46 @@
+{% extends 'MGDemoBundle:Bases:base_admin.html.twig' %}
+
+{% block content %}
+    <div class="container">
+        <div class="span12">
+            <div class="row">
+                <h3>Crear Servicio</h3>
+                <form method="POST" class="update_form">
+                    <fieldset>
+                        <div id="mg_repobundle_serviciostype">
+                            <div><label for="mg_repobundle_serviciostype_nombre" class="required">Nombre</label>
+                                <input type="text" id="mg_repobundle_serviciostype_nombre" name="mg_repobundle_serviciostype[nombre]" required="required" placeholder="Nombre">
+                            </div>
+                            <div>
+                                <label for="mg_repobundle_serviciostype_descripcion" class="required">Descripcion</label>
+                                <input type="text" id="mg_repobundle_serviciostype_descripcion" name="mg_repobundle_serviciostype[descripcion]" required="required" placeholder="Descripción">
+                            </div>
+                            <div>
+                                <label for="mg_repobundle_serviciostype_precio" class="required">Precio</label>
+                                <input type="number" id="mg_repobundle_serviciostype_precio" name="mg_repobundle_serviciostype[precio]" required="required" min="0">
+                            </div>
+                            <div>
+                                <label for="mg_repobundle_serviciostype_enabled" class="required">Activo</label>
+                                <select id="mg_repobundle_serviciostype_enabled" name="mg_repobundle_serviciostype[enabled]" required="required">
+                                    <option value="1">Activo</option>
+                                    <option value="0">Desactivado</option>
+                                </select>
+                                <a data-content="Determinará si el servicio es visible por los usuarios y si pueden asignarse usuarios y clientes." data-original-title="¿Que diferencia hay entre activo e inactivo?" class="btn toolTip">?</a>
+                            </div>
+                            <div>
+                                <label for="mg_repobundle_serviciostype_empresa" class="required">Empresa</label>
+                                <select id="mg_repobundle_serviciostype_empresa" name="mg_repobundle_serviciostype[empresa]" required="required">
+                                    <option>- Seleccione una Empresa -</option>
+                                    <option>Asesoría Tavernes S.L.</option>
+                                    <option>Gestoría Tavernes S.A.</option>
+                                </select>
+                                <a data-content="Deberás seleccionar una de la/s empresa/s de las que ya perteneces a la que quieres asignar el servicio." data-original-title="¿Que es la Empresa?" class="btn toolTip">?</a>
+                            </div>
+                    </fieldset>
+                    <input type="submit" class="btn btn-success" value="Guardar">
+                    <a href="{{ path('mg_demo_servadmin_homepage', {'page': 1}) }}" class="btn btn-danger">Volver</a>
+                </form>
+            </div>
+        </div>
+    </div>
+{% endblock %}

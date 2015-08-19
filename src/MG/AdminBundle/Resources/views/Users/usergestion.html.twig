@@ -1,0 +1,113 @@
+{% extends 'MGAdminBundle:Bases:base.html.twig' %}
+
+{% block content %}
+<div class="container">
+    <div class="span12">
+           <div class="span4">
+               <h2>Usuarios</h2>
+           </div>
+            <div class="span3 pull-right">
+                <form>
+                    <fieldset>
+                        <label for="sel_empresa">Mostrar usuarios por empresa</label>
+                        <select id="sel_empresa">
+                                <option value="none">- Seleccione una empresa -</option>
+                            {% for empresa in empresas %}
+                                <option value="{{ empresa.id }}">{{ empresa.nombre }}</option>
+                            {% endfor %}
+                        </select>
+                    </fieldset>
+                </form>
+            </div>
+
+        <table class="table table-bordered table-condensed table-striped table-hover">
+            <thead>
+            <tr>
+                <td>Usuario</td>
+                <td>Email</td>
+                <td>Nombre</td>
+                <td>Apellidos</td>
+                <td>NIF</td>
+                <td>Telefono</td>
+                <td>Móvil</td>
+                <td colspan="3">Acciones</td>
+            </tr>
+            </thead>
+
+            {% for user in usuarios %}
+                {% if user.locked != 0 %}
+                    <tr class="error">
+                {% else %}
+                    <tr>
+                {% endif %}
+                <td>{{ user.username }}</td>
+                <td>{{ user.email }}</td>
+                <td>{{ user.name }}</td>
+                <td>{{ user.apellidos }}</td>
+                <td>{{ user.nif }}</td>
+                <td>{{ user.telefono }}</td>
+                <td>{{ user.telefonoMvl }}</td>
+                <td style="text-align: center"><a href="{{ path('mg_user_detail', {'userName': user.username, 'empId':0}) }}" class="btn">Detalles</a></td>
+                <td style="text-align: center"><a href="{{ path('mg_user_edit', {'userName':user.username, 'empId':0}) }}" class="btn btn-info">Editar</a></td>
+                {% if user.locked != 1 %}
+                    <td style="text-align: center"><button class="btn btn-danger delUser" data-user="{{ user.username }}" style="padding: 4px 24px">Bloquear</button></td>
+                {% else %}
+                    <td style="text-align: center"><button class="btn btn-success delUser" data-user="{{ user.username }}">Desbloquear</button></td>
+                {% endif %}
+                </tr>
+            {% endfor %}
+
+        </table>
+
+        <div class="pagination">
+            <ul>
+                {% if first is defined and first == true %}
+                    <li class="active"><a href="{{ path('mg_useradmin_homepage', {'page': page-1 }) }}"><span>&laquo;</span></a></li>
+                {% else %}
+                    <li class="disabled"><span>&laquo;</span></li>
+                {% endif %}
+
+                {% if pages is defined %}
+                    {% for i in 1..pages %}
+                        <li><a href="{{ path('mg_useradmin_homepage', {'page': i }) }}">{{ i }}</a></li>
+                    {% endfor %}
+                {% endif %}
+
+                {% if last is defined and last == true %}
+                    <li class="disabled"><span>&raquo;</span></li>
+                {% else %}
+                    <li class="active"><a href="{{ path('mg_useradmin_homepage', {'page': page+1 }) }}"><span>&raquo;</span></a></li>
+                {% endif %}
+            </ul>
+        </div>
+        <div class="container">
+            <div class="span7">
+                <a href="{{ path('mg_user_create', {'empId': 0}) }}" class="btn btn-success btn-large">Nuevo Usuario</a>
+                <button id="showPop4" data-content="Un usuario puede ser un cliente o un empleado, diferenciado por rol." data-original-title="¿Que es un Usuario?" class="btn toolTip">?</button>
+            </div>
+        </div>
+
+    </div>
+</div>
+
+{# ------------------ MODAL ------------------  #}
+    <div id="delModal" class="modal hide fade">
+        <div class="modal-header">
+            <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+            <h3>¿Seguro que desea bloquear/desbloquear al usuario?</h3>
+        </div>
+        <div class="modal-body">
+            <p>Recuerde que un usuario bloqueado no podrá acceder a ninguna de las secciones de la aplicación.</p>
+        </div>
+        <div class="modal-footer">
+            <button class="btn closeMod">Cerrar</button>
+            <a class="btn btn-primary okDel">Confirmar</a>
+        </div>
+    </div>
+{# ---------------- FIN MODAL ----------------  #}
+
+{% endblock %}
+
+{% block customjs %}
+    <script src="{{ asset('bundles/adminbundle/js/custom.js') }}"></script>
+{% endblock %}

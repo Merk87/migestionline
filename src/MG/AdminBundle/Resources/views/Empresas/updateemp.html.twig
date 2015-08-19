@@ -1,0 +1,65 @@
+{% extends 'MGAdminBundle:Bases:base.html.twig' %}
+
+{% block content %}
+
+    <div class="container">
+        <h3>Editar información</h3>
+        <div class="span12">
+            <form action="{{ path('mg_empresa_update', {'empId':empId }) }}" method="POST" class="update_form" {{ form_enctype(empEditForm) }}>
+
+                <fieldset>
+                    {{ form_errors(empEditForm) }}
+                    <div class="span5">
+                        {{ form_label(empEditForm.nombre, 'Nombre / Razón Social') }}
+                        {{ form_widget(empEditForm.nombre) }}
+
+                        {{ form_label(empEditForm.CIF, 'CIF/NIF') }}
+                        {{ form_widget(empEditForm.CIF) }}
+
+                        {{ form_label(empEditForm.direccion, 'Dirección') }}
+                        {{ form_widget(empEditForm.direccion) }}
+
+                        {{ form_label(empEditForm.codigoPostal, 'Código Postal') }}
+                        {{ form_widget(empEditForm.codigoPostal) }}
+
+                        {{ form_label(empEditForm.ciudad, 'Ciudad') }}
+                        {{ form_widget(empEditForm.ciudad) }}
+
+                        {{ form_label(empEditForm.pais, 'País') }}
+                        {{ form_widget(empEditForm.pais) }}
+
+                    </div>
+                    <div class="span5">
+
+                        {{ form_label(empEditForm.telefono, 'Teléfono') }}
+                        {{ form_widget(empEditForm.telefono) }}
+
+                        {{ form_label(empEditForm.logoFile, 'Logo') }}
+                        {{ form_widget(empEditForm.logoFile) }}
+
+                        {{ form_label(empEditForm.logoTitle, 'Titulo (Sirve para posicionamiento)') }}
+                        {{ form_widget(empEditForm.logoTitle) }}
+
+                        {{ form_label(empEditForm.logoAlt, 'Alt (Sirve para posicionamiento)') }}
+                        {{ form_widget(empEditForm.logoAlt) }}
+
+                        {{ form_label(empEditForm.web, 'Página Web') }}
+                        {{ form_widget(empEditForm.web) }}
+
+                        {{ form_label(empEditForm.enabled, 'Activo') }}
+                        {{ form_widget(empEditForm.enabled) }}
+
+                        {{ form_label(empEditForm.public, 'Visibilidad') }}
+                        {{ form_widget(empEditForm.public) }}
+
+                        {{ form_rest(empEditForm) }}
+                    </div>
+                </fieldset>
+                
+                <input type="submit" value="Guardar" class="btn btn-success">
+                <a href="{{ path('mg_empadmin_homepage', {'page':1}) }}" class="btn btn-danger">Volver</a>
+            </form>
+        </div>
+    </div>
+
+{% endblock %}

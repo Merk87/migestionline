@@ -1,0 +1,74 @@
+{% extends 'MGAdminBundle:Bases:base.html.twig' %}
+
+{% block content %}
+
+    <div class="container">
+        <div class="span12">
+            <div class="row">
+                <h3>Crear usuario</h3>
+                <form action="{{  path('mg_user_create', {'empId':0}) }}" method="POST" class="update_form">
+                    <fieldset>
+                        {{ form_errors(createForm) }}
+                        <div class="span4">
+                            {{ form_label(createForm.username, 'Usuario') }}
+                            {{ form_widget(createForm.username) }}
+
+                            {{ form_label(createForm.email, 'Email') }}
+                            {{ form_widget(createForm.email) }}
+
+                            {{ form_widget(createForm.plainPassword) }}
+
+                            {{ form_label(createForm.name, 'Nombre') }}
+                            {{ form_widget(createForm.name) }}
+
+                            {{ form_label(createForm.apellidos, 'Apellidos') }}
+                            {{ form_widget(createForm.apellidos) }}
+
+                            {{ form_label(createForm.nif, 'DNI') }}
+                            {{ form_widget(createForm.nif) }}
+
+                            {{ form_label(createForm.fechaNacimiento, 'Fecha Nacimiento') }}
+                            {{ form_widget(createForm.fechaNacimiento) }}
+
+                        </div>
+                        <div class="span3">
+                            {{ form_label(createForm.telefono, 'Teléfono') }}
+                            {{ form_widget(createForm.telefono) }}
+
+                            {{ form_label(createForm.telefonoMvl, 'Teléfono Móvil') }}
+                            {{ form_widget(createForm.telefonoMvl) }}
+
+                            {{ form_label(createForm.direccion, 'Dirección') }}
+                            {{ form_widget(createForm.direccion) }}
+
+                            {{ form_label(createForm.ciudad, 'Ciudad') }}
+                            {{ form_widget(createForm.ciudad) }}
+
+                            {{ form_label(createForm.codigoPostal, 'Código Postal') }}
+                            {{ form_widget(createForm.codigoPostal) }}
+
+                            {{ form_label(createForm.pais, 'País') }}
+                            {{ form_widget(createForm.pais) }}
+
+                            {{ form_label(createForm.rol, 'Perfil') }}
+                            {{ form_widget(createForm.rol) }}
+                            <a data-content="El perfil del usuario determinará los diferentes niveles de acceso al sistema. Estos perfiles son: Gestor/a, Empleado/a y Cliente/a" data-original-title="¿Que es el Perfil?" class="btn toolTip">?</a>
+
+                            <label>Empresas
+                                <a data-content="Deberás seleccionar la empresa a la que quieres asignar al usuario de las que ya perteneces." data-original-title="¿Que es la Empresa?" class="btn toolTip">?</a>
+                            </label>
+                            {{ form_widget(createForm.empresas) }}
+                            {{ form_rest(createForm) }}
+                        </div>
+                    </fieldset>
+                        <input type="submit" value="Guardar" class="btn btn-success">
+                        <a class="btn" href="{{ path('mg_useradmin_homepage', {'page': 1}) }}">Volver</a>
+                </form>
+            </div>
+        </div>
+    </div>
+{% endblock %}
+
+{% block customjs %}
+    <script src="{{ asset('bundles/adminbundle/js/custom.js') }}"></script>
+{% endblock %}

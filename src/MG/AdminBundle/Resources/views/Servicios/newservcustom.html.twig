@@ -1,0 +1,53 @@
+{% extends 'MGAdminBundle:Bases:base.html.twig' %}
+
+{% block content %}
+    <div class="container">
+        <div class="span12">
+            <div class="row">
+                <h3>Crear Servicio</h3>
+                <div class="span5">
+                    <h5>Seleccione el tipo de servicio</h5>
+                    <form>
+                        <label class="pull-left"><input class="refreshForm" type="radio" name="typeServ" value="default" data-path="{{ path('mg_serv_create', {'empId':empId}) }}" style="vertical-align: baseline"> Título de servicio por defecto</label>
+                        <label class="pull-right"><input class="refreshForm" type="radio" name="typeServ" value="custom" data-path="{{ path('mg_custom_serv_create', {'empId':empId}) }}" style="vertical-align: baseline" checked> Título de servicio personalizado</label>
+                    </form>
+                </div>
+                <div class="span2">
+                    <a data-content="Los títulos de servicios por defecto ayudarán a posicionar tus servicios cuando un cliente quiera contratar nuevos servicios." data-original-title="¿Que diferencia hay entre un título por defecto y uno personalizado?" class="btn toolTip ">?</a>
+                </div>
+                <div class="span12">
+                   <form action="{{ path('mg_custom_serv_create', {'empId':empId}) }}" method="POST" class="update_form">
+                       <fieldset>
+                           {{ form_errors(newCustomServForm) }}
+
+                           {{ form_label(newCustomServForm.nombre , 'Nombre del Servicio') }}
+                           {{ form_widget(newCustomServForm.nombre) }}
+
+                           {{ form_label(newCustomServForm.descripcion , 'Descripción del servicio') }}
+                           {{ form_widget(newCustomServForm.descripcion) }}
+
+                           {{ form_label(newCustomServForm.precio , 'Precio del servicio') }}
+                           {{ form_widget(newCustomServForm.precio) }}
+
+                           {{ form_label(newCustomServForm.enabled , 'Activo') }}
+                           {{ form_widget(newCustomServForm.enabled) }}
+                           <a data-content="Determinará si el servicio es visible por los usuarios y si pueden asignarse usuarios y clientes." data-original-title="¿Que diferencia hay entre activo e inactivo?" class="btn toolTip">?</a>
+
+                           {{ form_label(newCustomServForm.empresa , 'Empresa') }}
+                           {{ form_widget(newCustomServForm.empresa) }}
+                           <a data-content="Deberás seleccionar una de la/s empresa/s de las que ya perteneces a la que quieres asignar el servicio." data-original-title="¿Que es la Empresa?" class="btn toolTip">?</a>
+
+                           {{ form_rest(newCustomServForm) }}
+                       </fieldset>
+                       <input type="submit" class="btn btn-success" value="Guardar">
+                       <a href="{{ path('mg_servadmin_homepage', {'page': 1}) }}" class="btn btn-danger">Volver</a>
+                   </form>
+               </div>
+            </div>
+        </div>
+    </div>
+{% endblock %}
+
+{% block customjs %}
+    <script src="{{ asset('bundles/adminbundle/js/custom.js') }}"></script>
+{% endblock %}

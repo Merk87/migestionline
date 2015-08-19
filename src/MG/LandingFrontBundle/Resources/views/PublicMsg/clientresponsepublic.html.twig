@@ -1,0 +1,139 @@
+{% extends 'MGLandingFrontBundle:Bases:base.html.twig' %}
+
+{% block customcss %}
+    <link rel="stylesheet" type="text/css" href="{{ asset('bundles/adminbundle/css/jquery.mCustomScrollbar.css') }}"
+          xmlns="http://www.w3.org/1999/html">
+{% endblock %}
+
+{% block customtopbar  %}
+    <div class="navbar" xmlns="http://www.w3.org/1999/html">
+        <div class="navbar-inner custnav">
+            <div class="container">
+
+                <!-- .btn-navbar is used as the toggle for collapsed navbar content -->
+                <a class="btn btn-navbar" data-toggle="collapse" data-target=".nav-collapse">
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </a>
+
+                <!-- Everything you want hidden at 940px or less, place within here -->
+                <div class="nav-collapse collapse">
+                    <ul class="nav contynav">
+                        <li><a href="{{ path('mg_landing_front_homepage') }}">Inicio</a></li>
+                        <li><a id="mod_pp" class="no-link" data-path="{{ path('mg_front_politica') }}" >Política de privacidad</a></li>
+                        <li><a id="mod_av" class="no-link" data-path="{{ path('mg_front_aviso') }}">Aviso Legal</a></li>
+                        <li><a id="mod_cc" class="no-link" data-path="{{ path('mg_front_condiciones') }}">Condiciones de contratación</a></li>
+                    </ul>
+                </div>
+
+            </div>
+        </div>
+    </div>
+
+{% endblock %}
+
+{% block content %}
+    <div class="container">
+        <div class="span11" style="min-width: 320px">
+            <div class="row">
+                <div class="span11" style="margin-bottom: 15px;">
+                    <h1>Historial de mensajes.</h1>
+                    <p>En esta página podrás contestar a los mensajes recibidos por parte del equipo de Mi Gestión Online.</p>
+                    <p><strong>No guardes esta página en favoritos</strong> ya que solo es accesible a través
+                        del enlace proporcionado en el email de respuesta a consulta y solo de forma temporal para poder salvaguardar
+                        la privacidad de los mensajes intercambiados entre el personal de Mi Gestión Online y tú.</p>
+                </div>
+                <div class="span11" style="margin-bottom: 15px">
+                    {% for contacto in conversacion.mensajesRes %}
+                        {% if loop.last == true %}
+                            <div class="span11">
+                                <h1>Último mensaje recibido</h1>
+                                {% for msgGes in conversacion.mensajesCli %}
+                                    {% if loop.first == true %}
+                                        <h4>Asunto Original: {{ msgGes.asunto }}</h4>
+                                    {% endif %}
+                                {% endfor %}
+                                <h4>Fecha: {{ contacto.fechaRespuesta|date('d-m-Y') }}</h4>
+                                <h4>Mensaje:</h4>
+                                <p style="text-align: justify">
+                                    {{ contacto.mensaje|nl2br }}
+                                </p>
+                            </div>
+                        {% endif %}
+                    {% endfor %}
+                </div>
+               <div class="span11" style="margin-bottom: 30px">
+                   <div class="span5 scrollable-container-msg pull-left">
+                       <h3>Mensajes anteriores Mi Gestión Online</h3>
+                       <ul class="nolist">
+                           {% for mensj in conversacion.mensajesRes %}
+                               {% if conversacion.mensajesRes|length < 2 %}
+                                   <li><h4>No hay mensajes anteriores</h4></li>
+                               {% else %}
+                                   {% if loop.last == false %}
+                                       <li style="border-bottom: 1px solid #cccccc; padding: 5px 0">
+                                       <p>Fecha: {{ mensj.fechaRespuesta|date('d-m-Y') }}</p>
+                                           <p>Mensaje: </p>
+                                           <p>{{ mensj.mensaje|nl2br }}</p>
+                                       </li>
+                                   {% endif %}
+                               {% endif %}
+
+                           {% endfor %}
+                       </ul>
+                   </div>
+                   <div class="span5 scrollable-container-msg pull-right">
+                       <h3>Mensajes anteriores propios</h3>
+                       <ul class="nolist">
+                           {% for mensajes in conversacion.mensajesCli|reverse %}
+                               {% if conversacion.mensajesCli|length < 1 %}
+                                   <li><h4>No hay mensajes anteriores</h4></li>
+                               {% else %}
+                                   <li style="border-bottom: 1px solid #cccccc; padding: 5px 0">
+                                       <p>Fecha: {{ mensajes.fechaEnvio|date('d-m-Y') }}</p>
+                                       <p>Mensaje: </p>
+                                       <p>{{ mensajes.mensaje|nl2br }}</p>
+                                   </li>
+                               {% endif %}
+
+                           {% endfor %}
+                       </ul>
+                   </div>
+                </div>
+
+               <div class="span11 offset1">
+                    <form action="{{ path('mg_public_client_response', {'hash':conversacion.hashConv}) }}" method="POST" class="create-msg-form">
+                        <fieldset>
+                            {{ form_errors(respuesta) }}
+                            {{ form_widget(respuesta) }}
+                            {{ form_rest(respuesta) }}
+                        </fieldset>
+                        <input type="submit" class="btn btn-success" value="Enviar">
+                        <a class="btn btn-danger" href="{{ path('mg_contactos_homepage', {'page': 1}) }}">Volver</a>
+                    </form>
+                </div>
+
+            </div>
+        </div>
+
+    </div>
+{% endblock %}
+
+{% block customjs %}
+    <script src="{{ asset('bundles/adminbundle/js/jquery.mCustomScrollbar.min.js') }}"></script>
+    <script src="{{ asset('bundles/adminbundle/js/jquery.mousewheel.min.js') }}"></script>
+    <script>
+        (function($){
+            $(window).load(function(){
+                $(".scrollable-container-msg").mCustomScrollbar({
+                    scrollButtons:{
+                        enable:true
+                    },
+                    theme:"dark"
+                });
+            });
+        })(jQuery);
+    </script>
+
+{% endblock %}

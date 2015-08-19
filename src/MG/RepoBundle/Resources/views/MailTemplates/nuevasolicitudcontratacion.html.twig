@@ -1,0 +1,33 @@
+<html>
+
+<body>
+<div style="width: 60%;">
+    <header>
+        <div><a href="{{ app.request.scheme ~'://' ~ app.request.httpHost ~ path('mg_landing_front_homepage') }}"><img src="{{ app.request.scheme ~'://' ~ app.request.httpHost ~ asset('bundles/landingfront/images/logo.png') }}" alt="migestion logo"></a></div>
+    </header>
+    <h1 style="color:#005580">¡Tienes un nuevo cliente!</h1>
+    <h2>Nueva contratación</h2>
+    <p>El usuario {{ name }} con dirección de email {{ mail }} ha solicitado la contratación de: </p>
+    {% set empId = servicios[0].empresaId %}
+    {% for servicio in servicios %}
+        <ul style="list-style: none ">
+            <li>{{ servicio.nombre }}</li>
+        </ul>
+    {% endfor %}
+    <p>Puedes consultar toda la información sobre tu cliente en su <a href="{{ app.request.scheme ~'://' ~ app.request.httpHost ~ path('mg_user_detail', {'empId':empId, 'userName':name}) }}">perfil</a></p>
+    <br><br>
+    <p>Bip Bip.</p>
+    <p>Robot Mi Gestión Online.</p>
+
+</div>
+<div style="width: 60%; border-top: 1px solid #cccccc; text-align: justify">
+    <p style="font-size: 10px">Copyright ©2013 Mi Gestion Online. · Todos los derechos reservados<p>
+    <p style="font-size: 10px">SABER NUEVAS TECNOLOGÍAS, S.L · Plaza Azteca, s/n local 50012 Zaragoza (España) · Tel. 976436030 / 679182420</p>
+    <p style="font-size: 10px">Ten en cuenta que este es un mensaje automático, por lo que si lo respondes no recibirás ninguna contestación.</p>
+    <p style="font-size: 10px">Para asegurar que recibes nuestros correos electrónicos, por favor, añade la dirección
+        noreply@migestionline.com a tu lista de remitentes seguros.</p>
+    <p style="font-size: 10px">Si quieres saber cómo tratamos tus datos personales, consulta nuestra <a href="{{ app.request.scheme ~'://' ~ app.request.httpHost ~ path('mg_front_politica') }}">política de privacidad.</a></p>
+    <p style="font-size: 10px">Este correo electrónico y la información que contiene son confidenciales. Si lo ha recibido por error, infórmenos inmediatamente. No deberá copiarlo bajo ningún propósito ni revelar su contenido a un tercero. Las comunicaciones por Internet no son seguras y, por tanto, Mi Gestión Online no asume ninguna responsabilidad jurídica por el contenido de este mensaje, ya que se ha difundido en una red pública. Si sospecha que el mensaje puede haber sido interceptado o modificado, póngase en contacto con nosotros.</p>
+</div>
+</body>
+</html>

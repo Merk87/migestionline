@@ -1,0 +1,33 @@
+{% extends 'MGAdminBundle:Bases:base.html.twig' %}
+
+{% block content %}
+
+
+<div class="container" style="margin-top: 50px">
+    <div class="span10 hero-unit">
+        <form>
+            <fieldset style="text-align: center">
+               <h3 for="sel_empresa">Selecciona la empresa para mostrar los usuarios</h3>
+               <select class="callToActionOpt" id="sel_empresa">
+                    <option  value="none">- Seleccione una empresa -</option>
+                    {% for empresa in empresas %}
+                        <option value="{{ empresa.id }}">{{ empresa.nombre }}</option>
+                    {% endfor %}
+                </select>
+            </fieldset>
+        </form>
+    </div>
+</div>
+
+
+<div class="container">
+    <div class="span7">
+        <a href="{{ path('mg_user_create', {'empId': 0}) }}" class="btn btn-success btn-large">Nuevo Usuario</a>
+    </div>
+</div>
+
+{% endblock %}
+
+{% block customjs %}
+    <script src="{{ asset('bundles/adminbundle/js/custom.js') }}"></script>
+{% endblock %}

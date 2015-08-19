@@ -1,0 +1,135 @@
+{% extends 'MGAdminBundle:Bases:base.html.twig' %}
+{% block content %}
+<div class="container">
+    <div class="span12">
+        <div class="span4">
+            <h2>Repositorios</h2>
+        </div>
+        <div class="span3 pull-right">
+            <form>
+                <fieldset>
+                    <label for="sel_empresaRepo">Mostrar repositorios por empresa</label>
+                    <select id="sel_empresaRepo">
+                        <option value="none">- Seleccione una empresa -</option>
+                        {% for empresa in empresas %}
+                            <option value="{{ empresa.id }}">{{ empresa.nombre }}</option>
+                        {% endfor %}
+                    </select>
+                </fieldset>
+            </form>
+        </div>
+
+        <table class="table table-bordered table-condensed table-striped table-hover">
+            <thead>
+            <tr>
+                <td>Descripción</td>
+                <td style="width: 75px">Límite de archivos</td>
+                <td colspan="3">Acciones</td>
+            </tr>
+            </thead>
+            {% for repo in repositorios %}
+                {% set showTips = loop.index %}
+                {% if repo.enabled != 1 %}
+                    <tr class="error">
+                {% else %}
+                    <tr>
+                {% endif %}
+                <td>{{ repo.descripcion }}</td>
+                <td style="width: 75px">{{ repo.limiteArchivos }}</td>
+                {% if repo.archivos|length > 0%}
+                    <td >
+                        <a href="{{ path('mg_repo_show_all_files', {'repoId': repo.id, 'page': 1}) }}" class="btn btn-custom">Mostrar Archivos</a>
+                        {% if showTips == 1 %}
+                            <button data-content="Desde este botón podrás acceder a los archivos almacenados en el repositorio." data-original-title="Archivos almacenados" class="btn toolTip ">?</button>
+                        {% endif %}
+                    </td>
+                {% else %}
+                        <td ><button class="btn btn-danger" disabled>No hay ficheros que mostrar</button></td>
+                {% endif %}
+                {% if repo.enabled == 0%}
+                    <td >
+                        <button class="btn btn-primary" disabled>Asignar Usuarios</button>
+                        {% if showTips == 1 %}
+                            <button class="btn toolTip" disabled>?</button>
+                        {% endif %}
+                    </td>
+                    <td ><button class="btn btn-success" disabled>Asignar Clientes</button>
+                        {% if showTips == 1 %}
+                            <button class="btn toolTip" disabled>?</button>
+                        {% endif %}
+                    </td>
+                {% else %}
+                    <td>
+                        <a href="{{ path('mg_repo_addusers', {'repoId': repo.id, 'empId':0}) }}" class="btn btn-primary">Asignar Usuarios</a>
+                        {% if showTips == 1 %}
+                            <button data-content="Desde esta opción podrás gestionar el acceso al repositorio por parte de los usuarios de la empresa." data-original-title="Asignar Usuarios" class="btn toolTip ">?</button>
+                        {% endif %}
+                    </td>
+                    <td >
+                        <a href="{{ path('mg_repo_addclients', {'repoId': repo.id, 'empId':0}) }}" class="btn btn-success">Asignar Clientes</a>
+                        {% if showTips == 1 %}
+                            <button data-content="Desde esta opción podrás gestionar el acceso al repositorio por parte de los clientes de la empresa." data-original-title="Asignar Clientes" class="btn toolTip ">?</button>
+                        {% endif %}
+                    </td>
+                {% endif %}
+                <td ><a href="{{ path('mg_repo_detail', {'repoId': repo.id, 'empId':0}) }}" class="btn">Detalles</a></td>
+                <td ><a href="{{ path('mg_repo_update', {'repoId':repo.id}) }}" class="btn btn-info">Editar</a></td>
+                {% if repo.enabled == 1 %}
+                    <td ><button class="btn btn-danger blockRepo" data-repo="{{ repo.id}}" style="padding: 4px 24px">Bloquear</button></td>
+                {% else %}
+                    <td ><button class="btn btn-danger blockRepo" data-repo="{{ repo.id }}">Desbloquear</button></td>
+                {% endif %}
+                </tr>
+            {% endfor %}
+        </table>
+
+        <div class="pagination">
+            <ul>
+                {% if first is defined and first == true %}
+                    <li class="active"><a href="{{ path('mg_repoadmin_homepage', {'page': page-1 }) }}"><span>&laquo;</span></a></li>
+                {% else %}
+                    <li class="disabled"><span>&laquo;</span></li>
+                {% endif %}
+
+                {% if pages is defined %}
+                    {% for i in 1..pages %}
+                        <li><a href="{{ path('mg_repoadmin_homepage', {'page': i }) }}">{{ i }}</a></li>
+                    {% endfor %}
+                {% endif %}
+
+                {% if last is defined and last == true %}
+                    <li class="disabled"><span>&raquo;</span></li>
+                {% else %}
+                    <li class="active"><a href="{{ path('mg_repoadmin_homepage', {'page': page+1 }) }}"><span>&raquo;</span></a></li>
+                {% endif %}
+            </ul>
+        </div>
+        <div class="container">
+            <div class="span7">
+                <a href="{{ path('mg_repo_create')}}" class="btn btn-success btn-large">Nuevo Repositorio</a>
+            </div>
+        </div>
+    </div>
+</div>
+
+{# ------------------ MODAL ------------------  #}
+<div id="repoModal" class="modal hide fade">
+    <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+        <h3>¿Seguro que desea bloquear/desbloquear el repositorio?</h3>
+    </div>
+    <div class="modal-body">
+        <p>Recuerde que en un repositorio bloqueado no podrán subirse ficheros</p>
+    </div>
+    <div class="modal-footer">
+        <button class="btn closeMod">Close</button>
+        <a class="btn btn-primary okRepoBlock">Confirmar</a>
+    </div>
+</div>
+{# ---------------- FIN MODAL ----------------  #}
+
+{% endblock %}
+
+{% block customjs %}
+    <script src="{{ asset('bundles/adminbundle/js/custom.js') }}"></script>
+{% endblock %}

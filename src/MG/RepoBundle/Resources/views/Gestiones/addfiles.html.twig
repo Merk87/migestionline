@@ -1,0 +1,26 @@
+{% extends 'MGRepoBundle:Base:base_repo.html.twig' %}
+
+{% block content %}
+    <div class="container" style="margin-bottom: 15px">
+        <div class="span12">
+            <h3>Agregar ficheros a la gestión.</h3>
+            <span>Si no desea agregar ningún documento a esta gestión pulse el boton rojo rotulado como "Salir".</span>
+        </div>
+    </div>
+
+    <div class="container" style="margin-top: 30px">
+        <div class="span12">
+            <form action="{{  path('mg_add_file_gestion', {'gestId':gestId}) }}" method="POST" class="newgest_form" {{ form_enctype(addFilesForm) }}>
+                <fieldset>
+                    {{ form_errors(addFilesForm) }}
+                    {{ form_label(addFilesForm.file, 'Archivos') }}
+                    {{ form_widget(addFilesForm.file, {'full_name': addFilesForm.file.get('full_name')~'[]' })}}
+                    {{ form_rest(addFilesForm) }}
+                </fieldset>
+                <input type="submit" class="btn btn-success" value="Finalizar">
+                <a class="btn btn-danger" href="{{ path('mg_user_panel', {'empName': empresa.nombre, 'page':1}) }}">Salir</a>
+            </form>
+        </div>
+    </div>
+    {#{'full_name': addFilesForm.file.get('full_name')~'[]' }) #}
+{% endblock %}

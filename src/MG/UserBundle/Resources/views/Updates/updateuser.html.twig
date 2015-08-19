@@ -1,0 +1,59 @@
+{% extends 'MGRepoBundle:Base:basenolat.html.twig' %}
+
+{% block content %}
+<div class="main">
+    <div class="container-fluid" style="margin-top: 50px">
+        <div class="span12">
+            <div class="row">
+                <h3>Información de {{ userToEdit.username }}</h3>
+                <form action="{{  path('mg_client_update') }}" method="POST" class="update_form">
+                    <fieldset>
+                        {{ form_errors(editUserForm) }}
+                        <div class="span4">
+                            {{ form_label(editUserForm.email, 'Email') }}
+                            {{ form_widget(editUserForm.email) }}
+
+                            {{ form_label(editUserForm.name, 'Nombre') }}
+                            {{ form_widget(editUserForm.name) }}
+
+                            {{ form_label(editUserForm.apellidos, 'Apellidos') }}
+                            {{ form_widget(editUserForm.apellidos) }}
+
+                            {{ form_label(editUserForm.fechaNacimiento, 'Fecha Nacimiento') }}
+                            {{ form_widget(editUserForm.fechaNacimiento) }}
+
+                            {{ form_label(editUserForm.telefono, 'Teléfono') }}
+                            {{ form_widget(editUserForm.telefono) }}
+
+                            {{ form_label(editUserForm.telefonoMvl, 'Teléfono Movil') }}
+                            {{ form_widget(editUserForm.telefonoMvl) }}
+                        </div>
+                        <div class="span3">
+                            {{ form_label(editUserForm.direccion, 'Dirección') }}
+                            {{ form_widget(editUserForm.direccion) }}
+
+                            {{ form_label(editUserForm.ciudad, 'Ciudad') }}
+                            {{ form_widget(editUserForm.ciudad) }}
+
+                            {{ form_label(editUserForm.codigoPostal, 'Código Postal') }}
+                            {{ form_widget(editUserForm.codigoPostal) }}
+
+                            {{ form_label(editUserForm.pais, 'Páis') }}
+                            {{ form_widget(editUserForm.pais) }}
+
+                            {{ form_label(editUserForm.nif, 'NIF/CIF') }}
+                            {{ form_widget(editUserForm.nif) }}
+
+                            {{ form_rest(editUserForm) }}
+
+                        </div>
+                    </fieldset>
+                    <input type="submit" value="Guardar Cambios" class="btn btn-success">
+                    <a class="btn btn-danger" href="{{ path('mg_user_profile')}}">Volver</a>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+
+{% endblock %}

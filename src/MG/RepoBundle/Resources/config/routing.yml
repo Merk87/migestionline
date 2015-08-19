@@ -1,0 +1,100 @@
+mg_repo_homepage:
+    pattern:  /
+    defaults: { _controller: MGRepoBundle:Gestion:index }
+
+mg_gestion_new:
+    pattern: /new/gestion
+    defaults: { _controller: MGRepoBundle:Gestion:newGestionCliente }
+
+mg_gestion_close:
+    pattern: /close/{gestId}
+    defaults: { _controller: MGRepoBundle:Gestion:closeGestCli }
+
+mg_manage_cli_gest:
+    pattern: /manage/{gestId}
+    defaults: { _controller:MGRepoBundle:Gestion:addFile }
+
+mg_user_panel:
+    pattern:  /{empName}/{page}
+    defaults: { _controller: MGRepoBundle:Gestion:userPanel }
+    requirements:
+            page: \d+
+
+mg_user_panel_cat:
+    pattern:  /{empName}/{page}/filter/{catId}
+    defaults: { _controller: MGRepoBundle:Gestion:userPanelFiltered }
+    requirements:
+        page: \d+
+        catId: \d+
+
+mg_user_panel_est:
+    pattern:  /{empName}/{page}/estado/{estId}/filter/
+    defaults: { _controller: MGRepoBundle:Gestion:userPanelFilteredEst }
+    requirements:
+        page: \d+
+        estId: \d+
+
+#Ruta para la gestión aunque ponga add file ,va integrado.
+mg_add_file_gestion:
+    pattern: /manage/gest/{gestId}
+    defaults: { _controller: MGRepoBundle:Gestion:addFile }
+    requirements:
+        gestId: \d+
+
+mg_add_comment:
+    pattern: /add/comment/{gestId}
+    defaults: { _controller: MGRepoBundle:Gestion:addComment }
+    requirements:
+        gestId: \d+
+
+mg_download_action:
+    pattern: /client/serv_for_the_lulz/{fileId}
+    defaults: { _controller: MGRepoBundle:Gestion:downloadServ }
+
+mg_cli_delete_action:
+    pattern: /client/del_for_the_lulz/delete/{fileId}
+    defaults: { _controller: MGRepoBundle:Gestion:deleteFile }
+    requirements:
+        fileId: \d+
+
+mg_cli_delete_repo_action:
+    pattern: /client/del_for_the_lulz/repo/delete/{fileId}
+    defaults: { _controller: MGRepoBundle:Gestion:deleteRepoFile }
+    requirements:
+        fileId: \d+
+
+mg_cli_show_files:
+    pattern: /client/access/repository/{page}
+    defaults: { _controller: MGRepoBundle:FileRepo:showRepoFiles }
+    requirements:
+        page: \d+
+
+mg_take_dates_from_panel:
+    pattern: /client/take/dates
+    defaults: { _controller: MGRepoBundle:FileRepo:takeDateFromPanel }
+
+mg_show_files_by_date:
+    pattern: /client/filter/by/{fechaIni}/to/{fechaFin}/{page}
+    defaults: { _controller: MGRepoBundle:FileRepo:filterDateFiles }
+    requirements:
+        page: \d+
+
+mg_home_contratacion:
+    pattern: /client/new/contratacion
+    defaults: { _controller: MGRepoBundle:ContratacionServicio:indexContratacionCliente }
+
+mg_detail_contratacion:
+    pattern: /detail/contratacion/{contId}
+    defaults: { _controller: MGRepoBundle:ContratacionServicio:detailContratacion }
+    requirements:
+        contId: \d+
+
+mg_delete_contratacion:
+    pattern: /delete/contratacion/{contId}
+    defaults: { _controller: MGRepoBundle:ContratacionServicio:discardContratacion }
+    requirements:
+        contId: \d+
+
+test:
+    pattern: /show/test
+    defaults: { _controller: MGRepoBundle:Gestion:test }

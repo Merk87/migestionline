@@ -1,0 +1,83 @@
+{% extends 'MGDemoBundle:Bases:base_admin.html.twig' %}
+
+{% block content %}
+    <div class="container">
+        <div class="span12">
+            <h2>Mensajes</h2>
+            <table class="table table-bordered table-condensed table-striped table-hover">
+                <thead>
+                <tr>
+                    <td>Asunto</td>
+                    <td>Último mensaje</td>
+                    <td>Fecha de creación</td>
+                    <td>Participantes</td>
+                    <td>Mensajes nuevos</td>
+                    <td>Acciones</td>
+                </tr>
+                </thead>
+                <tr class="success">
+                    <td>Mensaje de Cristalería Mayte</td>
+                    <td>29-08-2013 10:36:08</td>
+                    <td>19-08-2013 19:01:20</td>
+                    <td>Ana y Mayte Cristalería Mayte</td>
+                    <td>1</td>
+                    <td>
+                        <a href="{{path('mg_demo_show_conv') }}" class="btn btn-info">Ver Mensajes</a>
+                        <button class="btn btn-info newDest">Cambiar destinatario</button>
+                    </td>
+                </tr>
+                <tr>
+                    <td>Solicitud Tomás</td>
+                    <td>3-09-2013 19:01:20</td>
+                    <td>5-09-2013 19:01:20</td>
+                    <td>Pilar y Tomás. Electrodomésticos Madrid</td>
+                    <td>0</td>
+                        <td>
+                            <button class="btn btn-info" disabled>Ver Mensajes</button>
+                            <button class="btn btn-info" disabled>Cambiar destinatario</button>
+                        </td>
+                </tr>
+            </table>
+            <div class="pagination">
+                <ul>
+                    <li class="disabled"><span>&laquo;</span></li>
+                    <li class="active"><span><a href="{{ path('mg_demo_mensajeria_homepage') }}">1</span></a></li>
+                    <li class="disabled"><span>&raquo;</span></li>
+                </ul>
+            </div>
+        </div>
+    </div>
+    <div class="container">
+        <div class="span12">
+            <a href="{{ path('mg_demo_new_message_admin') }}" class="btn btn-success newMsg">Nuevo Mensaje</a>
+        </div>
+    </div>
+
+
+    {# ------------------ MODAL ------------------  #}
+    <div id="changeDest" class="modal hide fade">
+        <div class="modal-header">
+            <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+            <h4>Selecciona un nuevo destinatario</h4>
+        </div>
+        <div class="modal-body">
+            <form>
+                <fieldset>
+                    <label for="sel_userDest">Usuario</label>
+                    <select id="sel_userDest">
+                        <option value="none">- Seleccione un usuario -</option>
+                        <option value="none">María Jiménez (Empleado. Contabilidad)</option>
+                        <option value="none">Ana Sánchez (Empleado. Jurídico)</option>
+                    </select>
+                    <input type="hidden" value="" id="chatIdCont" name="chatIdCont" />
+                </fieldset>
+            </form>
+        </div>
+        <div class="modal-footer">
+            <button class="btn closeMod">Cerrar</button>
+            <a class="btn btn-success okNewDest">Cambiar</a>
+        </div>
+    </div>
+    {# ---------------- FIN MODAL ----------------  #}
+
+{% endblock %}

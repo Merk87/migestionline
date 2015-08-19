@@ -1,0 +1,64 @@
+{% extends 'MGAdminBundle:Bases:base.html.twig' %}
+
+{% block content %}
+
+    <div class="container">
+        <h3>Nueva Empresa</h3>
+        <div class="span12">
+            <form action="{{  path('mg_empresa_create') }}" method="POST" class="update_form" {{ form_enctype(newEmpresaForm) }} >
+                <fieldset style="padding-bottom: 10px">
+                    {{ form_errors(newEmpresaForm) }}
+                <div class="span5">
+                    {{ form_label(newEmpresaForm.nombre, 'Nombre / Razón Social') }}
+                    {{ form_widget(newEmpresaForm.nombre) }}
+
+                    {{ form_label(newEmpresaForm.CIF, 'CIF/NIF') }}
+                    {{ form_widget(newEmpresaForm.CIF) }}
+
+                    {{ form_label(newEmpresaForm.direccion, 'Dirección') }}
+                    {{ form_widget(newEmpresaForm.direccion) }}
+
+                    {{ form_label(newEmpresaForm.codigoPostal, 'Código Postal') }}
+                    {{ form_widget(newEmpresaForm.codigoPostal) }}
+
+                    {{ form_label(newEmpresaForm.ciudad, 'Ciudad') }}
+                    {{ form_widget(newEmpresaForm.ciudad) }}
+
+                    {{ form_label(newEmpresaForm.pais, 'País') }}
+                    {{ form_widget(newEmpresaForm.pais) }}
+
+                    {{ form_label(newEmpresaForm.web, 'Página Web') }}
+                    {{ form_widget(newEmpresaForm.web) }}
+
+
+                </div>
+                <div class="span5">
+
+                    {{ form_label(newEmpresaForm.telefono, 'Teléfono') }}
+                    {{ form_widget(newEmpresaForm.telefono) }}
+
+                    {{ form_label(newEmpresaForm.logoFile, 'Logo') }}
+                    {{ form_widget(newEmpresaForm.logoFile) }}
+
+                    {{ form_label(newEmpresaForm.logoTitle, 'Titulo (Sirve para posicionamiento)') }}
+                    {{ form_widget(newEmpresaForm.logoTitle) }}
+
+                    {{ form_label(newEmpresaForm.logoAlt, 'Alt (Sirve para posicionamiento)') }}
+                    {{ form_widget(newEmpresaForm.logoAlt) }}
+
+                    {{ form_label(newEmpresaForm.enabled, 'Activo') }}
+                    {{ form_widget(newEmpresaForm.enabled) }}
+
+                    {{ form_label(newEmpresaForm.public, 'Visibilidad') }}
+                    {{ form_widget(newEmpresaForm.public) }}
+
+                    {{ form_rest(newEmpresaForm) }}
+                </div>
+                </fieldset>
+                <input type="submit" value="Guardar" class="btn btn-success">
+                <a href="{{ path('mg_empadmin_homepage', {'page':1}) }}" class="btn btn-danger">Volver</a>
+            </form>
+        </div>
+    </div>
+
+{% endblock %}

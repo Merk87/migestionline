@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html>
+{% block header %}
+    <head>
+        <meta name="author" content="" />
+        <meta name="description" content="" />
+        <meta name="robots" content="index, follow"/>
+        <meta name="subject" content="" />
+        <meta name="Language" content="" />
+        <meta name="country" content="" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+        {% block stylesheet %}
+            <link rel="stylesheet" type="text/css" href="{{ asset('bundles/adminbundle/css/bootstrap.css') }}">
+            <link rel="stylesheet" type="text/css" href="{{ asset('bundles/adminbundle/css/custom_admin.css') }}">
+            <link rel="stylesheet" type="text/css" href="{{ asset('bundles/demobundle/css/tooltipstyles.css') }}">
+        {% endblock %}
+        {% block customstyle %}
+        {% endblock %}
+        {% block scripts %}
+            <script src="//ajax.googleapis.com/ajax/libs/jquery/2.0.0/jquery.min.js"></script>
+            <script src="//ajax.googleapis.com/ajax/libs/jqueryui/1.10.2/jquery-ui.min.js"></script>
+        {% endblock %}
+        {% block customscripts %}
+        {% endblock %}
+        <link rel="shortcut icon" href="{{ asset('bundles/adminbundle/img/favicon.ico') }}" type="image/x-icon">
+        <link rel="icon" href="{{ asset('bundles/adminbundle/img/favicon.ico') }}" type="image/x-icon">
+        <title>{% block title %}Panel de Administracion - Mi Gestión Online{% endblock %}</title>
+    </head>
+{% endblock %}
+<body>
+{% block body %}
+    {% block top_line %}
+        <div class="navbar navbar-inverse">
+            <div class="navbar-inner">
+                <div class="container">
+                    {% block inner_top_line %}
+
+                        <a class="btn btn-navbar" data-toggle="collapse" data-target=".nav-collapse">
+                            <span class="icon-bar"></span>
+                            <span class="icon-bar"></span>
+                            <span class="icon-bar"></span>
+                        </a>
+
+                        <div class="nav-collapse collapse">
+                            <ul class="nav">
+                                <li><a href="{{ path('mg_demo_admin') }}" style="font-weight: bold; color: white; padding: 6px"><img class="logo" style="" src="{{ asset('bundles/adminbundle/img/logo.png') }}"></a></li>
+                                <li><a href="{{ path('mg_demo_useradmin_homepage') }}">Usuarios</a></li>
+                                <li><a href="{{ path('mg_demo_repoadmin_homepage') }}">Repositorios</a></li>
+                                <li><a href="{{ path('mg_demo_servadmin_homepage') }}">Servicios</a></li>
+
+                                <li><a href="{{ path('mg_demo_catadmin_homepage') }}">Categorías</a></li>
+                                <li><a id="agest" href="{{ path('mg_demo_gest_homepage') }}" >Gestiones <span class="notifications gest" data-toggle="none"></span></a></li>
+                                <li><a id="amsg" href="{{ path('mg_demo_mensajeria_homepage') }}">Mensajes <span class="notifications msg" data-toggle="none"></span></a></li>
+                                <li><a href="#" id="cenot" ><span class="noback"> Nuevas notificaciones</span><span class="notifications gestchange" data-toggle="none"></span></a></li>
+                            </ul>
+                            <ul class="nav pull-right">
+                                <li><a href="#" class="btn-info disButton" style="color: white">Perfil</a></li>
+                                <li><a href="{{ path('mg_demo_homepage') }}" class="btn-danger" style="color: white">Salir</a></li>
+                            </ul>
+
+                        </div>
+
+                    {% endblock %}
+                </div>
+            </div>
+        </div>
+    {% endblock %}
+
+    {% block flashmessages %}
+        {% for flashMessage in app.session.flashbag.get('notice') %}
+            <div class="container">
+                <div class="span6 alert alert-success">
+                    <button type="button" class="close" data-dismiss="alert">&times;</button>
+                    {{ flashMessage }}
+                </div>
+            </div>
+        {% endfor %}
+
+        {% for flashMessage in app.session.flashbag.get('fail') %}
+            <div class="container">
+                <div class="span6 alert alert-danger">
+                    <button type="button" class="close" data-dismiss="alert">&times;</button>
+                    {{ flashMessage }}
+                </div>
+            </div>
+        {% endfor %}
+    {% endblock %}
+    {% block content %}
+
+    {% endblock %}
+{% endblock %}
+</body>
+{% block footer %}
+    {% block js %}
+        <script src="{{ asset('bundles/adminbundle/js/bootstrap.min.js') }}"></script>
+        <script src="{{ asset('bundles/demobundle/js/custom.js') }}"></script>
+    {% endblock %}
+    {% block customjs %}
+
+    {% endblock %}
+{% endblock %}
+<script>
+    (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+        (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+            m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+    })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+    ga('create', 'UA-44569448-1', 'migestionline.com');
+    ga('send', 'pageview');
+
+</script>
+</html>

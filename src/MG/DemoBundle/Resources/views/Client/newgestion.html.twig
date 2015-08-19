@@ -1,0 +1,27 @@
+{% extends 'MGDemoBundle:Bases:base_client.html.twig' %}
+
+{% block content %}
+    <div class="container" style="margin-top: 50px">
+         <div class="span12">
+             <h3>Crear nueva gestión.</h3>
+             <form method="POST" class="newgest_form">
+                 <fieldset>
+                     <label for="mg_repobundle_gestiontype_descripcion" class="required">Descripción de la gestión a realizar</label>
+                     <textarea id="mg_repobundle_gestiontype_descripcion" name="mg_repobundle_gestiontype[descripcion]" required="required" placeholder="Descripción"></textarea>
+                     <div>
+                         <label for="mg_repobundle_gestiontype_categoria" class="required">Categoria</label>
+                         <select id="mg_repobundle_gestiontype_categoria" name="mg_repobundle_gestiontype[categoria]" required="required">
+                             <option>- Seleccione una categoría -</option>
+                             <option>Impuestos</option>
+                             <option>Balances</option>
+                             <option>Libros</option>
+                             <option>Documentación</option>
+                         </select>
+                     </div>
+                 </fieldset>
+                 <input type="submit" class="btn btn-success" value="Crear Gestión">
+                 <a class="btn btn-danger" href="{{ path('mg_demo_user_panel') }}">Volver</a>
+             </form>
+         </div>
+    </div>
+{% endblock %}

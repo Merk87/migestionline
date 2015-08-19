@@ -1,0 +1,20 @@
+{% extends 'MGAdminBundle:Bases:base.html.twig' %}
+
+{% block content %}
+<div class="container">
+    <div class="span12">
+        <div class="row">
+            <h3>Crear Nueva Gestión</h3>
+            <form action="{{ path('mg_gest_admin_new', {'clientId': cliId}) }}" method="POST" class="newgest_form">
+                {{ form_errors(newGestForm) }}
+                {{ form_label(newGestForm.descripcion, 'Descripción de la gestión a realizar') }}
+                {{ form_widget(newGestForm.descripcion) }}
+                {{ form_rest(newGestForm) }}
+            <input type="submit" class="btn btn-success" value="Enviar">
+                <a href="{{ path('mg_gest_homepage', {'page':1, 'ord':0}) }}" class="btn btn-danger">Volver</a>
+            </form>
+
+        </div>
+    </div>
+</div>
+{% endblock %}

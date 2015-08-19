@@ -1,0 +1,60 @@
+{% extends 'MGRepoBundle:Base:base_repo.html.twig' %}
+
+{% set gestiones = newNotificaciones %}
+
+{% block content %}
+    <div class="container-fluid" style="margin-top: 50px; padding: 0">
+
+    <div class="row-fluid">
+    <div class="span7" style="padding-left: 10px">
+        <h2>Notificaciones</h2>
+        <h5>Las siguientes gestiones necesitan ser revisadas.</h5>
+    </div>
+    <table class="table table-striped table-hover" id="notifCont">
+
+        {% for gest in gestiones %}
+            {% if gest.estado.estadoCode == 'GESTION_RESUELTA' or gest.estado.estadoCode == 'GESTION_CERRADA_CLIENTE' %}
+                <tr class="info">
+            {% elseif gest.estado.estadoCode == 'GESTION_CERRADA_NO_RESUELTA' %}
+                <tr class="error">
+            {% elseif gest.estado.estadoCode == 'GESTION_ACCION_REQUERIDA' %}
+                <tr class="warning">
+            {% elseif gest.estado.estadoCode == 'GESTION_NUEVA' %}
+                <tr class="success">
+            {% elseif gest.estado.estadoCode == 'GESTION_FILES_ADDED_EMP' %}
+                <tr class="warning">
+            {% else %}
+                <tr>
+            {% endif %}
+            <td class="delNot"><img class="delNotif" data-path="{{ path('mg_delete_notif', {'notId': gest.notificacion.id}) }}" src="{{ asset('bundles/adminbundle/css/img/x_red.png') }}" title="Eliminar notificación" alt="eliminar notificación" ></td>
+            {% if gest.notificacion.estado.estadoCode == 'GESTION_ACCION_REQUERIDA'  %}
+                <td>Es necesario que revises la gestión 100{{ gest.id }}</td>
+            {% elseif gest.notificacion.estado.estadoCode == 'GESTION_RESUELTA'  %}
+                <td>La gestión 100{{ gest.id }} ha sido resuelta y cerrada.</td>
+            {% elseif gest.notificacion.estado.estadoCode == 'GESTION_CERRADA_NO_RESUELTA'  %}
+                <td>La gestión 100{{ gest.id }} ha sido cerrada sin resolver.</td>
+            {% elseif gest.notificacion.estado.estadoCode == 'GESTION_FILES_ADDED_EMP'  %}
+                <td>Tu asesor ha agregado un nuevo fichero a la gestión 100{{ gest.id }}</td>
+            {% elseif gest.notificacion.estado.estadoCode == 'GESTION_NUEVA'  %}
+                <td>Tu asesor ha creado la gestión 100{{ gest.id }}</td>
+            {% else %}
+                <td>La gestión 100{{ gest.id }} ha cambiado de estado</td>
+            {% endif %}
+            <td>
+                <div class="btn-group pull-right dropdown">
+                    <a class="btn btn-info dropdown-toggle" data-toggle="dropdown" href="#">
+                        <i class="icon-white icon-cog"></i> Acciones
+                        <span class="caret"></span>
+                    </a>
+                    <ul class="dropdown-menu" role="menu">
+                        <li><a href="{{ path('mg_manage_cli_gest', {'gestId':gest.id}) }}">Gestionar</a></li>
+                        <li class="divider"></li>
+                        <li><a href="{{ path('mg_gestion_close', {'gestId':gest.id}) }}" class="btn-danger" style="color: white">Cerrar gestión</a></li>
+                    </ul>
+                </div>
+            </td>
+
+            </tr>
+        {% endfor %}
+    </table>
+{% endblock %}

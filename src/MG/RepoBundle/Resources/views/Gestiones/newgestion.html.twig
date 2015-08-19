@@ -1,0 +1,19 @@
+{% extends 'MGRepoBundle:Base:base_repo.html.twig' %}
+
+{% block content %}
+    <div class="container" style="margin-top: 50px">
+         <div class="span12">
+             <h3>Crear nueva gestión.</h3>
+             <form action="{{  path('mg_gestion_new') }}" method="POST" class="newgest_form">
+                 <fieldset>
+                     {{ form_errors(newGestionForm) }}
+                     {{ form_label(newGestionForm.descripcion, 'Descripción de la gestión a realizar') }}
+                     {{ form_widget(newGestionForm.descripcion) }}
+                     {{ form_rest(newGestionForm) }}
+                 </fieldset>
+                 <input type="submit" class="btn btn-success" value="Crear Gestión">
+                 <a class="btn btn-danger" href="{{ path('mg_user_panel', {'empName': empresa.nombre, 'page':1}) }}">Volver</a>
+             </form>
+         </div>
+    </div>
+{% endblock %}

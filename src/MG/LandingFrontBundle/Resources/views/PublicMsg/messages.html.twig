@@ -1,0 +1,42 @@
+{% extends 'MGLandingFrontBundle:Bases:base.html.twig' %}
+
+{% block customtopbar  %}
+    <div class="navbar" xmlns="http://www.w3.org/1999/html">
+        <div class="navbar-inner custnav">
+            <div class="container">
+
+                <!-- .btn-navbar is used as the toggle for collapsed navbar content -->
+                <a class="btn btn-navbar" data-toggle="collapse" data-target=".nav-collapse">
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </a>
+
+                <!-- Everything you want hidden at 940px or less, place within here -->
+                <div class="nav-collapse collapse">
+                    <ul class="nav contynav">
+                        <li><a href="{{ path('mg_landing_front_homepage') }}">Inicio</a></li>
+                        <li><a id="mod_pp" class="no-link" data-path="{{ path('mg_front_politica') }}" >Política de privacidad</a></li>
+                        <li><a id="mod_av" class="no-link" data-path="{{ path('mg_front_aviso') }}">Aviso Legal</a></li>
+                        <li><a id="mod_cc" class="no-link" data-path="{{ path('mg_front_condiciones') }}">Condiciones de contratación</a></li>
+                    </ul>
+                </div>
+
+            </div>
+        </div>
+    </div>
+
+{% endblock %}
+
+
+{% block content %}
+    <div class="container" style="margin: 12% auto;">
+        <div class="span5 offset3">
+            <h1>{{ mensaje }}</h1>
+            <div class="span2 offset1">
+                <a href="{{ path('mg_landing_front_homepage') }}" class="btn btn-danger btn-large">Volver</a>
+            </div>
+        </div>
+    </div>
+{% endblock %}
+

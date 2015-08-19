@@ -1,0 +1,94 @@
+{% extends 'MGAdminBundle:Bases:base.html.twig' %}
+
+{% block content %}
+    <div class="container">
+        <div class="span12">
+            <h2>Empresas</h2>
+            <table class="table table-bordered table-condensed table-striped table-hover">
+                <thead>
+                <tr>
+                    <td>Nombre</td>
+                    <td>CIF</td>
+                    <td>Dirección</td>
+                    <td>Ciudad</td>
+                    <td>Código Postal</td>
+                    <td>País</td>
+                    <td>Teléfono</td>
+                    <td>Página web</td>
+                    <td colspan="3">Acciones</td>
+                </tr>
+                </thead>
+                {% for empresa in empresas %}
+                    {% if empresa.enabled != 1 %}
+                        <tr class="error">
+                    {% else %}
+                        <tr>
+                    {% endif %}
+                    <td>{{ empresa.nombre }}</td>
+                    <td>{{ empresa.cif }}</td>
+                    <td>{{ empresa.direccion}}</td>
+                    <td>{{ empresa.ciudad }}</td>
+                    <td>{{ empresa.codigoPostal }}</td>
+                    <td>{{ empresa.pais }}</td>
+                    <td>{{ empresa.telefono }}</td>
+                    <td>{{ empresa.web }}</td>
+                    <td style="text-align: center"><a href="{{ path('mg_empresa_detail', {'empId': empresa.id}) }}" class="btn">Detalles</a></td>
+                    <td style="text-align: center"><a href="{{ path('mg_empresa_update', {'empId': empresa.id}) }}" class="btn btn-info">Editar</a></td>
+                    {% if empresa.enabled != 0 %}
+                        <td style="text-align: center"><button class="btn btn-danger desEmpresa" data-emp="{{ empresa.id}}" style="padding: 4px 24px">Bloquear</button></td>
+                    {% else %}
+                        <td style="text-align: center"><button class="btn btn-danger desEmpresa" data-emp="{{ empresa.id}}">Desbloquear</button></td>
+                    {% endif %}
+                    </tr>
+                {% endfor %}
+            </table>
+
+            <div class="pagination">
+                <ul>
+                    {% if first is defined and first == true %}
+                        <li class="active"><a href="{{ path('mg_empadmin_homepage', {'page': page-1 }) }}"><span>&laquo;</span></a></li>
+                    {% else %}
+                        <li class="disabled"><span>&laquo;</span></li>
+                    {% endif %}
+
+                    {% if pages is defined %}
+                        {% for i in 1..pages %}
+                            <li><a href="{{ path('mg_empadmin_homepage', {'page': i }) }}">{{ i }}</a></li>
+                        {% endfor %}
+                    {% endif %}
+
+                    {% if last is defined and last == true %}
+                        <li class="disabled"><span>&raquo;</span></li>
+                    {% else %}
+                        <li class="active"><a href="{{ path('mg_empadmin_homepage', {'page': page+1 }) }}"><span>&raquo;</span></a></li>
+                    {% endif %}
+                </ul>
+            </div>
+            <div class="container">
+                <div class="span7">
+                    <a href="{{ path('mg_empresa_create') }}" class="btn btn-success btn-large">Nueva Empresa</a>
+                </div>
+            </div>
+
+        </div>
+    </div>
+
+    {# ------------------ MODAL ------------------  #}
+    <div id="empModal" class="modal hide fade">
+        <div class="modal-header">
+            <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+            <h3>¿Seguro que desea activar/desactivar la empresa?</h3>
+            <p>Al bloquear una empresa, se impedirá el acceso a todos los gestores y empleados.</p>
+        </div>
+        <div class="modal-footer">
+            <button class="btn closeMod">Cerrar</button>
+            <a class="btn btn-primary okDes">Confirmar</a>
+        </div>
+    </div>
+    {# ---------------- FIN MODAL ----------------  #}
+
+{% endblock %}
+
+{% block customjs %}
+    <script src="{{ asset('bundles/adminbundle/js/custom.js') }}"></script>
+{% endblock %}

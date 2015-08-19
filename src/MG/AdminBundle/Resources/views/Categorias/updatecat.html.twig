@@ -1,0 +1,42 @@
+{% extends 'MGAdminBundle:Bases:base.html.twig' %}
+
+{% block content %}
+    <div class="container">
+        <div class="span12">
+            <div class="row">
+                <h3>Modificar Categoría</h3>
+                <form action="{{  path('mg_cat_update', {'catId':catId, 'empId':empId}) }}" method="POST" class="update_form">
+                    <fieldset>
+
+                        {{ form_errors(updateCategoriaForm) }}
+
+                        {{ form_label(updateCategoriaForm.nombre, 'Nombre') }}
+                        {{ form_widget(updateCategoriaForm.nombre) }}
+
+                        {{ form_label(updateCategoriaForm.descripcion, 'Descripción') }}
+                        {{ form_widget(updateCategoriaForm.descripcion) }}
+
+                        {{ form_label(updateCategoriaForm.enabled, 'Estado') }}
+                        {{ form_widget(updateCategoriaForm.enabled) }}
+
+                        {{ form_label(updateCategoriaForm.servicio, 'Servicio') }}
+                        {{ form_widget(updateCategoriaForm.servicio) }}
+                        <a data-content="Las categorías son aquellas subdivisiones de tus servicios, lo que la usuario le permitirá concretar más el área sobre el que tratara su gestión." data-original-title="¿Por qué he de seleccionar un servicio?" class="btn toolTip">?</a>
+                        {{ form_rest(updateCategoriaForm) }}
+                    </fieldset>
+                    <input type="submit" class="btn btn-success" value="Guardar">
+                    {% if is_granted('ROLE_SUPER_ADMIN') %}
+                        <a href="{{ path('mg_catadmin_homepage', {'page': 1}) }}" class="btn btn-danger">Volver</a>
+                    {% else %}
+                        <a href="{{ path('mg_cat_by_empresa', {'page': 1, 'empId':empId}) }}" class="btn btn-danger">Volver</a>
+                    {% endif %}
+                </form>
+            </div>
+        </div>
+    </div>
+{% endblock %}
+
+
+{% block customjs %}
+    <script src="{{ asset('bundles/adminbundle/js/custom.js') }}"></script>
+{% endblock %}

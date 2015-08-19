@@ -1,0 +1,87 @@
+{% extends 'MGDemoBundle:Bases:base_admin.html.twig' %}
+
+{% block content %}
+
+    <div class="container">
+        <div class="span9 hero-unit" style="min-width: 320px">
+            <div class="row">
+                <div class="span7" style="padding-top: 10px">
+                    <h4>Detalles de usuario</h4>
+                    <table class="table table-bordered table-condensed table-striped">
+                        <tr>
+                            <td>Usuario</td>
+                            <td>Gestinova</td>
+                        </tr>
+
+                        <tr>
+                            <td>Email</td>
+                            <td>rperez@demo1.com</td>
+                        </tr>
+
+
+                            <tr class="success">
+                                <td>Estado</td>
+                                <td class="success">Activo</td>
+                            </tr>
+
+                        <tr>
+                            <td>Última conexión</td>
+                            <td>{{ "now"|date("m/d/Y") }}</td>
+                        </tr>
+                        <tr>
+                            <td>Nombre</td>
+                            <td>Ramón</td>
+                        </tr>
+                        <tr>
+                            <td>Apellidos</td>
+                            <td>Pérez Pérez</td>
+                        </tr>
+                        <tr>
+                            <td>NIF</td>
+                            <td>E12345678</td>
+                        </tr>
+                        <tr>
+                            <td>Fecha Nacimiento</td>
+                            <td>01/01/1985</td>
+                        </tr>
+                        <tr>
+                            <td>Telefono</td>
+                            <td>918765442</td>
+                        </tr>
+                        <tr>
+                            <td>Tfno. Móvil</td>
+                            <td>918765442</td>
+                        </tr>
+                        <tr>
+                            <td>Dirección</td>
+                            <td>Calle Mayor 13 2A</td>
+                        </tr>
+                        <tr>
+                            <td>Ciudad</td>
+                            <td>Madrid</td>
+                        </tr>
+                        <tr>
+                            <td>Codigo Postal</td>
+                            <td>28755</td>
+                        </tr>
+                        <tr>
+                            <td>País</td>
+                            <td>España</td>
+                        </tr>
+                        <tr>
+                            <td>Empresa</td>
+                            <td>Asesoría Tavernes S.L.</td>
+                        </tr>
+                    </table>
+                </div>
+                <div class="span9">
+                    <a class="btn btn-large btn-info margined" href="{{ path('mg_demo_user_edit') }}">Editar</a>
+                    <button class="btn btn-large btn-danger margined disButton">Bloquear</button>
+                    <a class="btn btn-large margined" href="{{ path('mg_demo_useradmin_homepage') }}">Volver</a>
+                </div>
+            </div>
+        </div>
+
+    </div>
+
+{% endblock %}

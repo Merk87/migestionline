@@ -1,0 +1,20 @@
+<html>
+<header>
+
+</header>
+<body>
+<div><a href="{{app.request.scheme ~'://' ~ app.request.httpHost ~ path('mg_landing_front_homepage') }}"><img src="{{ app.request.scheme ~'://' ~ app.request.httpHost ~ asset('bundles/landingfront/images/logo.png') }}" alt="migestion logo"></a></div>
+<h1 style="color:#005580">Nuevo mensaje de {{ name }}</h1>
+<h2>IP de envío: {{ ip }}</h2>
+<div>
+    <p style="text-align: justify">{{ message|raw }}</p>
+    <p>¿Se le puede envíar publicidad?</p>
+    {% if publiok == true %}
+        <p>Se le puede envíar publicidad</p>
+    {% else %}
+        <p><b>No</b> se le puede envíar publicidad</p>
+    {% endif %}
+</div>
+
+</body>
+</html>

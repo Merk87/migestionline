@@ -1,0 +1,103 @@
+{% extends 'MGAdminBundle:Bases:base.html.twig' %}
+
+{% block customstyle %}
+    <link rel="stylesheet" type="text/css" href="{{ asset('bundles/adminbundle/css/jquery.mCustomScrollbar.css') }}"
+          xmlns="http://www.w3.org/1999/html">
+    <link rel="stylesheet" type="text/css" href="{{ asset('bundles/adminbundle/css/custom_admin.css') }}">
+{% endblock %}
+
+{% block content %}
+
+    <div class="container">
+        <div class="row">
+            <div class="span12">
+                    <div class="title-msg-container">
+                        <h3 style="border-bottom: 3px #000 solid">Conversación entre
+                            {% for member in conversacion.members %}
+                                {% if loop.first == true %}
+                                    {% if member == app.user %}
+                                        Tu y
+                                    {% else %}
+                                        {{ member.username }} y
+                                    {% endif %}
+                                {% else %}
+                                    {% if member == app.user %}
+                                        Tú
+                                    {% else %}
+                                        {{ member.username }}
+                                    {% endif %}
+                                {% endif %}
+                            {% endfor %}
+                        </h3>
+                        <h4>{{ conversacion.asunto }}</h4>
+                    </div>
+                   <div class="scrollable-container-msg">
+                       <h3>Conversación </h3>
+                       <table id="msg_container" class="table table-condensed table-striped table-hover">
+                        {% for m in conversacion.mensajes %}
+                            {% if m.remitente == app.user %}
+                                <tr>
+                                    <td class="dateCell">{{ m.fechaCreacion|date('d-m-Y h:m:s') }}</td>
+                                    <td class="response-cliente">
+                                        <span>{{ m.remitente.username }}</span>
+                                    </td>
+                                    <td class="msgCell">
+                                        <span>{{ m.mensaje }}</span>
+                                    </td>
+                                </tr>
+                            {% else %}
+                                <tr>
+                                    <td class="dateCell">{{ m.fechaCreacion|date('d-m-Y h:m:s') }}</td>
+                                    <td class="response-empresa">
+                                        <span>Cliente - {{ m.remitente.username }}</span>
+                                    </td>
+                                    <td class="msgCell">
+                                    <span>{{ m.mensaje }}</span>
+                                    </td>
+                                </tr>
+                            {% endif %}
+                        {% endfor %}
+                        </table>
+                   </div>
+                    <form action="{{ path('mg_send_message', {'chatId':conversacion.id}) }}" method="POST" class="msg-send-form">
+                        <fieldset class="msg_sender">
+                            {{ form_errors(sendMsgForm) }}
+                            {{ form_widget(sendMsgForm) }}
+                            {{ form_rest(sendMsgForm) }}
+                        </fieldset>
+                        <input type="submit" class="btn btn-success" value="Enviar">
+                        <a href="{{ path('mg_repo_show_files_by_user', {'userId':cliente.id, 'page': 1}) }}" class="btn btn-custom">Ver archivos cliente</a>
+                        <a href="{{ path('mg_mensajeria_homepage', {'page':1}) }}" class="btn btn-danger">Volver</a>
+                    </form>
+                </div>
+
+        </div>
+    </div>
+
+{% endblock %}
+
+{% block customjs %}
+    <script src="{{ asset('bundles/adminbundle/js/jquery.mCustomScrollbar.min.js') }}"></script>
+    <script src="{{ asset('bundles/adminbundle/js/jquery.mousewheel.min.js') }}"></script>
+    <script src="{{ asset('bundles/repobundle/js/ajaxcalls.js') }}"></script>
+    <script>
+        (function($){
+            $(window).load(function(){
+                $(".scrollable-container-msg").mCustomScrollbar({
+                    scrollButtons:{
+                        enable:true
+                    },
+                    theme:"dark"
+
+                });
+            });
+
+            $(window).load(function(){
+
+                $(".scrollable-container-msg").mCustomScrollbar("scrollTo",'bottom');
+            });
+
+        })(jQuery);
+    </script>
+
+{% endblock %}

@@ -1,0 +1,56 @@
+{% extends 'MGAdminBundle:Bases:base.html.twig' %}
+
+{% block content %}
+    <div class="container">
+        <div class="span12 mainContainer">
+            {% if newClients|length < 1 %}
+                    <h1>No hay nuevos clientes.</h1>
+                </div>
+            </div>
+            {% else %}
+                <div class="span7">
+                    <h2>Notificaciones</h2>
+                    <h5>Nuevos usuarios.</h5>
+                </div>
+                <table class="table table-bordered table-condensed table-striped table-hover">
+                    <thead>
+                        <tr>
+                            <td colspan="2">Usuario</td>
+                            <td>Email</td>
+                            <td>Nombre</td>
+                            <td>Apellidos</td>
+                            <td>NIF</td>
+                            <td>Telefono</td>
+                            <td>Móvil</td>
+                            <td colspan="3">Acciones</td>
+                        </tr>
+                    </thead>
+
+                    {% for user in newClients %}
+                        {% if user.locked != 0 %}
+                            <tr class="error">
+                        {% else %}
+                            <tr>
+                        {% endif %}
+                        <td class="delNot"><img class="delNotif" data-path="" src="{{ asset('bundles/adminbundle/css/img/x_red.png') }}" title="Eliminar notificación" alt="eliminar notificación" ></td>
+                        <td>{{ user.username }}</td>
+                        <td>{{ user.email }}</td>
+                        <td>{{ user.name }}</td>
+                        <td>{{ user.apellidos }}</td>
+                        <td>{{ user.nif }}</td>
+                        <td>{{ user.telefono }}</td>
+                        <td>{{ user.telefonoMvl }}</td>
+                        <td style="text-align: center"><a href="{{ path('mg_user_detail', {'userName': user.username, 'empId':0}) }}" class="btn">Detalles</a></td>
+                        <td style="text-align: center"><a href="{{ path('mg_user_edit', {'userName':user.username, 'empId':0}) }}" class="btn btn-info">Editar</a></td>
+                        </tr>
+                    {% endfor %}
+
+                </table>
+            {% endif %}
+        </div>
+    </div>
+{% endblock %}
+
+{% block customjs %}
+    <script src="{{ asset('bundles/adminbundle/js/custom.js') }}"></script>
+{% endblock %}

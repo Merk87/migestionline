@@ -1,0 +1,40 @@
+{% extends 'MGAdminBundle:Bases:base.html.twig' %}
+
+{% block content %}
+    <div class="container">
+        <div class="span12">
+            <div class="row">
+                <h3>Crear Categoría</h3>
+                <form action="{{  path('mg_cat_create', {'empId':empId}) }}" method="POST" class="update_form">
+                    <fieldset>
+                        {{ form_errors(newCategoriaForm) }}
+
+                        {{ form_label(newCategoriaForm.nombre, 'Nombre') }}
+                        {{ form_widget(newCategoriaForm.nombre) }}
+
+                        {{ form_label(newCategoriaForm.descripcion, 'Descripción') }}
+                        {{ form_widget(newCategoriaForm.descripcion) }}
+
+                        {{ form_label(newCategoriaForm.enabled, 'Estado') }}
+                        {{ form_widget(newCategoriaForm.enabled) }}
+
+                        {{ form_label(newCategoriaForm.servicio, 'Servicio') }}
+                        {{ form_widget(newCategoriaForm.servicio) }}
+                        <a data-content="Las categorías son aquellas subdivisiones de tus servicios, lo que la usuario le permitirá concretar más el área sobre el que tratara su gestión." data-original-title="¿Por qué he de seleccionar un servicio?" class="btn toolTip">?</a>
+                        {{ form_rest(newCategoriaForm) }}
+                    </fieldset>
+                    <input type="submit" class="btn btn-success" value="Guardar">
+                   {% if is_granted('ROLE_SUPER_ADMIN') %}
+                       <a href="{{ path('mg_catadmin_homepage', {'page': 1}) }}" class="btn btn-danger">Volver</a>
+                   {% else %}
+                       <a href="{{ path('mg_catadmin_homepage', {'page': 1}) }}" class="btn btn-danger">Volver</a>
+                   {% endif %}
+                </form>
+            </div>
+        </div>
+    </div>
+{% endblock %}
+
+{% block customjs %}
+    <script src="{{ asset('bundles/adminbundle/js/custom.js') }}"></script>
+{% endblock %}

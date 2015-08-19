@@ -1,0 +1,57 @@
+{% extends 'MGAdminBundle:Bases:base.html.twig' %}
+
+{% block content %}
+    <div class="container">
+        <div class="span12 hero-unit" style="min-width: 320px">
+            <div class="row">
+                <div class="span6">
+                    <h4>Detalles Categoría</h4>
+                    <table class="table table-bordered table-condensed table-striped">
+                        {% if categoria.enabled == 0 %}
+                            <tr class="error">
+                                <td colspan="2" style="font-weight: bold">Inactiva</td>
+                            </tr>
+                        {% endif %}
+                        <tr>
+                            <td>Nombre</td>
+                            <td>{{ categoria.nombre}}</td>
+                        </tr>
+                        <tr>
+                            <td>Descripción</td>
+                            <td>{{ categoria.descripcion }}</td>
+                        </tr>
+
+                        {% if categoria.enabled == 1 %}
+                            <tr class="success">
+                                <td>Estado</td>
+                                <td class="success">Activo</td>
+                            </tr>
+                        {% else %}
+                            <tr class="warning">
+                                <td>Estado</td>
+                                <td class="error">Inactivo</td>
+                            </tr>
+                        {% endif %}
+
+                    </table>
+                </div>
+            </div>
+
+            <div class="span9">
+                <a class="btn btn-large btn-info margined" href="{{ path('mg_cat_update', {'catId': categoria.id, 'empId':empId}) }}">Editar</a>
+                {% if categoria.enabled  == 1%}
+                    <a class="btn btn-large btn-danger margined" href="{{ path('mg_cat_block', {'catId': categoria.id}) }}">Bloquear</a>
+                {% else %}
+                     <a class="btn btn-large btn-danger margined" href="{{ path('mg_cat_block', {'catId': categoria.id}) }}">Desbloquear</a>
+                {% endif %}
+                {% if is_granted('ROLE_SUPER_ADMIN') %}
+                    <a class="btn btn-large margined" href="{{ path('mg_catadmin_homepage', {'page': 1 }) }}">Volver</a>
+                {% else %}
+                    <a class="btn btn-large margined" href="{{ path('mg_cat_by_empresa', {'page': 1, 'empId':empId }) }}">Volver</a>
+                {% endif %}
+            </div>
+
+        </div>
+
+    </div>
+{% endblock %}

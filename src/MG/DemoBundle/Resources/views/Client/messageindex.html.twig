@@ -1,0 +1,45 @@
+{% extends 'MGDemoBundle:Bases:base_mail_client.html.twig' %}
+
+{% block content %}
+
+    <div class="container-fluid" style="margin-top: 50px; padding: 0">
+        <div class="row-fluid">
+            <h2 style="margin-left: 25px; margin-bottom: 25px">Mensajes</h2>
+            <table class="table table-striped">
+                <thead>
+                <tr>
+                    <td>Asunto</td>
+                    <td>Último mensaje</td>
+                    <td>Fecha de creación</td>
+                    <td>Participantes</td>
+                    <td>Mensajes nuevos</td>
+                    <td>Acciones</td>
+                </tr>
+                </thead>
+                <tr class="success">
+                    <td>Mensaje de Construcciones Europa S.L</td>
+                    <td>29-08-2013 10:36:08</td>
+                    <td>19-08-2013 19:01:20</td>
+                    <td>Ana y Construcciones Europa S.L</td>
+                    <td>1</td>
+                    <td>
+                        <a href="{{path('mg_demo_user_show_message') }}" class="btn btn-info">Ver Mensajes</a>
+                    </td>
+                </tr>
+            </table>
+            <div class="pagination">
+                <ul>
+                    <li class="disabled"><span>&laquo;</span></li>
+                    <li class="active"><span><a href="{{ path('mg_demo_user_messages_panel') }}">1</span></a></li>
+                    <li class="disabled"><span>&raquo;</span></li>
+                </ul>
+            </div>
+        </div>
+    </div>
+    <div class="container">
+        <div class="span12">
+            <a href="{{ path('mg_demo_user_new_message') }}" class="btn btn-success newMsg">Nuevo Mensaje</a>
+        </div>
+    </div>
+
+{% endblock %}

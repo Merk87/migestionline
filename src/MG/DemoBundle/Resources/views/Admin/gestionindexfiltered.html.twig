@@ -1,0 +1,135 @@
+{% extends 'MGDemoBundle:Bases:base_admin.html.twig' %}
+{% block content %}
+    <div class="container">
+        <div class="span12">
+            <div class="span4">
+                <h2>Gestiones abiertas</h2>
+            </div>
+            <div class="span3 pull-right">
+                <form>
+                    <fieldset>
+                        <label for="sel_empresaGestion">Mostrar gestiones por empresa</label>
+                        <select id="sel_empresaGestion">
+                            <option value="none">- Seleccione una empresa -</option>
+                            <option value="{{ path('mg_demo_gest_by_empresa') }}">Asesoría Tavernes S.L.</option>
+                            <option value="{{ path('mg_demo_gest_by_empresa') }}">Gestoría Tavernes S.A.</option>
+                        </select>
+                    </fieldset>
+                </form>
+            </div>
+
+            <div class="span3 pull-right">
+                <form>
+                    <fieldset>
+                        <label for="sel_estadoGest">Mostrar gestiones por estado</label>
+                        <select id="sel_estadoGest">
+                            <option value="none">- Seleccione estado-</option>
+                            <option value="{{ path('mg_demo_gest_by_empresa_estado') }}">Nuevo</option>
+                            <option value="none">Leido</option>
+                            <option value="none">En trámite</option>
+                            <option value="none">En espera</option>
+                            <option value="none">Acción requerida</option>
+                            <option value="none">Resuelta</option>
+                            <option value="none">Cerrada sin resolver</option>
+                            <option value="none">Cerrada por el cliente</option>
+                        </select>
+                    </fieldset>
+                </form>
+            </div>
+
+            <table class="table table-bordered table-condensed table-striped table-hover">
+                <thead>
+                <tr>
+                    <td>Número Gestión</td>
+                    <td>Cliente</td>
+                    <td>Descripción</td>
+                    <td>Fecha Creación</td>
+                    <td>Servicio</td>
+                    <td>Categoría</td>
+                    <td>Estado</td>
+                    <td>Archivos adjuntos</td>
+                    <td colspan="3">Acciones</td>
+                </tr>
+                </thead>
+                <tr>
+                    <td>100001 </td>
+                    <td>Construcciones Europa, S.L.</td>
+                    <td>Presentar IVA trimestral</td>
+                    <td>20/10/2013</td>
+                    <td>Fiscal autónomo</td>
+                    <td>Impuestos</td>
+                    <td>En trámite</td>
+                    <td>3</td>
+                    <td>
+                        <div class="btn-group pull-right dropdown">
+                            <a class="btn btn-info dropdown-toggle" data-toggle="dropdown" href="#">
+                                <i class="icon-white icon-cog"></i> Acciones
+                                <span class="caret"></span>
+                            </a>
+                            <ul class="dropdown-menu" role="menu">
+                                <li><a href="{{ path('mg_demo_manage_gest') }}">Gestionar</a></li>
+                                <li class="divider"></li>
+                                <li><a class="btn-success disButton" style="color:#ffffff;">Cerrar como solucionada</a></li>
+                                <li><a class="btn-danger disButton" style="color: white">Cerrar gestión</a></li>
+                            </ul>
+                        </div>
+                    </td>
+                </tr>
+                <tr class="success">
+                    <td>100003 </td>
+                    <td>Restaurante El Cielo</td>
+                    <td>Procesamiento facturas</td>
+                    <td>01/09/2013</td>
+                    <td>Contabilidad PYME</td>
+                    <td>Facturas recibidas</td>
+                    <td>Nueva</td>
+                    <td>0</td>
+                    <td>
+                        <div class="btn-group pull-right dropdown">
+                            <button class="btn btn-info dropdown-toggle" data-toggle="dropdown" disabled>
+                                <i class="icon-white icon-cog"></i> Acciones
+                                <span class="caret"></span>
+                            </button>
+                        </div>
+                    </td>
+                </tr>
+                <tr>
+                    <td>100004 </td>
+                    <td>Mármoles Fernando</td>
+                    <td>Procesamiento facturas</td>
+                    <td>15/09/2013</td>
+                    <td>Contabilidad Est. Directa</td>
+                    <td>Facturas emitidas.</td>
+                    <td>En trámite</td>
+                    <td>0</td>
+                    <td>
+                        <div class="btn-group pull-right dropdown">
+                            <button class="btn btn-info dropdown-toggle" data-toggle="dropdown" disabled>
+                                <i class="icon-white icon-cog"></i> Acciones
+                                <span class="caret"></span>
+                            </button>
+                        </div>
+                    </td>
+                </tr>
+            </table>
+            <div class="pagination">
+                <ul>
+
+                    <li class="disabled"><span>&laquo;</span></li>
+                    <li class="active"><span><a href="{{ path('mg_demo_gest_by_empresa') }}">1</span></a></li>
+                    <li class="disabled"><span>&raquo;</span></li>
+
+                </ul>
+            </div>
+
+            <div class="container">
+                <div class="span7">
+                    <a href="{{ path('mg_demo_gest_admin_new') }}" class="btn btn-success btn-large newGest">Nueva Gestión</a>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+
+{% endblock %}

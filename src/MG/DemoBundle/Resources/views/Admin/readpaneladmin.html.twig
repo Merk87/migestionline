@@ -1,0 +1,92 @@
+{% extends 'MGDemoBundle:Bases:base_admin.html.twig' %}
+
+{% block customstyle %}
+    <link rel="stylesheet" type="text/css" href="{{ asset('bundles/adminbundle/css/jquery.mCustomScrollbar.css') }}"
+          xmlns="http://www.w3.org/1999/html">
+    <link rel="stylesheet" type="text/css" href="{{ asset('bundles/adminbundle/css/custom_admin.css') }}">
+{% endblock %}
+
+{% block content %}
+
+    <div class="container">
+        <div class="row">
+            <div class="span12">
+                    <div class="title-msg-container">
+                        <h3 style="border-bottom: 3px #000 solid">Conversación entre Ana y Mayte.</h3>
+                        <h4>Cristalería Mayte</h4>
+                    </div>
+                   <div class="scrollable-container-msg">
+                       <h3>Conversación </h3>
+                       <table id="msg_container" class="table table-condensed table-striped table-hover">
+                           <tr>
+                               <td class="dateCell">19-08-2013 19:01:20</td>
+                               <td class="response-empresa">
+                                   <span>Mayte. Cristalería Mayte</span>
+                               </td>
+                               <td class="msgCell">
+                                   <span>Hola, quería saber si puedo desgravar la factura de un hotel</span>
+                               </td>
+                           </tr>
+                            <tr>
+                                <td class="dateCell">23-08-2013 17:11:40</td>
+                                <td class="response-cliente">
+                                    <span>Ana</span>
+                                </td>
+                                <td class="msgCell">
+                                    <span>Hola, puedes asignarla a gasto pero no deducirte el iva.</span>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td class="dateCell">29-08-2013 10:36:08</td>
+                                <td class="response-empresa">
+                                    <span>Mayte. Cristalería Mayte</span>
+                                </td>
+                                <td class="msgCell">
+                                <span>Vale, gracias.</span>
+                                </td>
+                            </tr>
+
+                        </table>
+                   </div>
+                    <form method="POST" class="msg-send-form">
+                        <fieldset class="msg_sender">
+                            {{ form_errors(sendMsgForm) }}
+                            {{ form_widget(sendMsgForm) }}
+                            {{ form_rest(sendMsgForm) }}
+                        </fieldset>
+                        <input type="submit" class="btn btn-success" value="Enviar">
+                        <a href="{{ path('mg_demo_show_files_user') }}" class="btn btn-custom">Mostrar Archivos</a>
+                        <a href="{{ path('mg_demo_mensajeria_homepage') }}" class="btn btn-danger">Volver</a>
+                    </form>
+                </div>
+
+        </div>
+    </div>
+
+{% endblock %}
+
+{% block customjs %}
+    <script src="{{ asset('bundles/adminbundle/js/jquery.mCustomScrollbar.min.js') }}"></script>
+    <script src="{{ asset('bundles/adminbundle/js/jquery.mousewheel.min.js') }}"></script>
+    <script src="{{ asset('bundles/repobundle/js/ajaxcalls.js') }}"></script>
+    <script>
+        (function($){
+            $(window).load(function(){
+                $(".scrollable-container-msg").mCustomScrollbar({
+                    scrollButtons:{
+                        enable:true
+                    },
+                    theme:"dark"
+
+                });
+            });
+
+            $(window).load(function(){
+
+                $(".scrollable-container-msg").mCustomScrollbar("scrollTo",'bottom');
+            });
+
+        })(jQuery);
+    </script>
+
+{% endblock %}

@@ -1,0 +1,10 @@
+{% extends 'MGAdminBundle:Bases:base.html.twig' %}
+
+{% block content %}
+    <div class="container" style="margin: 15% auto; width: 25%">
+        <div class="span5" style="margin: 0 auto">
+            <h1>{{ mensaje }}</h1>
+            <a href="{{ path('mg_admin_homepage') }}" class="btn btn-danger btn-large" style="width: 75%">Volver</a>
+        </div>
+    </div>
+{% endblock %}

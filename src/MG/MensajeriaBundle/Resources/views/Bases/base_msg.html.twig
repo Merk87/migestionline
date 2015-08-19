@@ -1,0 +1,179 @@
+<!DOCTYPE html>
+<html>
+{% block header %}
+    <head>
+        <meta name="author" content="" />
+        <meta name="description" content="" />
+        <meta name="robots" content="index, follow"/>
+        <meta name="subject" content="" />
+        <meta name="Language" content="" />
+        <meta name="country" content="" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+        {% block stylesheet %}
+            <link rel="stylesheet" type="text/css" href="{{ asset('bundles/repobundle/css/bootstrap.css') }}">
+            <link rel="stylesheet" type="text/css" href="{{ asset('bundles/repobundle/css/front.css') }}">
+        {% endblock %}
+        {% block customstyle %}
+        {% endblock %}
+        {% block scripts %}
+            <script src="//ajax.googleapis.com/ajax/libs/jquery/2.0.0/jquery.min.js"></script>
+            <script src="//ajax.googleapis.com/ajax/libs/jqueryui/1.10.2/jquery-ui.min.js"></script>
+        {% endblock %}
+        {% block customscripts %}
+        {% endblock %}
+        <link rel="shortcut icon" href="{{ asset('bundles/adminbundle/img/favicon.ico') }}" type="image/x-icon">
+        <link rel="icon" href="{{ asset('bundles/adminbundle/img/favicon.ico') }}" type="image/x-icon">
+        <title>{% block title %}Panel de Administracion - Mi Gestión Online{% endblock %}</title>
+    </head>
+{% endblock %}
+<body>
+
+
+{% set infoClient = app.session.get('infoClient') %}
+{% set empresa = infoClient['empresa'] %}
+{% set servicios = infoClient['servicios'] %}
+{% set estados = infoClient['estados'] %}
+{% set url = app.request.uri %}
+
+{% if app.session.get('infoMsg') != null %}
+    {% set infoMsg = app.session.get('infoMsg')  %}
+    {% set msgstatus = infoMsg['msg_status'] %}
+{% endif %}
+
+{% block body %}
+    {% block top_line %}
+
+        <div class="navbar navbar-fixed-top">
+            <div class="navbar-inner">
+                <div class="container-fluid">
+                    {% block inner_top_line %}
+                        <a class="brand" href="{{ path('mg_repo_homepage' )}}" style="font-weight: bold; color: white; padding: 6px"><img class="logo" style="" src="{{ asset('bundles/adminbundle/img/logob.png') }}"></a></li>
+
+                        <div class="nav">
+                            <ul class="nav">
+                                <li><a id="amsg" href="{{ path('mg_mensajeria_homepage', {'page':1}) }}" data-path="{{path('mg_msg_alerts')}}">¡<span class="not-text">Nuevos Mensajes!</span><span class="notifications msg" data-toggle="none"></span></a></li>
+                                <li><a href="{{ path('mg_show_notificaciones_client', {'empId':empresa.id}) }}" id="cenot" data-path="{{ path('mg_change_estado_alert_client', {'empId':empresa.id}) }}"><span class="noback"> Nuevas notificaciones</span><span class="notifications gestchange" data-toggle="none"></span></a></li>
+                            </ul>
+                        </div>
+
+                        <div class="btn-group pull-right dropdown">
+                            <a class="btn dropdown-toggle" data-toggle="dropdown" href="#">
+                                <i class="icon-user"></i> {{ app.user.username }}
+                                <span class="caret"></span>
+                            </a>
+                            <ul class="dropdown-menu" role="menu">
+                                <li><a href="{{ path('mg_gestion_new') }}">Nueva gestión</a></li>
+                                <li><a href="{{ path('mg_mensajeria_homepage', {'page':1}) }}">Mensajes</a></li>
+                                {# <li><a href="#">Solicitar nuevos servicios</a></li>#}
+                                <li class="divider"></li>
+                                <li><a href="{{ path('mg_user_profile') }}">Perfil</a></li>
+                                <li class="divider"></li>
+                                <li><a class="btn-danger" style="color:white" href="{{ path('fos_user_security_logout') }}">Salir</a></li>
+                            </ul>
+                        </div>
+                    {% endblock %}
+                </div>
+            </div>
+        </div>
+    {% endblock %}
+
+
+
+    {% block maincontent %}
+        <div class="main">
+            <div class="box">
+                <div class="row-fluid">
+                    <div class="column span2 latBar">
+                        {% block sidebar %}
+                            <ul class="nav nav-list nav-fixed-sidebar">
+
+                                <li><div class="img-wrap"><a href="{{ path('mg_user_panel', {'empName':empresa.nombre, 'page':1}) }}"><img class="img-rounded" src="{{ asset(empresa.logoPath) }}"></a></div></li>
+                                <ul class="accordion" id="accordionActions">
+
+                                    <div class="accordion-heading">
+                                        <a id="ulATitle" class="accordion-toggle" data-toggle="collapse" data-parent="#accordionActions" href="#collapsedActions">
+                                            Acciones
+                                        </a>
+
+                                    </div>
+
+                                    <div id="collapsedActions" class="accordion-body collapse in">
+                                            <div class="accordion-inner">
+                                                <li><a class="btn btn-primary" href="{{ path('mg_new_message') }}">Nuevo Mensaje</a></li>
+                                                {% if 'filter' in url %}
+                                                    <li style="margin: 10px 0"><a class="btn btn-danger" href="{{ path('mg_mensajeria_homepage', {'page':1}) }}">Eliminar filtro</a></li>
+                                                {% endif %}
+                                            </div>
+
+                                    </div>
+
+                                </ul>
+
+                                    <li class="nav-header">Filtros</li>
+
+
+                                    <ul class="accordion" id="accordionEstsM">
+                                        <div class="accordion-heading">
+                                            <a id="ulEMTitle" class="accordion-toggle" data-toggle="collapse" data-parent="#accordionEstsM" href="#collapsedEstsM">
+                                                Filtrar por
+                                            </a>
+                                        </div>
+                                        <div id="collapsedEstsM" class="accordion-body collapse in ">
+                                            <div class="accordion-inner">
+                                                <li><a href="{{ path('mg_mensajeria_homepage', {'page':1}) }}">Todos</a></li>
+                                                {% for status in msgstatus %}
+                                                    <li><a href="{{ path('mg_mensajeria_homepage_filtered', {'page':1, 'statusId':status.id}) }}">{{ status.descripcion }}s</a></li>
+                                                {% endfor %}
+                                            </div>
+                                        </div>
+                                    </ul>
+
+                                </ul>
+                            </ul>
+                        {% endblock %}
+                    </div>
+                    <div class="column span10 bordered">
+                        <div class="spanned"></div>
+                        {% block flashmessages %}
+                            {% for flashMessage in app.session.flashbag.get('notice') %}
+                                <div class="container">
+                                    <div class="span6 alert alert-success">
+                                        <button type="button" class="close" data-dismiss="alert">&times;</button>
+                                        {{ flashMessage }}
+                                    </div>
+                                </div>
+                            {% endfor %}
+
+                            {% for flashMessage in app.session.flashbag.get('fail') %}
+                                <div class="container">
+                                    <div class="span6 alert alert-danger">
+                                        <button type="button" class="close" data-dismiss="alert">&times;</button>
+                                        {{ flashMessage }}
+                                    </div>
+                                </div>
+                            {% endfor %}
+                        {% endblock %}
+                        {% block content %}
+
+                        {% endblock %}
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    {% endblock %}
+{% endblock %}
+</body>
+{% block footer %}
+    {% block js %}
+        <script src="{{ asset('bundles/repobundle/js/bootstrap.js') }}"></script>
+        <script src="{{ asset('bundles/repobundle/js/bootstrap.min.js') }}"></script>
+        <script src="{{ asset('bundles/repobundle/js/custom_front.js') }}"></script>
+        <script src="{{ asset('bundles/repobundle/js/ajaxcalls.js') }}"></script>
+    {% endblock %}
+    {% block customjs %}
+
+    {% endblock %}
+{% endblock %}
+</html>

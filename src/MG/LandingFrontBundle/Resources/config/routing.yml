@@ -1,0 +1,35 @@
+mg_public_client_browse_servs:
+    pattern: /
+    defaults: { _controller: MGLandingFrontBundle:LandingFront:browseServicesClient }
+
+mg_public_client_show_servs:
+    pattern: /mostrar/servicio/{tipoServicio}
+    defaults: { _controller: MGLandingFrontBundle:LandingFront:showServicesPublic }
+
+mg_landing_front_homepage:
+    pattern:  /empresas
+    defaults: { _controller: MGLandingFrontBundle:LandingFront:index }
+
+mg_check_rol_redirect:
+    pattern: /entra
+    defaults: { _controller: MGLandingFrontBundle:LandingFront:checkRolR }
+
+mg_front_contratacion:
+    pattern: /contrata-ya
+    defaults: { _controller: MGLandingFrontBundle:LandingFront:contrata }
+
+mg_front_politica:
+    pattern: /politica-privacidad
+    defaults: { _controller: MGLandingFrontBundle:LandingFront:politica }
+
+mg_front_condiciones:
+    pattern: /condiciones-de-contratacion
+    defaults: { _controller: MGLandingFrontBundle:LandingFront:condiciones }
+
+mg_front_aviso:
+    pattern: /aviso-legal
+    defaults: { _controller: MGLandingFrontBundle:LandingFront:aviso }
+
+mg_public_client_response:
+    pattern: /public-response/{hash}
+    defaults: { _controller: MGLandingFrontBundle:LandingFront:clientRespuesta }

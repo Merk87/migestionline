@@ -1,0 +1,25 @@
+{% extends 'MGAdminBundle:Bases:base.html.twig' %}
+
+{% block content %}
+
+    <div class="container" style="margin-top: 50px">
+        <div class="span10 hero-unit">
+            <form>
+                <fieldset>
+                    <center><h3 for="sel_empresaGestion">Selecciona la empresa para mostrar las gestiones</h3>
+                        <select class="callToActionOpt" id="sel_empresaGestion">
+                            <option  value="none">- Seleccione una empresa -</option>
+                            {% for empresa in empresas %}
+                                <option value="{{ empresa.id }}">{{ empresa.nombre }}</option>
+                            {% endfor %}
+                        </select></center>
+                </fieldset>
+            </form>
+        </div>
+    </div>
+
+{% endblock %}
+
+{% block customjs %}
+    <script src="{{ asset('bundles/adminbundle/js/custom.js') }}"></script>
+{% endblock %}

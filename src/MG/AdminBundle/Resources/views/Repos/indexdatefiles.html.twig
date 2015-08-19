@@ -1,0 +1,95 @@
+{% extends 'MGAdminBundle:Bases:base.html.twig' %}
+
+{% block content %}
+    <div class="container">
+        <div class="span12">
+            <h2>Archivos almacenados entre: </h2>
+            <h4>{{ fechaIni|date('d-m-Y') }} - {{ fechaFin|date('d-m-Y') }}</h4>
+        </div>
+    </div>
+
+    <div class="container" style="margin-top: 25px">
+         <table class="table table-bordered">
+             <thead>
+                 <tr>
+                     <td colspan="2">Nombre archivo</td>
+                     <td>Categoría</td>
+                     <td>Servicio</td>
+                     <td>Fecha subida</td>
+                     <td colspan="2">Acciones</td>
+                 </tr>
+             </thead>
+
+             {% for file in files %}
+                <tr>
+                    <td style="text-align: center"><img class="icon_mini" src="{{ asset(file.fileType.iconoPath) }}" alt="{{ file.fileType.tipo }}" title="{{ file.fileType.descripcion}}"></td>
+                    <td>{{ file.originalName }}</td>
+                    <td>{{ file.gestion.categoria.nombre }}</td>
+                     <td>{{ file.gestion.categoria.servicio.nombre }}</td>
+                    <td>{{ file.fechaSubida|date('d-m-Y h:i') }}</td>
+                    <td>
+                        <a href="{{ path('mg_download_file', {'fileId': file.id}) }}" class="btn btn-small btn-success">Descargar</a>
+                {% if file.delEmpresa == true %}
+                    <a href="{{ path('mg_delete_action_repo', {'fileId': file.id}) }}" class="btn btn-small btn-danger">Eliminar</a></p>
+                {% else %}
+                    <button class="btn btn-danger" disabled>No puedes eliminar este ficheros.</button>
+                {% endif %}
+                    </td>
+                </tr>
+            {% endfor %}
+         </table>
+
+        <div class="pagination">
+            <ul>
+                {% if first is defined and first == true %}
+                    <li class="active"><a href="{{ path('mg_repo_filter_files_repo', {'fechaIni':fechaIni, 'fechaFin':fechaFin, 'repoId':repoId, 'page': page-1 }) }}"><span>&laquo;</span></a></li>
+                {% else %}
+                    <li class="disabled"><span>&laquo;</span></li>
+                {% endif %}
+
+                {% if pages is defined %}
+                    {% for i in 1..pages %}
+                        <li><a href="{{ path('mg_repo_filter_files_repo', {'fechaIni':fechaIni, 'fechaFin':fechaFin, 'repoId':repoId, 'page': i }) }}">{{ i }}</a></li>
+                    {% endfor %}
+                {% endif %}
+
+                {% if last is defined and last == true %}
+                    <li class="disabled"><span>&raquo;</span></li>
+                {% else %}
+                    <li class="active"><a href="{{ path('mg_repo_filter_files_repo', {'fechaIni':fechaIni, 'fechaFin':fechaFin, 'repoId':repoId, 'page': page+1 }) }}"><span>&raquo;</span></a></li>
+                {% endif %}
+            </ul>
+        </div>
+
+        <div class="container">
+            <div class="span12">
+                <button class="btn btn-info showS">Buscar por fecha</button>
+            </div>
+        </div>
+
+        <div class="span10 formContainer">
+            <h4>Busqueda de archivos por fecha</h4>
+            <p>Establezca la fecha de inicio y de fin del intervalo, para mostrar todos los archivos agregados entre ambas.</p>
+            <form action="{{ path('mg_take_dates_from_user', {'repoId':repoId}) }}" method="POST">
+                <fieldset>
+                    {{ form_errors(searchForm) }}
+                    <div style="margin-right: 15px">
+                        {{ form_label(searchForm.fechaIni, 'Fecha Inicio') }}
+                        {{ form_widget(searchForm.fechaIni) }}
+                    </div>
+                    <div>
+                        {{ form_label(searchForm.fechaFin, 'Fecha Fin') }}
+                        {{ form_widget(searchForm.fechaFin) }}
+                    </div>
+                    {{ form_rest(searchForm) }}
+                </fieldset>
+                <input type="submit" class="btn btn-success" value="Buscar">
+                <button class="btn btn-danger hideS">Volver</button>
+            </form>
+        </div>
+    </div>
+{% endblock %}
+
+{% block customjs %}
+    <script src="{{ asset('bundles/adminbundle/js/custom.js') }}"></script>
+{% endblock %}

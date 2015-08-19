@@ -1,0 +1,7 @@
+parameters:
+#    mg_repo.example.class: MG\RepoBundle\Example
+
+services:
+#    mg_repo.example:
+#        class: %mg_repo.example.class%
+#        arguments: [@service_id, "plain_value", %parameter%]

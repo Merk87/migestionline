@@ -1,0 +1,108 @@
+mg_mensajeria_homepage:
+    pattern:  /{page}
+    defaults: { _controller: MGMensajeriaBundle:UserMessage:index }
+    requirements:
+        page: \d+
+
+mg_mensajeria_homepage_filtered:
+    pattern: /{page}/status/{statusId}
+    defaults: { _controller: MGMensajeriaBundle:UserMessage:indexMessageByStatus}
+    requirements:
+        page: \d+
+        statusId: \d+
+
+mg_show_conv:
+    pattern: /conv/{chatId}
+    defaults: { _controller: MGMensajeriaBundle:UserMessage:showChat }
+    requirements:
+        chatId: \d+
+
+mg_send_message:
+    pattern: /conv/send/{chatId}
+    defaults: { _controller: MGMensajeriaBundle:UserMessage:sendMessage }
+    requirements:
+        chatId: \d+
+
+mg_new_message:
+    pattern: /new/conv
+    defaults: { _controller: MGMensajeriaBundle:UserMessage:newChat }
+
+mg_new_message_admin:
+    pattern: /new/admin/conv/{empId}
+    defaults: { _controller: MGMensajeriaBundle:UserMessage:newChatAdmin }
+    requirements:
+        empId: \d+
+
+mg_all_contratacion_alert:
+    pattern: /all/cont/alert
+    defaults: { _controller MGMensajeriaBundle:UserNotifications:newAllContratacionNotificacion }
+
+mg_contratacion_alert:
+    pattern: /cont/alert
+    defaults: { _controller MGMensajeriaBundle:UserNotifications:newContratacionNotificacion }
+
+mg_contratacion_client_alert:
+    pattern: /cont/client/alert
+    defaults: { _controller MGMensajeriaBundle:UserNotifications:newClientContratacionNotificacion }
+
+mg_change_receiver_admin:
+    pattern: /change/reciever/{chatId}/to/{newRecieverId}
+    defaults: { _controller: MGMensajeriaBundle:UserMessage:changeReceiver }
+    requirements:
+            chatId: \d+
+            newRecieverId: \d+
+mg_msg_alerts:
+    pattern: /msg/alerts
+    defaults: { _controller: MGMensajeriaBundle:UserNotifications:newMessagesNotification }
+
+mg_msg_contact_alerts:
+    pattern: /msg/contact/alert
+    defaults: { _controller: MGMensajeriaBundle:UserNotifications:newContactMsgNotification }
+
+mg_gest_alerts:
+    pattern: /gest/alerts
+    defaults: { _controller: MGMensajeriaBundle:UserNotifications:newGestionNotification }
+
+mg_change_estado_alert:
+    pattern: /gest/emp/change/estado/alert
+    defaults: { _controller: MGMensajeriaBundle:UserNotifications:changeStatusNotification }
+
+mg_change_estado_alert_client:
+    pattern: /gest/cli/{empId}/change/estado/alert
+    defaults: { _controller: MGMensajeriaBundle:UserNotifications:changeStatusNotificationUser }
+    requirements:
+        empId: \d+
+
+mg_show_notificaciones_admin:
+    pattern: /show/changed/gest/{page}
+    defaults: { _controller: MGMensajeriaBundle:UserNotifications:showChangedGestAdmin }
+    requirements:
+        page: \d+
+
+mg_show_notificaciones_client:
+    pattern: /show/client/changed/gest/{empId}
+    defaults: { _controller: MGMensajeriaBundle:UserNotifications:showChangedGestUser }
+    requirements:
+        empId: \d+
+
+mg_show_notificaciones_contratacion_client:
+    pattern: /show/client/contratacion/notificaciones
+    defaults: { _controller: MGMensajeriaBundle:UserNotifications:showContractNotification }
+
+mg_show_alert_contratacion_client_pending:
+    pattern: /contratacion/alert
+    defaults: { _controller: MGMensajeriaBundle:UserNotifications:checkContratacionNotification }
+
+mg_delete_notif:
+    pattern: /disable/not/{notId}
+    defaults: { _controller: MGMensajeriaBundle:UserNotifications:disableNotification }
+    requirements:
+       notId: \d+
+
+mg_new_clients:
+    pattern: /show/new/clients
+    defaults: { _controller: MGMensajeriaBundle:UserNotifications:showNewUsers }
+
+mg_new_clients_alert:
+    pattern: /new/clients/alert
+    defaults: { _controller: MGMensajeriaBundle:UserNotifications:newClientsNotification }

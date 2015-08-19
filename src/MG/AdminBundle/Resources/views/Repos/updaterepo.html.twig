@@ -1,0 +1,33 @@
+{% extends 'MGAdminBundle:Bases:base.html.twig' %}
+
+{% block content %}
+    <div class="container">
+        <div class="span12">
+            <div class="row">
+                <h3>Modificar Repositorio</h3>
+                <form action="{{  path('mg_repo_update',{'repoId': repId}) }}" method="POST" class="update_form">
+                    <fieldset>
+                        {{ form_errors(editRepoForm) }}
+
+                        {{ form_label(editRepoForm.descripcion, 'Descripción') }}
+                        {{ form_widget(editRepoForm.descripcion) }}
+
+                        {{ form_label(editRepoForm.limiteArchivos, 'Número de archivos máximo') }}
+                        {{ form_widget(editRepoForm.limiteArchivos) }}
+
+                        {{ form_label(editRepoForm.enabled, 'Activado') }}
+                        {{ form_widget(editRepoForm.enabled) }}
+                        {{ form_rest(editRepoForm) }}
+
+                    </fieldset>
+                    <input type="submit" class="btn btn-success" value="Guardar">
+                    {% if(is_granted('ROLE_SUPER_ADMIN')) %}
+                        <a href="{{ path('mg_repoadmin_homepage', {'page': 1}) }}" class="btn btn-danger">Volver</a>
+                    {% else %}
+                        <a href="{{ path('mg_repo_by_empresa', {'page': 1}) }}" class="btn btn-danger">Volver</a>
+                    {% endif %}
+                </form>
+            </div>
+        </div>
+    </div>
+{% endblock %}

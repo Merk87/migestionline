@@ -1,0 +1,36 @@
+{% extends 'MGDemoBundle:Bases:base_admin.html.twig' %}
+
+{% block content %}
+    <div class="container">
+        <div class="span12 hero-unit" style="min-width: 320px">
+            <div class="row">
+                <div class="span6">
+                    <h4>Detalles Categoría</h4>
+                    <table class="table table-bordered table-condensed table-striped">
+                        <tr>
+                            <td>Nombre</td>
+                            <td>Categoría Demo 1</td>
+                        </tr>
+                        <tr>
+                            <td>Descripción</td>
+                            <td>Categoría de Demostración 1</td>
+                        </tr>
+                        <tr class="success">
+                            <td>Estado</td>
+                            <td class="success">Activo</td>
+                        </tr>
+
+                    </table>
+                </div>
+            </div>
+
+            <div class="span9">
+                <a class="btn btn-large btn-info margined" href="{{ path('mg_demo_cat_update') }}">Editar</a>
+                <button class="btn btn-large btn-danger margined disButton" >Bloquear</button>
+                <a class="btn btn-large margined" href="{{ path('mg_demo_catadmin_homepage') }}">Volver</a>
+            </div>
+
+        </div>
+
+    </div>
+{% endblock %}

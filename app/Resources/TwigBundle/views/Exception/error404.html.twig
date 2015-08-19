@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+
+<html lang="es">
+<head>
+    <meta charset="utf-8">
+    <title>Mi Gestión Online</title>
+    <meta name="description" content="">
+    <meta name="author" content="Mi Gestión Online (Merkury)">
+
+    <!-- Mobile Specific Meta -->
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+
+    <!-- Stylesheets -->
+    <link rel="stylesheet" href="{{ asset('bundles/landingfront/css/bootstrap.css') }}" />
+    <link rel="stylesheet" href="{{ asset('bundles/landingfront/css/errorp.css') }}" />
+
+    <!-- Favicon and Apple Touch Icons -->
+    <link rel="shortcut icon" href="{{ asset('bundles/adminbundle/img/favicon.ico') }}">
+    <link rel="apple-touch-icon" href="{{ asset('bundles/landingfront/images/icons/apple-touch-icon.png') }}">
+    <link rel="apple-touch-icon" sizes="72x72" href="{{ asset('bundles/landingfront/images/icons/apple-touch-icon-72x72.png') }}">
+    <link rel="apple-touch-icon" sizes="114x114" href="{{ asset('bundles/landingfront/images/icons/apple-touch-icon-114x114.png') }}">
+    <script src="//ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
+
+</head>
+
+
+<body>
+<div class="container-fluid">
+    <div class="span12">
+        <img id="id404" class="span12" data-pc="{{ asset('bundles/landingfront/images/errorp/404.png') }}" data-mv="{{ asset('bundles/landingfront/images/errorp/404_vt.png') }}" src="{{ asset('bundles/landingfront/images/errorp/404.png') }}">
+    </div>
+</div>
+</body>
+
+<script>
+
+$(document).ready(function(){
+
+    if($(this).width() < 825)
+    {
+        var mvimg = $('#id404').data('mv')
+        $('#id404').attr('src', mvimg );
+    }
+
+
+    $(window).resize(function(){
+        if($(this).width() < 825)
+        {
+            var mvimg = $('#id404').data('mv')
+            $('#id404').attr('src', mvimg );
+        }else
+        {
+            var pcimg = $('#id404').data('pc')
+            $('#id404').attr('src', pcimg);
+        }
+    });
+
+});
+
+
+</script>
+
+</html>

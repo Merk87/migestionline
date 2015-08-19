@@ -1,0 +1,42 @@
+{% extends 'MGAdminBundle:Bases:base.html.twig' %}
+
+{% block content %}
+
+    <div style="width: 60%; margin: 15% auto auto auto ; text-align: center">
+        <h1>{{ mensaje }}</h1>
+
+        <button class="btn btn-success newMsg">Nuevo Mensaje</button>
+
+    </div>
+
+    {# ------------------ MODAL ------------------  #}
+    <div id="selectEmpModal" class="modal hide fade">
+        <div class="modal-header">
+            <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+            <h4>Selecciona empresa para enviar un nuevo mensaje</h4>
+        </div>
+        <div class="modal-body">
+            <form>
+                <fieldset>
+                    <label for="sel_empresaMsg">Empresa</label>
+                    <select id="sel_empresaMsg">
+                        <option value="none">- Seleccione una empresa -</option>
+                        {% for empresa in empresas %}
+                            <option class="empName" value="{{ empresa.id }}">{{ empresa.nombre }}</option>
+                        {% endfor %}
+                    </select>
+                </fieldset>
+            </form>
+        </div>
+        <div class="modal-footer">
+            <button class="btn closeMod">Cerrar</button>
+            <a class="btn btn-success newMsgAdmin" >Crear Mensaje</a>
+        </div>
+    </div>
+    {# ---------------- FIN MODAL ----------------  #}
+
+{% endblock %}
+
+{% block customjs %}
+    <script src="{{ asset('bundles/adminbundle/js/custom.js') }}"></script>
+{% endblock %}

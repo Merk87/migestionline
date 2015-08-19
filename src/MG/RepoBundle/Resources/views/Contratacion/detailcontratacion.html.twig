@@ -1,0 +1,97 @@
+{% extends 'MGRepoBundle:Base:base_repo.html.twig' %}
+
+{% block content %}
+    <div class="container-fluid" style="margin-top: 50px; padding: 0">
+
+    <div class="row-fluid">
+        <div class="span7" style="padding-left: 10px">
+            <h2>Solicitud ampliación de servicios</h2>
+        </div>
+        <table class="table table-striped">
+           <tr>
+                <td style="font-weight: bold">Fecha Solcitud: </td>
+                <td>{{ solicitudContratacion.fechaSolicitud|date('d-m-Y') }}</td>
+            </tr>
+           <tr>
+                <td style="font-weight: bold">Servicios solciitados:</td>
+                <td>
+                    {% for serv_sol in solicitudContratacion.serviciosSolicitados %}
+                        {% if loop.last %}
+                            {{ serv_sol.displayName }}
+                        {% else %}
+                            {{ serv_sol.displayName }},
+                        {% endif %}
+                    {% endfor %}
+                </td>
+            </tr>
+            <tr>
+                <td style="font-weight: bold">Comentarios contratación</td>
+                <td>{{ solicitudContratacion.serviciosPersonalizados|nl2br }}</td>
+            </tr>
+        </table>
+    </div>
+    {% if solicitudContratacion.serviciosSeleccionadosEmpresa|length > 0 %}
+        <div class="row-fluid">
+            <div class="span12">
+                <h3>Servicios recomendados</h3>
+                <p>Después de analizar la solicitud de ampliación de servicios, te mostramos a continuación una lista
+                de empresas que ofrecen los servicios que necesitas.</p>
+                <p>Para añadirlo directamente a tus actuales servicios contratados basta con que marques el servicio que
+                desees y una vez hayas seleccionado el/los servicios desados, pulses el botón contratar.</p>
+            </div>
+        </div>
+
+        {% if addServsForm is defined  %}
+            <div class="row-fluid" style="margin-top: 25px">
+                <div class="span7 offset3" style="padding-left: 10px; margin-bottom: 15px">
+                    <form action="{{ path('mg_detail_contratacion', {'contId':solicitudContratacion.id}) }}" method="POST">
+                        <fieldset class="offeredservices">
+                            {{ form_widget(addServsForm) }}
+                        </fieldset>
+                        <fieldset class="span5" style="margin: 0 0 10px 0">
+                            <input type="submit" class="btn btn-success btn-block btn-large" value="Contratar">
+                        </fieldset>
+                        <fieldset class="span5">
+                            <a href="{{ path('mg_delete_contratacion', {'contId': solicitudContratacion.id}) }}" class="btn btn-danger btn-large">Descartar</a>
+                        </fieldset>
+                    </form>
+                </div>
+            </div>
+        {% endif %}
+
+        <div class="row-fluid">
+            <div class="span11 offset1" style="padding-left: 10px">
+                <ul class="thumbnails span10" style="margin-top: 30px">
+                    {% for serv_solicitado in solicitudContratacion.serviciosSeleccionadosEmpresa %}
+                        <li class="span3">
+                            <div class="thumbnail" data-val="{{ serv_solicitado.id }}">
+                                <h5 style="text-align: center">{{ serv_solicitado.empresa.nombre }}</h5>
+                                <a href="" class="thumbnail">
+                                    <img src="{{ asset(serv_solicitado.empresa.logoPath) }}">
+                                </a>
+                                <div class="caption">
+                                    <h5>Servicio</h5>
+                                    <table class="table table-bordered table-condensed table-striped">
+                                        <tr>
+                                            <td>Nombre</td>
+                                            <td>{{ serv_solicitado.nombre }}</td>
+                                        </tr>
+                                        <tr>
+                                            <td>Descripción</td>
+                                            <td>{{ serv_solicitado.descripcion }}</td>
+                                        </tr>
+                                        <tr>
+                                            <td>Precio:</td>
+                                            <td>{{ serv_solicitado.precio }}€</td>
+                                        </tr>
+                                    </table>
+                                    <button class="btn btn-success btn-block selectServBut" data-info="{{ serv_solicitado.id }}">Seleccionar</button>
+                                </div>
+                            </div>
+                        </li>
+                    {% endfor %}
+                </ul>
+            </div>
+        </div>
+    {% endif %}
+{% endblock %}

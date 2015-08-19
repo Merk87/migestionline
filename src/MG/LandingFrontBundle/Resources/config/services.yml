@@ -1,0 +1,7 @@
+parameters:
+#    mg_landing_front.example.class: MG\LandingFrontBundle\Example
+
+services:
+#    mg_landing_front.example:
+#        class: %mg_landing_front.example.class%
+#        arguments: [@service_id, "plain_value", %parameter%]

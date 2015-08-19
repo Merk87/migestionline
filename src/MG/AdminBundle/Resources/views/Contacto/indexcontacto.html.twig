@@ -1,0 +1,114 @@
+{% extends 'MGAdminBundle:Bases:base.html.twig' %}
+
+{% block content %}
+    <div class="container">
+        <div class="span12">
+            <h2>Solicitudes</h2>
+            <table class="table table-bordered table-condensed table-striped table-hover">
+                <thead>
+                <tr>
+                    <td>ID</td>
+                    <td>Nombre</td>
+                    <td>Asunto</td>
+                    <td>Email</td>
+                    <td>Nuevos Mensajes</td>
+                    <td colspan="3">Acciones</td>
+                </tr>
+                </thead>
+
+                {% for conver in conversaciones|reverse %}
+                    {% set nuevos = conver.countUnread %}
+                    {% for contacto in conver.mensajesCli|reverse %}
+                        {% if loop.first %}
+                            {% if conver.activa == false %}
+                                <tr class="error">
+                            {% else %}
+                                <tr>
+                            {% endif %}
+                            <td>{{ conver.id }}</td>
+                            <td>{{ contacto.nombre }}</td>
+                            <td>{{ contacto.asunto }}</td>
+                            <td>{{ contacto.email}}</td>
+                            {% if nuevos > 0 %}
+                                <td>{{ nuevos }}</td>
+                            {% else %}
+                                <td>No hay mensajes nuevos</td>
+                            {% endif %}
+                            <td style="text-align: center">
+                                <a href="{{ path('mg_public_conver_detail', {'idConv': conver.id}) }}" class="btn btn-success"><i class="icon-white icon-eye-open" style="margin-right: 5px"></i>Detalles</a>
+                            </td>
+                            <td style="text-align: center">
+                                {% if conver.activa == 1 %}
+                                    <button class="btn btn-danger delContacto" data-conv="{{ path('mg_discard_conver', {'convId':conver.id}) }}"><i class="icon-white icon-trash" style="margin-right: 5px"></i>Descartar</button>
+                                {% else %}
+                                    <button class="btn btn-success reContacto" data-conv="{{ path('mg_discard_conver', {'convId':conver.id}) }}"><i class="icon-white icon-retweet" style="margin-right: 5px"></i>Reactivar</button>
+                                {% endif %}
+                            </td>
+                        </tr>
+                        {% endif %}
+                    {% endfor %}
+                {% endfor %}
+            </table>
+
+            <div class="pagination">
+                <ul>
+                    {% if first is defined and first == true %}
+                        <li class="active"><a href="{{ path('mg_cont_homepage', {'page': page-1 }) }}"><span>&laquo;</span></a></li>
+                    {% else %}
+                        <li class="disabled"><span>&laquo;</span></li>
+                    {% endif %}
+
+                    {% if pages is defined %}
+                        {% for i in 1..pages %}
+                            <li><a href="{{ path('mg_cont_homepage', {'page': i }) }}">{{ i }}</a></li>
+                        {% endfor %}
+                    {% endif %}
+
+                    {% if last is defined and last == true %}
+                        <li class="disabled"><span>&raquo;</span></li>
+                    {% else %}
+                        <li class="active"><a href="{{ path('mg_cont_homepage', {'page': page+1 }) }}"><span>&raquo;</span></a></li>
+                    {% endif %}
+                </ul>
+            </div>
+
+        </div>
+    </div>
+
+{# ------------------ MODAL ------------------  #}
+<div id="delContacto" class="modal hide fade">
+    <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+        <h3>¿Seguro que desea descartar esta conversación?</h3>
+    </div>
+    <div class="modal-body">
+        <p>Recuerde que una conversación descartada no será accesible por el usuario que la inicio.</p>
+    </div>
+    <div class="modal-footer">
+        <button class="btn closeMod">Cerrar</button>
+        <a class="btn btn-primary okDel">Confirmar</a>
+    </div>
+</div>
+{# ---------------- FIN MODAL ----------------  #}
+
+{# ------------------ MODAL ------------------  #}
+<div id="reContacto" class="modal hide fade">
+    <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+        <h3>¿Seguro que desea reabrir esta conversación?</h3>
+    </div>
+    <div class="modal-body">
+        <p>Recuerde que esta acción permitirá al usuario acceder a los mensajes.</p>
+    </div>
+    <div class="modal-footer">
+        <button class="btn closeMod">Cerrar</button>
+        <a class="btn btn-primary okRe">Confirmar</a>
+    </div>
+</div>
+{# ---------------- FIN MODAL ----------------  #}
+
+{% endblock %}
+
+{% block customjs %}
+    <script src="{{ asset('bundles/adminbundle/js/custom.js') }}"></script>
+{% endblock %}

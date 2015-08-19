@@ -1,0 +1,74 @@
+{% extends 'MGAdminBundle:Bases:base.html.twig' %}
+
+{% block content %}
+
+    <div class="container-fluid" style="margin-top: 50px;">
+        <div class="span5">
+           <ul class="front-buttons">
+               <li>
+                   <button class="btn btn-info btn-large newGest">Nueva Gestión</button>
+                   <button id="showPop" data-content="Será la forma en que los usuarios te solicitarán de tus servicios." data-original-title="¿Que es una Gestión?" class="btn toolTip ">?</button>
+               </li>
+            {% if is_granted('ROLE_SUPER_ADMIN') %}
+               <li><a href="{{ path('mg_empresa_create') }}" class="btn btn-success btn-large">Nueva Empresa</a></li>
+               <li><a href="{{ path('mg_repo_create')}}" class="btn btn-success btn-large">Nuevo Repositorio</a></li>
+            {% endif %}
+            {% if is_granted('ROLE_ADMIN') %}
+                <li>
+                    <a href="{{ path('mg_serv_create', {'empId':0}) }}" class="btn btn-success btn-large">Nuevo Servicio</a>
+                    <button id="showPop2" data-content="Los servicios serán las divisiones identificativas de los servicios que ofreces a través de Mi Gestión Online. Por ejemplo Servicios Fiscales, Laborales, etc." data-original-title="¿Que es un Servicio?" class="btn toolTip">?</button>                </li>
+                <li>
+                    <a href="{{ path('mg_cat_create', {'empId':0}) }}" class="btn btn-success btn-large">Nueva Categoría</a>
+                    <button id="showPop3" data-content="Las categorías son aquellas subdivisiones de tus servicios, que servirán para categorizar las gestiones que tus clientes te soliciten." data-original-title="¿Que es un Categoría?" class="btn toolTip">?</button>
+                </li>
+            {% else %}
+
+                <li>
+                    <button class="btn btn-success btn-large" disabled>Nuevo Servicio</button>
+                    <button class="btn toolTip" disabled>?</button>
+                </li>
+                <li>
+                    <button class="btn btn-success btn-large" disabled>Nueva Categoría</button>
+                    <button class="btn toolTip" disabled>?</button>
+                </li>
+            {% endif %}
+                <li>
+                    <a href="{{ path('mg_user_create', {'empId': 0}) }}" class="btn btn-success btn-large">Nuevo Usuario</a>
+                    <button id="showPop4" data-content="Un usuario puede ser un cliente o un empleado, diferenciado por rol." data-original-title="¿Que es un Usuario?" class="btn toolTip">?</button>
+                </li>
+
+           </ul>
+        </div>
+    </div>
+
+    {# ------------------ MODAL ------------------  #}
+    <div id="selectClientModal" class="modal hide fade">
+        <div class="modal-header">
+            <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+            <h4>Selecciona un cliente para crear una nueva gestión</h4>
+        </div>
+        <div class="modal-body">
+            <form>
+                <fieldset>
+                    <label for="sel_empresaMsg">Cliente</label>
+                    <select id="sel_empresaMsg">
+                        <option value="none">- Seleccione un cliente -</option>
+                        {% for cliente in clientes %}
+                            <option class="cliName" value="{{ cliente.id }}" data-url="{{ path('mg_gest_admin_new', {'clientId':cliente.id}) }}">{{ cliente.username}}</option>
+                        {% endfor %}
+                    </select>
+                </fieldset>
+            </form>
+        </div>
+        <div class="modal-footer">
+            <button class="btn closeMod">Cerrar</button>
+            <a class="btn btn-success newGestAdmin" >Crear Gestión</a>
+        </div>
+    </div>
+    {# ---------------- FIN MODAL ----------------  #}
+
+{% endblock %}
+
+{% block customjs %}
+    <script src="{{ asset('bundles/adminbundle/js/custom.js') }}"></script>
+{% endblock %}

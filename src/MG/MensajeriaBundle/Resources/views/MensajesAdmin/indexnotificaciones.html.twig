@@ -1,0 +1,86 @@
+{% extends 'MGAdminBundle:Bases:base.html.twig' %}
+
+{% set gestiones = newNotificaciones %}
+
+{% block content %}
+    <div class="container">
+        <div class="span12 mainContainer">
+            <div class="span7">
+                <h2>Notificaciones</h2>
+                <h5>Las siguientes gestiones necesitan ser revisadas.</h5>
+            </div>
+
+            <table class="table table-bordered table-condensed table-striped table-hover" id="notifCont">
+
+                {% for gest in gestiones %}
+                    {% if gest.estado.estadoCode == 'GESTION_RESUELTA' or gest.estado.estadoCode == 'GESTION_CERRADA_CLIENTE' %}
+                        <tr class="info">
+                    {% elseif gest.estado.estadoCode == 'GESTION_CERRADA_NO_RESUELTA' %}
+                        <tr class="error">
+                    {% elseif gest.estado.estadoCode == 'GESTION_ACCION_REQUERIDA' %}
+                        <tr class="warning">
+                    {% elseif gest.estado.estadoCode == 'GESTION_FILES_ADDED_CLIENTE' %}
+                        <tr class="warning">
+                    {% else %}
+                        <tr>
+                    {% endif %}
+                    <td class="delNot"><img class="delNotif" data-path="{{ path('mg_delete_notif', {'notId': gest.notificacion.id}) }}" src="{{ asset('bundles/adminbundle/css/img/x_red.png') }}" title="Eliminar notificación" alt="eliminar notificación" ></td>
+                        {% if gest.notificacion.estado.estadoCode == 'GESTION_FILES_ADDED_CLIENTE'  %}
+                            <td>El cliente {{ gest.cliente.username }} ha agregado archivos a la gestión 100{{ gest.id }}</td>
+                        {% elseif gest.notificacion.estado.estadoCode == 'GESTION_CERRADA_CLIENTE'  %}
+                            <td>El cliente {{ gest.cliente.username }} ha cerrado la gestión 100{{ gest.id }}</td>
+                        {% else %}
+                        <td>La gestión 100{{ gest.id }} ha cambiado de estado</td>
+                        {% endif %}
+                        <td>
+                           <div class="btn-group pull-right dropdown">
+                                <a class="btn btn-info dropdown-toggle" data-toggle="dropdown" href="#">
+                                    <i class="icon-white icon-cog"></i> Acciones
+                                    <span class="caret"></span>
+                                </a>
+                                <ul class="dropdown-menu" role="menu">
+                                    <li><a href="{{ path('mg_manage_gest', {'gestId':gest.id}) }}">Gestionar</a></li>
+                                    <li class="divider"></li>
+                                    {% if gest.estado.nombre  == 'Resuelta' or gest.estado.nombre == 'No Resuelta' %}
+                                        <li><a href="{{ path('mg_reopen_gest', {'gestId':gest.id}) }}" class="btn-info" style="color: white">Reabrir Gestión</a></li>
+                                    {% else %}
+                                        <li><a href="{{ path('mg_close_gest', {'gestId':gest.id, 'status':10}) }}" class="btn-success" style="color:#ffffff;">Cerrar como solucionada</a></li>
+                                        <li><a href="{{ path('mg_close_gest', {'gestId':gest.id, 'status':0}) }}" class="btn-danger" style="color: white">Cerrar gestión</a></li>
+                                    {% endif %}
+                                </ul>
+                            </div>
+                        </td>
+
+                    </tr>
+                {% endfor %}
+            </table>
+            <div class="pagination">
+                <ul>
+                    {% if first is defined and first == true %}
+                        <li class="active"><a href="{{ path('mg_show_notificaciones_admin', {'page': page-1}) }}"><span>&laquo;</span></a></li>
+                    {% else %}
+                        <li class="disabled"><span>&laquo;</span></li>
+                    {% endif %}
+
+                    {% if pages is defined %}
+                        {% for i in 1..pages %}
+                            <li class="active"><span><a href="{{ path('mg_show_notificaciones_admin', {'page': i }) }}">{{ i }}</span></a></li>
+                        {% endfor %}
+                    {% endif %}
+
+                    {% if last is defined and last == true %}
+                        <li class="disabled"><span>&raquo;</span></li>
+                    {% else %}
+                        <li class="active"><a href="{{ path('mg_show_notificaciones_admin', {'page': page+1 }) }}"><span>&raquo;</span></a></li>
+                    {% endif %}
+                </ul>
+            </div>
+        </div>
+    </div>
+
+
+{% endblock %}
+
+{% block customjs %}
+    <script src="{{ asset('bundles/adminbundle/js/custom.js') }}"></script>
+{% endblock %}

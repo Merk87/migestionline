@@ -1,0 +1,201 @@
+<?php
+
+namespace MG\RepoBundle\Entity;
+
+use Doctrine\ORM\Mapping as ORM;
+
+/**
+ * Permiso
+ *
+ * @ORM\Table()
+ * @ORM\Entity
+ */
+class Permiso
+{
+    /**
+     * @var integer
+     *
+     * @ORM\Column(name="id", type="integer")
+     * @ORM\Id
+     * @ORM\GeneratedValue(strategy="AUTO")
+     */
+    private $id;
+
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="accion", type="string", length=255, nullable=false)
+     */
+    private $accion;
+
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="descripcion", type="string", length=255, nullable=false)
+     */
+    private $descripcion;
+
+    /**
+     * @ORM\ManyToMany(targetEntity="MG\UserBundle\Entity\User", mappedBy="permisos")
+     */
+    private $users;
+
+    /**
+     * @var integer
+     *
+     * @ORM\Column(name="repo_id", type="integer")
+     */
+    private $repoId;
+
+    /**
+     * @ORM\ManyToOne(targetEntity="Repo", inversedBy="permisos")
+     * @ORM\JoinColumn(name="repo_id", referencedColumnName="id")
+     */
+    private $repos;
+
+    /**
+     * Get id
+     *
+     * @return integer 
+     */
+    public function getId()
+    {
+        return $this->id;
+    }
+
+
+
+  
+    /**
+     * Set descripcion
+     *
+     * @param string $descripcion
+     * @return Permiso
+     */
+    public function setDescripcion($descripcion)
+    {
+        $this->descripcion = $descripcion;
+
+        return $this;
+    }
+
+    /**
+     * Get descripcion
+     *
+     * @return string 
+     */
+    public function getDescripcion()
+    {
+        return $this->descripcion;
+    }
+    /**
+     * Constructor
+     */
+    public function __construct()
+    {
+        $this->users = new \Doctrine\Common\Collections\ArrayCollection();
+    }
+
+    /**
+     * Add users
+     *
+     * @param \MG\UserBundle\Entity\User $users
+     * @return Permiso
+     */
+    public function addUser(\MG\UserBundle\Entity\User $users)
+    {
+        $this->users[] = $users;
+
+        return $this;
+    }
+
+    /**
+     * Remove users
+     *
+     * @param \MG\UserBundle\Entity\User $users
+     */
+    public function removeUser(\MG\UserBundle\Entity\User $users)
+    {
+        $this->users->removeElement($users);
+    }
+
+    /**
+     * Get users
+     *
+     * @return \Doctrine\Common\Collections\Collection 
+     */
+    public function getUsers()
+    {
+        return $this->users;
+    }
+
+
+    /**
+     * Set repoId
+     *
+     * @param integer $repoId
+     * @return Permiso
+     */
+    public function setRepoId($repoId)
+    {
+        $this->repoId = $repoId;
+
+        return $this;
+    }
+
+    /**
+     * Get repoId
+     *
+     * @return integer 
+     */
+    public function getRepoId()
+    {
+        return $this->repoId;
+    }
+
+    /**
+     * Set repos
+     *
+     * @param \MG\RepoBundle\Entity\Repo $repos
+     * @return Permiso
+     */
+    public function setRepos(\MG\RepoBundle\Entity\Repo $repos = null)
+    {
+        $this->repos = $repos;
+
+        return $this;
+    }
+
+    /**
+     * Get repos
+     *
+     * @return \MG\RepoBundle\Entity\Repo 
+     */
+    public function getRepos()
+    {
+        return $this->repos;
+    }
+
+    /**
+     * Set accion
+     *
+     * @param string $accion
+     * @return Permiso
+     */
+    public function setAccion($accion)
+    {
+        $this->accion = $accion;
+
+        return $this;
+    }
+
+    /**
+     * Get accion
+     *
+     * @return string 
+     */
+    public function getAccion()
+    {
+        return $this->accion;
+    }
+}

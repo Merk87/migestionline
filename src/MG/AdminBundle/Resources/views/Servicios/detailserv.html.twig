@@ -1,0 +1,67 @@
+{% extends 'MGAdminBundle:Bases:base.html.twig' %}
+
+{% block content %}
+    <div class="container">
+        <div class="span12 hero-unit" style="min-width: 320px">
+            <div class="row">
+                <div class="span6">
+                    <h4>Detalles Servicio</h4>
+                    <table class="table table-bordered table-condensed table-striped">
+                        {% if servicio.enabled == 0 %}
+                            <tr class="error">
+                                <td colspan="2" style="font-weight: bold">Inactiva</td>
+                            </tr>
+                        {% endif %}
+                        <tr>
+                            <td>Nombre</td>
+                            <td>{{ servicio.nombre}}</td>
+                        </tr>
+                        <tr>
+                            <td>Descripción</td>
+                            <td>{{ servicio.descripcion }}</td>
+                        </tr>
+                        <tr>
+                            <td>Tarifa</td>
+                            <td>{{ servicio.precio }}</td>
+                        </tr>
+                        {% if servicio.enabled == 1 %}
+                            <tr class="success">
+                                <td>Estado</td>
+                                <td class="success">Activo</td>
+                            </tr>
+                        {% else %}
+                            <tr class="warning">
+                                <td>Estado</td>
+                                <td class="error">Inactivo</td>
+                            </tr>
+                        {% endif %}
+
+                    </table>
+                </div>
+            </div>
+
+            <div class="span9">
+
+                {% if is_granted('ROLE_ADMIN') %}
+                    <a class="btn btn-large btn-info margined" href="{{ path('mg_serv_update', {'servId': servicio.id, 'empId':servicio.empresaId}) }}">Editar</a>
+                    {% if servicio.enabled  != 0%}
+                        <a class="btn btn-large btn-danger margined" href="{{ path('mg_serv_block', {'servId': servicio.id}) }}">Bloquear</a>
+                    {% else %}
+                        <a class="btn btn-large btn-danger margined" href="{{ path('mg_serv_block', {'servId': servicio.id}) }}">Desbloquear</a>
+                    {% endif %}
+
+                {% else %}
+                    <button class="btn btn-large btn-info margined" disabled>Editar</button>
+                    {% if servicio.enabled  != 0%}
+                        <button class="btn btn-large btn-danger margined" disabled>Bloquear</button>
+                    {% else %}
+                        <button class="btn btn-large btn-success margined" disabled>Desbloquear</button>
+                    {% endif %}
+                {% endif %}
+                <a class="btn btn-large margined" href="{{ path('mg_serv_by_empresa', {'page': 1, 'empId':servicio.empresaId }) }}">Volver</a>
+            </div>
+
+        </div>
+
+    </div>
+{% endblock %}

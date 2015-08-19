@@ -1,0 +1,101 @@
+{% extends 'MGRepoBundle:Base:base_repo.html.twig' %}
+
+
+
+{% block content %}
+
+    <div class="container-fluid" style="margin-top: 25px; padding: 0">
+        <div class="span10" style="margin-left: 15px">
+            <h1>Repositorio personal</h1>
+            <p>En este apartado encontrarás todos tus archivos.</p>
+        </div>
+        <div class="row-fluid">
+            <table class="table table-striped">
+                <thead>
+                    <tr>
+                        <td colspan="2">Nombre archivo</td>
+                        <td>Empresa</td>
+                        <td>Categoría</td>
+                        <td>Servicio</td>
+                        <td>Fecha subida</td>
+                        <td colspan="2">Acciones</td>
+                    </tr>
+                </thead>
+                {% for file in files %}
+                    <tr>
+                        <td style="text-align: center"><img class="icon_mini" src="{{ asset(file.fileType.iconoPath) }}" alt="{{ file.fileType.tipo }}" title="{{ file.fileType.descripcion}}"></td>
+                        <td>{{ file.originalName }}</td>
+                        <td>{{ file.repo.empresa.nombre }}</td>
+                        <td>{{ file.gestion.categoria.nombre }}</td>
+                        <td>{{ file.gestion.categoria.servicio.nombre }}</td>
+                        <td>{{ file.fechaSubida|date('d-m-Y h:i') }}</td>
+                        <td>
+                            <div class="btn-group pull-right dropdown">
+                                <a class="btn btn-info dropdown-toggle" data-toggle="dropdown" href="#">
+                                    <i class="icon-white icon-cog"></i> Acciones
+                                    <span class="caret"></span>
+                                </a>
+                                <ul class="dropdown-menu" role="menu">
+                                    <li><a href="{{ path('mg_download_action', {'fileId': file.id}) }}">Descargar</a></li>
+                                    {% if file.delUser == true %}
+                                        <li class="divider"></li>
+                                        <li><a href="{{ path('mg_cli_delete_repo_action', {'fileId': file.id}) }}" class="btn-danger" style="color: white">Borrar</a></li>
+                                    {% endif %}
+                                </ul>
+                            </div>
+                        </td>
+                    </tr>
+                {% endfor %}
+            </table>
+            <div class="pagination">
+                <ul>
+                    {% if first is defined and first == true %}
+                        <li class="active"><a href="{{ path('mg_cli_show_files', {'page': page-1}) }}"><span>&laquo;</span></a></li>
+                    {% else %}
+                        <li class="disabled"><span>&laquo;</span></li>
+                    {% endif %}
+
+                    {% if pages is defined %}
+                        {% for i in 1..pages %}
+                            <li><a href="{{ path('mg_cli_show_files', {'page': i}) }}">{{ i }}</a></li>
+                        {% endfor %}
+                    {% endif %}
+
+                    {% if last is defined and last == true %}
+                        <li class="disabled"><span>&raquo;</span></li>
+                    {% else %}
+                        <li class="active"><a href="{{ path('mg_cli_show_files', {'page': page+1}) }}"><span>&raquo;</span></a></li>
+                    {% endif %}
+                </ul>
+            </div>
+        </div>
+        <div class="span10">
+            <button class="btn btn-info showS">Buscar por fecha</button>
+            <a href="{{ path("mg_user_panel", {'empName': empresa.nombre, 'page':1}) }}" class="btn btn-danger">Volver</a>
+        </div>
+
+        <div class="span10 formContainer" style="display: none">
+            <h4>Busqueda de archivos por fecha</h4>
+            <p>Establezca la fecha de inicio y de fin del intervalo, para mostrar todos los archivos agregados entre ambas.</p>
+            <form action="{{ path('mg_take_dates_from_panel') }}" method="POST">
+                <fieldset>
+                    {{ form_errors(searchForm) }}
+                    <div style="margin-right: 15px">
+                        {{ form_label(searchForm.fechaIni, 'Fecha Inicio') }}
+                        {{ form_widget(searchForm.fechaIni) }}
+                    </div>
+                    <div>
+                        {{ form_label(searchForm.fechaFin, 'Fecha Fin') }}
+                        {{ form_widget(searchForm.fechaFin) }}
+                    </div>
+                    {{ form_rest(searchForm) }}
+                </fieldset>
+                <input type="submit" class="btn btn-success" value="Buscar">
+                <button class="btn btn-danger hideS">Volver</button>
+            </form>
+        </div>
+
+    </div>
+
+{% endblock %}
+

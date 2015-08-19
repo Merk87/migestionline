@@ -1,0 +1,12 @@
+{% extends 'MGRepoBundle:Base:base_repo.html.twig' %}
+
+{% block content %}
+
+    <div style="width: 60%; margin: 15% auto auto auto ; text-align: center">
+        <h1>{{ mensaje }}</h1>
+
+        <a href="{{ path('mg_gestion_new') }}" class="btn btn-success btn-large">Abrir nueva gestión</a>
+
+    </div>
+
+{% endblock %}

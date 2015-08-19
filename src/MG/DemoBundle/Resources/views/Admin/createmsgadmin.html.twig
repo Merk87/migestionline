@@ -1,0 +1,107 @@
+{% extends 'MGDemoBundle:Bases:base_admin.html.twig' %}
+
+{% block customstyle %}
+    <link rel="stylesheet" type="text/css" href="{{ asset('bundles/adminbundle/css/jquery.mCustomScrollbar.css') }}">
+{% endblock %}
+
+{% block content %}
+
+    <div class="container-fluid">
+        <div class="row-fluid">
+            <div class="title-msg-container">
+                <h3 style="border-bottom: 3px #000 solid">Nuevo Mensaje</h3>
+            </div>
+            <h3>¡Aquí verás tus mensajes!</h3>
+            <div class="msg_container_no_mssg">
+                <table class="table table-condensed example-msg-table">
+                    <tr>
+                        <td class="dateCell">{{ "now"|date('d/m/y h:m:s')  }}</td>
+                        <td class="response-cliente">
+                            <span>Tú</span>
+                        </td>
+                        <td class="msgCell">
+                            <span>¿Cuando estará preparado el documento de la gestión número 30454?</span>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td class="dateCell">{{ "now"|date('d/m/y h:m:s')  }}</td>
+                        <td class="response-empresa"><span>Gestor</span></td>
+                        <td class="msgCell">
+                            <span>En tres días lo tendrás listo.</span>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td class="dateCell">{{ "now"|date('d/m/y h:m:s')  }}</td>
+                        <td class="response-empresa"><span>Gestor</span></td>
+                        <td class="msgCell">
+                            <span>Te hemos adjuntado el documento que solicistaste en la incidencia.</span>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td class="dateCell">{{ "now"|date('d/m/y h:m:s')  }}</td>
+                        <td class="response-cliente">
+                            <span>Tú</span>
+                        </td>
+                        <td class="msgCell">
+                            <span>¡Muchas gracias! Un trabajo insuperable.</span>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td class="dateCell">{{ "now"|date('d/m/y h:m:s')  }}</td>
+                        <td class="response-empresa"><span>Gestor</span></td>
+                        <td class="msgCell">
+                            <span>Gracias, si necesitas algo más estamos a tu disposición</span>
+                        </td>
+                    </tr>
+
+                </table>
+            </div>
+        </div>
+    </div>
+    <div class="container-fluid">
+        <div class="span12">
+            <form method="POST" class="create-msg-form">
+                <fieldset>
+                    {{ form_errors(createMsg) }}
+                    <div><label for="mg_mensajeriabundle_newmensajesadmintype_asunto" class="required">Asunto</label><input type="text" id="mg_mensajeriabundle_newmensajesadmintype_asunto" name="mg_mensajeriabundle_newmensajesadmintype[asunto]" required="required" placeholder="Asunto"></div>
+                    <div><textarea id="mg_mensajeriabundle_newmensajesadmintype_mensaje" name="mg_mensajeriabundle_newmensajesadmintype[mensaje]" required="required" placeholder="Mensaje"></textarea></div>
+                    <div>
+                        <label for="mg_mensajeriabundle_newmensajesadmintype_destinatario" class="required">Destinatario</label>
+                        <select id="mg_mensajeriabundle_newmensajesadmintype_destinatario" name="mg_mensajeriabundle_newmensajesadmintype[destinatario]" required="required">
+                            <option value="none">- Seleccione un usuario -</option>
+                            <option value="none">María Jiménez (Empleado. Contabilidad)</option>
+                            <option value="none">Ana Sánchez	(Empleado. Jurídico)</option>
+                        </select>
+                    </div>
+                    <input type="submit" class="btn btn-success" value="Enviar">
+                    <a href="{{ path('mg_demo_mensajeria_homepage') }}" class="btn btn-danger">Volver</a>
+                </fieldset>
+            </form>
+        </div>
+    </div>
+{% endblock %}
+
+{% block customjs %}
+    <script src="{{ asset('bundles/adminbundle/js/jquery.mCustomScrollbar.min.js') }}"></script>
+    <script src="{{ asset('bundles/adminbundle/js/jquery.mousewheel.min.js') }}"></script>
+    <script>
+        (function($){
+            $(window).load(function(){
+                $(".scrollable-container-msg").mCustomScrollbar({
+                    scrollButtons:{
+                        enable:true
+                    },
+                    theme:"dark"
+
+                });
+            });
+
+            $(window).load(function(){
+
+                $(".scrollable-container-msg").mCustomScrollbar("scrollTo",'bottom');
+            });
+
+        })(jQuery);
+    </script>
+
+{% endblock %}

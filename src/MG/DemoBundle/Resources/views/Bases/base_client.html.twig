@@ -1,0 +1,208 @@
+<!DOCTYPE html>
+<html>
+{% block header %}
+    <head>
+        <meta name="author" content="" />
+        <meta name="description" content="" />
+        <meta name="robots" content="index, follow"/>
+        <meta name="subject" content="" />
+        <meta name="Language" content="" />
+        <meta name="country" content="" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+        {% block stylesheet %}
+            <link rel="stylesheet" type="text/css" href="{{ asset('bundles/repobundle/css/bootstrap.css') }}">
+            <link rel="stylesheet" type="text/css" href="{{ asset('bundles/repobundle/css/front.css') }}">
+            <link rel="stylesheet" type="text/css" href="{{ asset('bundles/demobundle/css/tooltipstyles.css') }}">
+        {% endblock %}
+        {% block customstyle %}
+        {% endblock %}
+        {% block scripts %}
+            <script src="//ajax.googleapis.com/ajax/libs/jquery/2.0.0/jquery.min.js"></script>
+            <script src="//ajax.googleapis.com/ajax/libs/jqueryui/1.10.2/jquery-ui.min.js"></script>
+        {% endblock %}
+        {% block customscripts %}
+        {% endblock %}
+        <link rel="shortcut icon" href="{{ asset('bundles/adminbundle/img/favicon.ico') }}" type="image/x-icon">
+        <link rel="icon" href="{{ asset('bundles/adminbundle/img/favicon.ico') }}" type="image/x-icon">
+        <title>{% block title %}Panel de Usuarios - Mi Gestión Online{% endblock %}</title>
+    </head>
+{% endblock %}
+<body>
+
+
+{% block body %}
+    {% block top_line %}
+
+        <div class="navbar navbar-fixed-top">
+            <div class="navbar-inner">
+                <div class="container-fluid">
+                    {% block inner_top_line %}
+                        <a class="brand" href="{{ path('mg_demo_user_panel' )}}" style="font-weight: bold; color: white; padding: 6px"><img class="logo" style="" src="{{ asset('bundles/adminbundle/img/logob.png') }}"></a></li>
+
+                      <div class="btn-group pull-right dropdown">
+                            <a class="btn dropdown-toggle" data-toggle="dropdown" href="#">
+                                <i class="icon-user"></i> CONSTRUCCIONES EUROPA S.L.
+                                <span class="caret"></span>
+                            </a>
+                            <ul class="dropdown-menu" role="menu">
+                                <li><a href="{{ path('mg_demo_gestion_new') }}">Nueva gestión</a></li>
+                                <li><a href="{{ path('mg_demo_user_messages_panel') }}">Mensajes</a></li>
+                                <li class="divider"></li>
+                                <li><a href="#" class="disButton">Perfil</a></li>
+                                <li class="divider"></li>
+                                <li><a class="btn-danger" style="color:white" href="{{ path('mg_demo_homepage') }}">Salir</a></li>
+                            </ul>
+                        </div>
+                    {% endblock %}
+                </div>
+            </div>
+        </div>
+    {% endblock %}
+
+
+    {% block maincontent %}
+        <div class="main">
+            <div class="box">
+                <div class="row-fluid">
+                    <div class="column span2 latBar">
+                        {% block sidebar %}
+                            <ul class="nav nav-list nav-fixed-sidebar">
+
+                                <li><div class="img-wrap">
+                                        <a href="{{ path('mg_demo_user_panel') }}">
+                                            <!--TODO - Incluir imagen de no logo -->
+                                            <img class="img-rounded" src="{{ asset('bundles/demobundle/images/not_icon.png') }}">
+                                        </a>
+                                    </div>
+                                </li>
+                                <ul class="accordion" id="accordionActions">
+                                    <div class="accordion-heading">
+                                        <a id="ulATitle" class="accordion-toggle" data-toggle="collapse" data-parent="#accordionActions" href="#collapsedActions">
+                                            Acciones
+                                        </a>
+                                    </div>
+
+                                    <div id="collapsedActions" class="accordion-body collapse in">
+                                        <div class="accordion-inner">
+                                            <li><a class="btn btn-block btn-primary" href="{{ path('mg_demo_gestion_new') }}">Nueva Gestión</a></li>
+                                            <li><a style="margin: 10px 0; " class="btn btn-block btn-success" href="{{ path('mg_demo_show_files_cli') }}"><i class="icon-cog icon-white"></i>Tus Archivos</a></li>
+                                        </div>
+                                    </div>
+
+                                </ul>
+
+                                <li class="nav-header">Filtros</li>
+                                <ul class="accordion" id="accordionEsts">
+                                    <div class="accordion-heading">
+                                        <a id="ulETitle" class="accordion-toggle" data-toggle="collapse" data-parent="#accordionEsts" href="#collapsedEsts">
+                                            Estado
+                                        </a>
+                                    </div>
+                                    <div id="collapsedEsts" class="accordion-body collapse in ">
+                                        <div class="accordion-inner">
+                                            <li><a href="{{ path('mg_demo_user_panel_est') }}">Nuevo</a></li>
+                                            <li><a>Leido</a></li>
+                                            <li><a>En trámite</a></li>
+                                            <li><a>En espera</a></li>
+                                            <li><a>Acción requerida</a></li>
+                                            <li><a>Resuelta</a></li>
+                                            <li><a>Cerrada sin resolver</a></li>
+                                            <li><a>Cerrada por el cliente</a></li>
+                                        </div>
+                                    </div>
+                                </ul>
+
+                                <ul class="accordion" id="accordion1">
+                                    <div>
+                                        <div class="accordion-heading">
+                                            <a id="ulTitle" class="accordion-toggle" data-toggle="collapse" data-parent="#accordion1" href="#collapse1">
+                                               FISCAL PYME
+                                            </a>
+                                        </div>
+                                    </div>
+                                    <div id="collapse1" class="accordion-body collapse in">
+                                        <div class="accordion-inner">
+                                            <li>
+                                                <a href="{{ path('mg_demo_user_panel_cat') }}">Impuestos</a>
+                                            </li>
+                                            <li>
+                                                <a href="#" class="disButton">Memorias</a>
+                                            </li>
+                                        </div>
+                                    </div>
+                                </ul>
+
+                                <ul class="accordion" id="accordion2">
+                                    <div>
+                                        <div class="accordion-heading">
+                                            <a id="ulTitle" class="accordion-toggle" data-toggle="collapse" data-parent="#accordion2" href="#collapse2">
+                                                FISCAL AUTÓNOMOS
+                                            </a>
+                                        </div>
+                                    </div>
+                                    <div id="collapse2" class="accordion-body collapse in">
+                                        <div class="accordion-inner">
+                                            <li>
+                                                <a href="#" class="disButton">Impuestos</a>
+                                            </li>
+                                        </div>
+                                    </div>
+                                </ul>
+                            </ul>
+                        {% endblock %}
+                    </div>
+                    <div class="column span10 bordered">
+                        <div class="spanned"></div>
+                        {% block flashmessages %}
+                            {% for flashMessage in app.session.flashbag.get('notice') %}
+                                <div class="container">
+                                    <div class="span6 alert alert-success">
+                                        <button type="button" class="close" data-dismiss="alert">&times;</button>
+                                        {{ flashMessage }}
+                                    </div>
+                                </div>
+                            {% endfor %}
+
+                            {% for flashMessage in app.session.flashbag.get('fail') %}
+                                <div class="container">
+                                    <div class="span6 alert alert-danger">
+                                        <button type="button" class="close" data-dismiss="alert">&times;</button>
+                                        {{ flashMessage }}
+                                    </div>
+                                </div>
+                            {% endfor %}
+                        {% endblock %}
+                        {% block content %}
+
+                        {% endblock %}
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    {% endblock %}
+{% endblock %}
+</body>
+{% block footer %}
+    {% block js %}
+        <script src="{{ asset('bundles/repobundle/js/bootstrap.js') }}"></script>
+        <script src="{{ asset('bundles/repobundle/js/bootstrap.min.js') }}"></script>
+        <script src="{{ asset('bundles/repobundle/js/custom_front.js') }}"></script>
+        <script src="{{ asset('bundles/demobundle/js/custom.js') }}"></script>
+    {% endblock %}
+    {% block customjs %}
+
+    {% endblock %}
+{% endblock %}
+<script>
+    (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+        (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+            m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+    })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+    ga('create', 'UA-44569448-1', 'migestionline.com');
+    ga('send', 'pageview');
+
+</script>
+</html>

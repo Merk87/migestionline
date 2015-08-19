@@ -1,0 +1,157 @@
+{% extends 'MGAdminBundle:Bases:base.html.twig' %}
+{% block content %}
+
+
+    {% set generalInfo = app.session.get('generalInfo') %}
+    {% set estados = generalInfo['estado'] %}
+
+    <div class="container">
+        <div class="span12">
+            <div class="span4">
+                <h2>Gestiones abiertas {{ nombre_emp }}</h2>
+            </div>
+            <div class="span3 pull-right">
+                <form>
+                    <fieldset>
+                        <label for="sel_empresaGestion">Mostrar gestiones por empresa</label>
+                        <select id="sel_empresaGestion">
+                            <option value="none">- Seleccione una empresa -</option>
+                            {% for empresa in empresas %}
+                                <option value="{{ empresa.id }}">{{ empresa.nombre }}</option>
+                            {% endfor %}
+                        </select>
+                    </fieldset>
+                </form>
+            </div>
+
+            <div class="span3 pull-right">
+                <form>
+                    <fieldset>
+                        <label for="sel_estadoGest">Mostrar gestiones por estado</label>
+                        <select id="sel_estadoGest">
+                            <option value="none">- Seleccione estado-</option>
+                            {% for estado in estados %}
+                                <option value="{{ estado.id }}">{{ estado.nombre }}</option>
+                            {% endfor %}
+                        </select>
+                    </fieldset>
+                </form>
+            </div>
+
+            <table class="table table-bordered table-condensed table-striped table-hover">
+                <thead>
+                <tr>
+                    <td>Número Gestión</td>
+                    <td>Cliente</td>
+                    <td>Descripción</td>
+                    <td>Fecha Creación</td>
+                    <td>Servicio</td>
+                    <td>Categoría</td>
+                    <td>Estado</td>
+                    <td>Archivos adjuntos</td>
+                    <td colspan="3">Acciones</td>
+                </tr>
+                </thead>
+                {% for gest in gestiones %}
+                    {% if gest.estado.estadoCode == 'GESTION_NUEVA' %}
+                        <tr class="success">
+                    {% elseif gest.estado.estadoCode == 'GESTION_RESUELTA' %}
+                        <tr class="info">
+                    {% elseif gest.estado.estadoCode == 'GESTION_CERRADA_NO_RESUELTA' or gest.estado.estadoCode == 'GESTION_CERRADA_CLIENTE' %}
+                        <tr class="error">
+                    {% elseif gest.estado.estadoCode == 'GESTION_ACCION_REQUERIDA'%}
+                        <tr class="warning">
+                    {% else %}
+                        <tr>
+                    {% endif %}
+
+                        <td>{{ gest.id + 10000}}</td>
+                        <td>{{ gest.cliente.username }}</td>
+                        <td>{{ gest.descripcion }}</td>
+                        <td>{{ gest.fechaCreacion|date('d-m-Y H:i:s') }}</td>
+                        <td>{{ gest.categoria.servicio.nombre }}</td>
+                        <td>{{ gest.categoria.nombre }}</td>
+                        <td>{{ gest.estado.nombre }}</td>
+                        <td>{{ gest.archivos|length }}</td>
+                        <td>
+                            <div class="btn-group pull-right dropdown">
+                                <a class="btn btn-info dropdown-toggle" data-toggle="dropdown" href="#">
+                                    <i class="icon-white icon-cog"></i> Acciones
+                                    <span class="caret"></span>
+                                </a>
+                                <ul class="dropdown-menu" role="menu">
+                                    <li><a href="{{ path('mg_manage_gest', {'gestId':gest.id}) }}">Gestionar</a></li>
+                                    <li class="divider"></li>
+                                    {% if gest.estado.estadoCode  == 'GESTION_RESUELTA' or gest.estado.estadoCode == 'GESTION_CERRADA_NO_RESUELTA' or gest.estado.estadoCode == 'GESTION_CERRADA_CLIENTE' %}
+                                        <li><a href="{{ path('mg_reopen_gest', {'gestId':gest.id}) }}" class="btn-info" style="color: white">Reabrir Gestión</a></li>
+                                    {% else %}
+                                        <li><a href="{{ path('mg_close_gest', {'gestId':gest.id, 'status':10}) }}" class="btn-success" style="color:#ffffff;">Cerrar como solucionada</a></li>
+                                        <li><a href="{{ path('mg_close_gest', {'gestId':gest.id, 'status':0}) }}" class="btn-danger" style="color: white">Cerrar gestión</a></li>
+                                    {% endif %}
+                                </ul>
+                            </div>
+                        </td>
+                    </tr>
+                {% endfor %}
+            </table>
+            <div class="pagination">
+                <ul>
+                    {% if first is defined and first == true %}
+                        <li class="active"><a href="{{ path('mg_gest_by_empresa', {'page': page-1, 'empId': empId}) }}"><span>&laquo;</span></a></li>
+                    {% else %}
+                        <li class="disabled"><span>&laquo;</span></li>
+                    {% endif %}
+
+                    {% if pages is defined %}
+                        {% for i in 1..pages %}
+                            <li><a href="{{ path('mg_gest_by_empresa', {'page': i, 'empId': empId }) }}">{{ i }}</a></li>
+                        {% endfor %}
+                    {% endif %}
+
+                    {% if last is defined and last == true %}
+                        <li class="disabled"><span>&raquo;</span></li>
+                    {% else %}
+                        <li class="active"><a href="{{ path('mg_gest_by_empresa', {'page': page+1, 'empId': empId }) }}"><span>&raquo;</span></a></li>
+                    {% endif %}
+                </ul>
+            </div>
+
+            <div class="container">
+                <div class="span7">
+                    <button class="btn btn-success btn-large newGest">Nueva Gestión</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    {# ------------------ MODAL ------------------  #}
+    <div id="selectClientModal" class="modal hide fade">
+        <div class="modal-header">
+            <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+            <h4>Selecciona un cliente para crear una nueva gestión</h4>
+        </div>
+        <div class="modal-body">
+            <form>
+                <fieldset>
+                    <label for="sel_empresaMsg">Cliente</label>
+                    <select id="sel_empresaMsg">
+                        <option value="none">- Seleccione un cliente -</option>
+                        {% for cliente in clientes %}
+                            <option class="cliName" value="{{ cliente.id }}" data-url="{{ path('mg_gest_admin_new', {'clientId':cliente.id})}}">{{ cliente.username}}</option>
+                        {% endfor %}
+                    </select>
+                </fieldset>
+            </form>
+        </div>
+        <div class="modal-footer">
+            <button class="btn closeMod">Cerrar</button>
+            <a class="btn btn-success newGestAdmin" >Crear Gestión</a>
+        </div>
+    </div>
+    {# ---------------- FIN MODAL ----------------  #}
+
+{% endblock %}
+
+{% block customjs %}
+    <script src="{{ asset('bundles/adminbundle/js/custom.js') }}"></script>
+{% endblock %}

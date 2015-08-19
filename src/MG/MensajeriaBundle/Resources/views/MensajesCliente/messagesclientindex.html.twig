@@ -1,0 +1,88 @@
+{% extends 'MGMensajeriaBundle:Bases:base_msg.html.twig' %}
+
+{% block content %}
+    <div class="container-fluid" style="margin-top: 50px; padding: 0">
+        <div class="row-fluid">
+            <table class="table table-striped">
+                <thead>
+                <tr>
+                    <td>Asunto</td>
+                    <td>Último mensaje</td>
+                    <td>Fecha de creación</td>
+                    <td>Participantes</td>
+                    <td>Mensajes Nuevos</td>
+                    <td>Acciones</td>
+                </tr>
+                </thead>
+                {% for conv in conversaciones %}
+                    {% set noLeidos = 0 %}
+                    {% for mensaje in conv.mensajes %}
+                        {% if mensaje.leido == false and mensaje.destinatario == app.user %}
+                            {% set noLeidos = noLeidos + 1  %}
+                        {% endif %}
+                    {% endfor %}
+                    {% if noLeidos > 0 %}
+                        <tr class="success">
+                    {% else %}
+                        <tr>
+                    {% endif %}
+                        <td>{{ conv.asunto }}</td>
+                        <td>{{ conv.fechaLastMessage|date('d-m-Y H:i:s') }}</td>
+                        <td>{{ conv.fechaCreacion|date('d-m-Y H:i:s') }}</td>
+                        <td>
+                            {% for member in conv.members %}
+                                {% if loop.first == true %}
+                                    {% if member == app.user %}
+                                        Tu y
+                                    {% else %}
+                                        {{ member.username }} y
+                                    {% endif %}
+                                {% else %}
+                                    {% if member == app.user %}
+                                        Tú
+                                    {% else %}
+                                        {{ member.username }}
+                                    {% endif %}
+                                {% endif %}
+                            {% endfor %}
+                        </td>
+                        {% if noLeidos > 0 %}
+                            <td>{{ noLeidos }}</td>
+                        {% else %}
+                            <td>{{ noLeidos }}</td>
+                        {% endif %}
+                        <td><a href="{{path('mg_show_conv', {'chatId':conv.id}) }}" class="btn btn-info">Ver Mensajes</a></td>
+                    </tr>
+
+                {% endfor %}
+            </table>
+            <div class="pagination">
+                <ul>
+                    {% if first is defined and first == true %}
+                        <li class="active"><a href="{{ path('mg_mensajeria_homepage', {'page': page-1}) }}"><span>&laquo;</span></a></li>
+                    {% else %}
+                        <li class="disabled"><span>&laquo;</span></li>
+                    {% endif %}
+
+                    {% if pages is defined %}
+                        {% for i in 1..pages %}
+                            <li class="active"><span><a href="{{ path('mg_mensajeria_homepage', {'page': i}) }}">{{ i }}</span></a></li>
+                        {% endfor %}
+                    {% endif %}
+
+                    {% if last is defined and last == true %}
+                        <li class="disabled"><span>&raquo;</span></li>
+                    {% else %}
+                        <li class="active"><a href="{{ path('mg_mensajeria_homepage', {'page': page+1}) }}"><span>&raquo;</span></a></li>
+                    {% endif %}
+                </ul>
+            </div>
+        </div>
+    </div>
+    <div class="container-fluid">
+        <div class="span12">
+            <a href="{{ path('mg_new_message') }}" class="btn btn-success">Nuevo Mensaje</a>
+            <a href="{{ path('mg_user_panel', {'empName':empresa.nombre, 'page':1}) }}" class="btn btn-danger">Volver</a>
+        </div>
+    </div>
+{% endblock %}

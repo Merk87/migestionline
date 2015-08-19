@@ -1,0 +1,91 @@
+{% extends 'MGAdminBundle:Bases:base.html.twig' %}
+
+
+{% block customstyle %}
+    <link rel="stylesheet" type="text/css" href="{{ asset('bundles/adminbundle/css/jquery.mCustomScrollbar.css') }}"
+          xmlns="http://www.w3.org/1999/html">
+{% endblock %}
+
+{% block content %}
+    <div class="container">
+        <div class="span12 hero-unit" style="min-width: 320px">
+            <div class="row">
+                <div class="span6">
+                    <h4>Detalles Gestión</h4>
+                    <table class="table table-bordered table-condensed table-striped">
+                        <tr>
+                            <td>Usuario</td>
+                            <td>{{ gestion.cliente.username }}</td>
+                        </tr>
+                        <tr>
+                            <td>Fecha creación</td>
+                            <td>{{ gestion.fechaCreacion|date('d-m-Y')}}</td>
+                        </tr>
+                        <tr>
+                            <td>Servicio</td>
+                            <td>{{ gestion.categoria.servicio.nombre }}</td>
+                        </tr>
+                        <tr>
+                            <td>Categoria</td>
+                            <td>{{ gestion.categoria.nombre}}</td>
+                        </tr>
+                        <tr>
+                        <td>Adjuntos</td>
+                        <td>{{ gestion.archivos|length }}</td>
+                        </tr>
+                        <tr>
+                        <td>Estado</td>
+                        <td>{{ gestion.estado.nombre }}</td>
+                        </tr>
+                        <tr>
+                            <td>Descripción cliente</td>
+                            <td>{{ gestion.descripcion }}</td>
+                        </tr>
+                    </table>
+                </div>
+                {% if gestion.archivos|length > 0 %}
+                    <div class="span5 file-explorer-container">
+                        <h2>Ficheros adjuntos</h2>
+                        <ul class="thumbnails" style="margin-left: 0px!important;">
+                            {% for file in gestion.archivos %}
+                                <li class="span2">
+                                    <div class="thumbnail white">
+                                        <img src="{{ asset(file.fileType.iconoPath) }}" alt=""></a>
+                                        <h5 style="text-align: center">{{ file.originalName }}</h5>
+                                        <p style="text-align: center"><a href="{{ path('mg_download_file', {'fileId': file.id}) }}" class="btn btn-small btn-success">Descargar</a></p>
+                                    </div>
+                                </li>
+                            {% endfor %}
+                        </ul>
+                    </div>
+                {% endif %}
+            </div>
+
+            <div class="span9">
+                <a href="{{ path('mg_gest_add_file', {'gestId': gestion.id}) }}" class="btn btn-large btn-primary margined">Agregar fichero</a>
+                <a href="{{ path('mg_gest_manage', {'gestId': gestion.id}) }}" class="btn btn-large btn-success margined">Gestionar</a>
+                <a href="{{ path('mg_gest_by_empresa', {'page': 1, 'empId':gestion.empresa.id}) }}" class="btn btn-large margined">Volver</a>
+            </div>
+
+        </div>
+
+    </div>
+{% endblock %}
+
+{% block customjs %}
+    <script src="{{ asset('bundles/adminbundle/js/jquery.mCustomScrollbar.min.js') }}"></script>
+    <script src="{{ asset('bundles/adminbundle/js/jquery.mousewheel.min.js') }}"></script>
+    <script>
+        (function($){
+            $(window).load(function(){
+                $(".file-explorer-container").mCustomScrollbar({
+                    scrollButtons:{
+                        enable:true
+                    },
+                    theme:"dark"
+                });
+            });
+        })(jQuery);
+    </script>
+
+{% endblock %}

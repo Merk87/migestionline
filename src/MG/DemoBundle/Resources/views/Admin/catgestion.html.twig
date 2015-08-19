@@ -1,0 +1,96 @@
+{% extends 'MGDemoBundle:Bases:base_admin.html.twig' %}
+
+{% block content %}
+    <div class="container">
+        <div class="span12">
+            <div class="span4">
+                <h2>Categoría</h2>
+            </div>
+            <div class="span3 pull-right">
+                <form>
+                    <fieldset>
+                        <label for="sel_empresaCat">Mostrar categorías por empresa</label>
+                        <select id="sel_empresaCat">
+                            <option value="none">- Seleccione una empresa -</option>
+                            <option value="{{ path('mg_demo_cat_by_empresa') }}">Asesoría Tavernes S.L.</option>
+                            <option value="{{ path('mg_demo_cat_by_empresa') }}">Gestoría Tavernes S.A.</option>
+                        </select>
+                    </fieldset>
+                </form>
+            </div>
+             <table class="table table-bordered table-condensed table-striped table-hover">
+                <thead>
+                <tr>
+                    <td>Nombre</td>
+                    <td>Descripción</td>
+                    <td colspan="3">Acciones</td>
+                </tr>
+                </thead>
+               
+                <tr>
+                    <td>Impuestos</td>
+                    <td>IVA, Imp. Sociedades, Intrastat</td>
+                    <td style="text-align: center"><a href="{{ path('mg_demo_cat_detail') }}" class="btn">Detalles</a></td>
+                    <td style="text-align: center"><a href="{{ path('mg_demo_cat_update') }}" class="btn btn-info">Editar</a></td>
+                    <td style="text-align: center"><button class="btn btn-danger blockCat disButton" style="padding: 4px 24px">Bloquear</button></td>
+
+                </tr>
+                 <tr class="error">
+                     <td>Balances</td>
+                     <td>Balance de situación</td>
+                     <td style="text-align: center"><button class="btn" disabled>Detalles</button></td>
+                     <td style="text-align: center"><button class="btn btn-info" disabled>Editar</button></td>
+                     <td style="text-align: center"><button class="btn btn-danger blockCat" disabled>Desbloquear</button></td>
+                 </tr>
+                 <tr>
+                     <td>Libros</td>
+                     <td>Mayor y Diario</td>
+                     <td style="text-align: center"><button class="btn" disabled>Detalles</button></td>
+                     <td style="text-align: center"><button class="btn btn-info" disabled>Editar</button></td>
+                     <td style="text-align: center"><button class="btn btn-danger blockCat" style="padding: 4px 24px" disabled>Bloquear</button></td>
+
+                 </tr>
+                 <tr class="error">
+                     <td>Documentación</td>
+                     <td>Escrituras, Poderes </td>
+                     <td style="text-align: center"><button class="btn" disabled>Detalles</button></td>
+                     <td style="text-align: center"><button class="btn btn-info" disabled>Editar</button></td>
+                     <td style="text-align: center"><button class="btn btn-danger blockCat" disabled>Desbloquear</button></td>
+                 </tr>
+               
+            </table>
+
+            <div class="pagination">
+                <ul>
+                    <li class="disabled"><span>&laquo;</span></li>
+                    <li class="active"><span><a href="{{ path('mg_demo_catadmin_homepage') }}">2</span></a></li>
+                    <li class="disabled"><span>&raquo;</span></li>
+
+                </ul>
+            </div>
+            <div class="container">
+                <div class="span7">
+                    <a href="{{ path('mg_demo_cat_create') }}" class="btn btn-success btn-large">Nueva Categoría</a>
+                    <button id="showPop3" data-content="Las categorías son aquellas subdivisiones de tus servicios, que servirán para categorizar las gestiones que tus clientes te soliciten." data-original-title="¿Que es un Categoría?" class="btn toolTip">?</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    {# ------------------ MODAL ------------------  #}
+    <div id="catModal" class="modal hide fade">
+        <div class="modal-header">
+            <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+            <h3>¿Seguro que desea bloquear/desbloquear la categoría?</h3>
+        </div>
+        <div class="modal-body">
+            <p>Recuerde que en una categoría bloqueada no se mostrará</p>
+        </div>
+        <div class="modal-footer">
+            <button class="btn closeMod">Cerrar</button>
+            <a class="btn btn-primary okCatBlock">Confirmar</a>
+        </div>
+    </div>
+    {# ---------------- FIN MODAL ----------------  #}
+
+{% endblock %}

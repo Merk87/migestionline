@@ -1,0 +1,154 @@
+{% extends 'MGDemoBundle:Bases:base_admin.html.twig' %}
+
+{% block content %}
+<div class="container">
+    <div class="span12">
+           <div class="span4">
+               <h2>Usuarios</h2>
+           </div>
+            <div class="span3 pull-right">
+                <form>
+                    <fieldset>
+                        <label for="sel_empresa">Mostrar usuarios por empresa</label>
+                        <select id="sel_empresa">
+                                <option value="none">- Seleccione una empresa -</option>
+                            <option value="{{ path('mg_demo_user_by_empresa') }}">Asesoría Tavernes S.L.</option>
+                            <option value="{{ path('mg_demo_user_by_empresa') }}">Gestoría Tavernes S.A.</option>
+                        </select>
+                    </fieldset>
+                </form>
+            </div>
+
+        <table class="table table-bordered table-condensed table-striped table-hover">
+            <thead>
+            <tr>
+                <td>Usuario</td>
+                <td>Email</td>
+                <td>Nombre</td>
+                <td>Apellidos</td>
+                <td>NIF</td>
+                <td>Telefono</td>
+                <td>Móvil</td>
+                <td colspan="3">Acciones</td>
+            </tr>
+            </thead>
+                <tr>
+                    <td>Gestinova</td>
+                    <td>rperez@demo1.com</td>
+                    <td>Ramón</td>
+                    <td>Pérez Pérez</td>
+                    <td>E12345678</td>
+                    <td>918765442</td>
+                    <td>918765442</td>
+                    <td style="text-align: center"><a href="{{ path('mg_demo_user_detail') }}" class="btn">Detalles</a></td>
+                    <td style="text-align: center"><a href="{{ path('mg_demo_user_edit') }}" class="btn btn-info">Editar</a></td>
+                    <td style="text-align: center"><button class="btn btn-danger delUser disButton"  style="padding: 4px 24px">Bloquear</button></td>
+                </tr>
+                <tr class="error">
+                    <td>Gestilabor</td>
+                    <td>laboral@demo1.com</td>
+                    <td>Luís</td>
+                    <td>Garcia Pérez</td>
+                    <td>11111112I</td>
+                    <td>918765442</td>
+                    <td>918765442</td>
+                    <td style="text-align: center"><button class="btn" disabled>Detalles</button></td>
+                    <td style="text-align: center"><button class="btn btn-info" disabled>Editar</button></td>
+                    <td style="text-align: center"><button class="btn btn-success delUser" disabled>Desbloquear</button></td>
+                </tr>
+                <tr>
+                    <td>Despafiscal</td>
+                    <td>clientes@prueba.es</td>
+                    <td>Félix</td>
+                    <td>Martínez Sosa</td>
+                    <td>03988488D</td>
+                    <td>969387478</td>
+                    <td>969387478</td>
+                    <td style="text-align: center"><a href="{{ path('mg_demo_user_detail') }}" class="btn" disabled>Detalles</a></td>
+                    <td style="text-align: center"><button class="btn btn-info" disabled>Editar</button></td>
+                    <td style="text-align: center"><button class="btn btn-danger delUser" style="padding: 4px 24px" disabled>Bloquear</button></td>
+                </tr>
+                <tr>
+                    <td>Contatma</td>
+                    <td>info@tma.com</td>
+                    <td>María</td>
+                    <td>Jiménez Crespo</td>
+                    <td>08378499A</td>
+                    <td>950498737</td>
+                    <td>950498737</td>
+                    <td style="text-align: center"><a href="{{ path('mg_demo_user_detail') }}" class="btn" disabled>Detalles</a></td>
+                    <td style="text-align: center"><button class="btn btn-info" disabled>Editar</button></td>
+                    <td style="text-align: center"><button class="btn btn-danger delUser" style="padding: 4px 24px" disabled>Bloquear</button></td>
+                </tr>
+                <tr>
+                    <td>Juridicotma</td>
+                    <td>jco@tma.com	</td>
+                    <td>Ana</td>
+                    <td>Sánchez Ramírez</td>
+                    <td>67783882B</td>
+                    <td>950498737</td>
+                    <td>950498737</td>
+                    <td style="text-align: center"><a href="{{ path('mg_demo_user_detail') }}" class="btn" disabled>Detalles</a></td>
+                    <td style="text-align: center"><button class="btn btn-info" disabled>Editar</button></td>
+                    <td style="text-align: center"><button class="btn btn-danger delUser" style="padding: 4px 24px" disabled>Bloquear</button></td>
+                </tr>
+                <tr>
+                    <td>Documenta</td>
+                    <td>doc@documenta.es</td>
+                    <td>Pilar</td>
+                    <td>Casanova Pujol</td>
+                    <td>64782823Z</td>
+                    <td>937467488</td>
+                    <td>937467488</td>
+                    <td style="text-align: center"><a href="{{ path('mg_demo_user_detail') }}" class="btn" disabled>Detalles</a></td>
+                    <td style="text-align: center"><button class="btn btn-info" disabled>Editar</button></td>
+                    <td style="text-align: center"><button class="btn btn-danger delUser" style="padding: 4px 24px" disabled>Bloquear</button></td>
+                </tr>
+                <tr>
+                    <td>Tasas</td>
+                    <td>fiscal@asesores.com</td>
+                    <td>Juan</td>
+                    <td>Ferrer Freixa</td>
+                    <td>98399202C</td>
+                    <td>986477326</td>
+                    <td>986477326</td>
+                    <td style="text-align: center"><a href="{{ path('mg_demo_user_detail') }}" class="btn" disabled>Detalles</a></td>
+                    <td style="text-align: center"><button class="btn btn-info" disabled>Editar</button></td>
+                    <td style="text-align: center"><button class="btn btn-danger delUser" style="padding: 4px 24px" disabled>Bloquear</button></td>
+                </tr>
+        </table>
+
+        <div class="pagination">
+            <ul>
+                <li class="disabled"><span>&laquo;</span></li>
+                <li class="active"><span><a href="{{ path('mg_demo_useradmin_homepage') }}">1</span></a></li>
+                <li class="disabled"><span>&raquo;</span></li>
+            </ul>
+        </div>
+        <div class="container">
+            <div class="span7">
+                <a href="{{ path('mg_demo_user_create') }}" class="btn btn-success btn-large">Nuevo Usuario</a>
+                <button id="showPop4" data-content="Un usuario puede ser un cliente o un empleado, diferenciado por rol." data-original-title="¿Que es un Usuario?" class="btn toolTip">?</button>
+            </div>
+        </div>
+
+    </div>
+</div>
+
+{# ------------------ MODAL ------------------  #}
+    <div id="delModal" class="modal hide fade">
+        <div class="modal-header">
+            <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+            <h3>¿Seguro que desea bloquear/desbloquear al usuario?</h3>
+        </div>
+        <div class="modal-body">
+            <p>Recuerde que un usuario bloqueado no podrá acceder a ninguna de las secciones de la aplicación.</p>
+        </div>
+        <div class="modal-footer">
+            <button class="btn closeMod">Cerrar</button>
+            <a class="btn btn-primary okDel">Confirmar</a>
+        </div>
+    </div>
+{# ---------------- FIN MODAL ----------------  #}
+
+{% endblock %}

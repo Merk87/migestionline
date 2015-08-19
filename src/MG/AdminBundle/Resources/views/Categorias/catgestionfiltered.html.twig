@@ -1,0 +1,118 @@
+{% extends 'MGAdminBundle:Bases:base.html.twig' %}
+{% block content %}
+<div class="container">
+    <div class="span12">
+        <div class="span4">
+            <h2>Categorías</h2>
+        </div>
+        <div class="span3 pull-right">
+            <form>
+                <fieldset>
+                    <label for="sel_empresaCat">Mostrar categorías por empresa</label>
+                    <select id="sel_empresaCat">
+                        <option value="none">- Seleccione una empresa -</option>
+                        {% for empresa in empresas %}
+                            <option value="{{ empresa.id }}">{{ empresa.nombre }}</option>
+                        {% endfor %}
+                    </select>
+                </fieldset>
+            </form>
+        </div>
+
+        <table class="table table-bordered table-condensed table-striped table-hover">
+            <thead>
+            <tr>
+                <td>Nombre</td>
+                <td>Descripción</td>
+                <td colspan="3">Acciones</td>
+            </tr>
+            </thead>
+            {% for cat in categorias %}
+
+                    {% if cat.enabled != 1 %}
+                        <tr class="error">
+                    {% else %}
+                        <tr>
+                    {% endif %}
+                    <td>{{ cat.nombre }}</td>
+                    <td>{{ cat.descripcion }}</td>
+
+                    <td style="text-align: center"><a href="{{ path('mg_cat_detail', {'catId': cat.id, 'empId':empId}) }}" class="btn">Detalles</a></td>
+
+                    {% if is_granted('ROLE_ADMIN') %}
+                        <td style="text-align: center"><a href="{{ path('mg_cat_update', {'catId': cat.id, 'empId':empId}) }}" class="btn btn-info">Editar</a></td>
+                        {% if cat.enabled == 1 %}
+                            <td style="text-align: center"><button class="btn btn-danger blockCatFilter" data-serv="{{ cat.id}}" style="padding: 4px 24px">Bloquear</button></td>
+                        {% else %}
+                            <td style="text-align: center"><button class="btn btn-success blockCatFilter" data-serv="{{ cat.id }}">Desbloquear</button></td>
+                        {% endif %}
+                    {% else %}
+                        <td style="text-align: center"><button class="btn btn-info" disabled>Editar</button></td>
+                        {% if cat.enabled == 1 %}
+                            <td style="text-align: center"><button class="btn btn-danger blockServFilter" style="padding: 4px 24px" disabled>Bloquear</button></td>
+                        {% else %}
+                            <td style="text-align: center"><button class="btn btn-success blockServFilter" disabled>Desbloquear</button></td>
+                        {% endif %}
+                    {% endif %}
+
+                    </tr>
+
+            {% endfor %}
+        </table>
+
+        <div class="pagination">
+            <ul>
+                {% if first is defined and first == true %}
+                    <li class="active"><a href="{{ path('mg_cat_by_empresa', {'page': page-1, 'empId':empId }) }}"><span>&laquo;</span></a></li>
+                {% else %}
+                    <li class="disabled"><span>&laquo;</span></li>
+                {% endif %}
+
+                {% if pages is defined %}
+                    {% for i in 1..pages %}
+                        <li><a href="{{ path('mg_cat_by_empresa', {'page': i, 'empId':empId }) }}">{{ i }}</a></li>
+                    {% endfor %}
+                {% endif %}
+
+                {% if last is defined and last == true %}
+                    <li class="disabled"><span>&raquo;</span></li>
+                {% else %}
+                    <li class="active"><a href="{{ path('mg_cat_by_empresa', {'page': page+1, 'empId':empId }) }}"><span>&raquo;</span></a></li>
+                {% endif %}
+            </ul>
+        </div>
+        <div class="container">
+            <div class="span7">
+                {% if is_granted('ROLE_ADMIN') %}
+                    <a href="{{ path('mg_cat_create', {'empId':empId}) }}" class="btn btn-success btn-large">Nueva Categoría</a>
+                    <button data-content="Las categorías son aquellas subdivisiones de tus servicios, que servirán para categorizar las gestiones que tus clientes te soliciten." data-original-title="¿Que es un Categoría?" class="btn toolTip">?</button>
+                {% else %}
+                    <button class="btn btn-success btn-large" disabled>Nueva Categoría</button>
+                {% endif %}
+            </div>
+        </div>
+
+    </div>
+</div>
+
+{# ------------------ MODAL ------------------  #}
+<div id="catModal" class="modal hide fade">
+    <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+        <h3>¿Seguro que desea bloquear/desbloquear la categoría?</h3>
+    </div>
+    <div class="modal-body">
+        <p>Recuerde que en una categoría bloqueada no se mostrará</p>
+    </div>
+    <div class="modal-footer">
+        <button class="btn closeMod">Cerrar</button>
+        <a class="btn btn-primary okCatBlockFilter">Confirmar</a>
+    </div>
+</div>
+{# ---------------- FIN MODAL ----------------  #}
+
+{% endblock %}
+
+{% block customjs %}
+    <script src="{{ asset('bundles/adminbundle/js/custom.js') }}"></script>
+{% endblock %}

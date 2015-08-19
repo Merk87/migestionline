@@ -1,0 +1,63 @@
+.boxes
+{
+    padding: 20px;
+    background: #fff;
+    border: 1px solid #e5e5e5;
+    -webkit-box-shadow: rgba(200,200,200,0.7) 0 4px 10px -1px;
+    box-shadow: rgba(200,200,200,0.7) 0 4px 10px -1px;
+}
+
+.topbox
+{
+    margin-bottom: 10px;
+    width:285px;
+}
+
+.topbox img
+{
+    margin-left: 10px;
+}
+
+.requestp
+{
+    min-width: 270px;
+    max-width: 270px;
+}
+
+.alertbox
+{
+    width: 240px;
+}
+
+.alert
+{
+    padding: 8px 14px!important;
+}
+
+.alert p
+{
+    text-align: justify;
+    font-size: 13px;
+}
+
+#remember_me
+{
+    vertical-align: baseline;
+    margin-right: 5px;
+}
+
+.rmblabel
+{
+    width: 100px;
+}
+
+.box_controls
+{
+    display: inline-block;
+    width: 97%;
+}
+
+.box_controls label
+ {
+    margin-top: 10px;
+ }

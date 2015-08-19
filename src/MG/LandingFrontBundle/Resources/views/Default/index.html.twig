@@ -1,0 +1,1103 @@
+<!DOCTYPE html>
+
+<html lang="es">
+<head>
+ <meta charset="utf-8">
+ <title>Mi Gestión Online</title>
+ <meta name="description" content="">
+ <meta name="author" content="Mi Gestión Online (Merkury)">
+
+ <!-- Mobile Specific Meta -->
+ <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+
+ <!-- Stylesheets -->
+ <link rel="stylesheet" href="{{ asset('bundles/landingfront/css/bootstrap.css') }}" />
+ <link rel="stylesheet" href="{{ asset('bundles/landingfront/css/styles.css') }}" />
+ <link rel="stylesheet" href="{{ asset('bundles/landingfront/css/colorbox.css') }}" />
+
+ <!--[if lt IE 9]>
+ <script src="http://html5shim.googlecode.com/svn/trunk/html5.js"></script>
+ <![endif]-->
+
+ <!-- Favicon and Apple Touch Icons -->
+ <link rel="shortcut icon" href="{{ asset('bundles/adminbundle/img/favicon.ico') }}">
+</head>
+<body>
+
+<div class="topamsg alert alert-warning">
+   <button type="button" class="close" data-dismiss="alert" id="closemsg">&times;</button>
+   <div class="container">
+       <div class="span12">
+           <p>Nuestro sitio utiliza cookies para mejorar nuestros servicios. Si continuas navegando aceptas el uso que hacemos de las cookies.</p>
+       </div>
+   </div>
+</div>
+
+<!-- HEADER -->
+<header class="container" id="top">
+ <div class="row">
+
+  <div class="span4">
+
+   <h1 class="logo"><a href="{{ path('mg_landing_front_homepage') }}" class="ir">Mi Gestión Online</a></h1>
+
+  </div> <!-- end span4 -->
+
+  <div class="span8">
+
+   <ul class="header-information">
+
+    <li class="phone-info">
+     <p>¿Preguntas?</p>
+     <p><strong>Llama al 976-436-030</strong></p>
+    </li>
+    <li class="email-info">
+     <p>Envíanos un email a:</p>
+     <p><a href="mailto:dudas@migestionline.com">dudas@migestionline.com</a></p>
+    </li>
+    <li class="login-action">
+     <p>¿Ya eres cliente?</p>
+     <p>¡<a href="{{ path('fos_user_security_login') }}">Accede</a> a tu zona personal!</p>
+    </li>
+   </ul>
+
+  </div> <!-- end span8 -->
+
+ </div> <!-- end row -->
+</header> <!-- end container -->
+
+<!-- FLOATING MENU -->
+<div class="nav-replacement"><!-- --></div>
+
+<nav class="floating-nav container">
+
+ <div>
+
+  <!-- The navigation is generated automatically based on the sections with the class .spy-hook -->
+  <!-- JavaScript must be enabled in the browser in order for this to work -->
+  <ul>
+  </ul>
+
+  <div class="navbuttonsContainer">
+   <a href="{{ path('mg_demo_homepage') }}" class="btn btn-info pull-right">¡Pruébalo!</a>
+   <a href="{{ path('mg_front_contratacion') }}" class="btn btn-success pull-right">Contrata ya</a>
+  </div>
+
+ </div>
+
+</nav> <!-- end floating-nav -->
+
+{% block flashmessages %}
+ {% for flashMessage in app.session.flashbag.get('notice') %}
+  <div class="container">
+   <div class="span11 alert alert-success">
+    <button type="button" class="close" data-dismiss="alert">&times;</button>
+    {{ flashMessage }}
+   </div>
+  </div>
+ {% endfor %}
+
+{% endblock %}
+
+<!-- BANNER -->
+<div class="banner-container">
+
+ <div class="container">
+
+  <div class="row">
+
+   <div class="span5 clearfix topinfo">
+
+    <div class="logoContainer"><h1><img src="{{ asset('bundles/landingfront/images/logob.png') }}" alt="migestion online"></h1></div>
+    <h2>¿QUÉ ES?</h2>
+    <ul class="ctaul">
+     <li>Repositorio documental en la nube.</li>
+     <li>Una plataforma que convierte tu despacho, en despacho online.</li>
+    </ul>
+
+    <h2>¿QUÉ HACE?:</h2>
+    <ul class="ctaul">
+     <li>Convierte tu despacho en una verdadera <strong>”OFICINA SIN PAPELES EN LA NUBE”</strong>.</li>
+     <li>Crea un ARCHIVO DOCUMENTAL para ti y para tus clientes.</li>
+     <li>Te permite gestionar tu despacho desde cualquier lugar y en cualquier momento.</li>
+    </ul>
+
+
+    <div class="screenshot-cta ">
+     <a href="{{ path('mg_front_contratacion') }}" class="btn btn-large btn-success">Contrata ya</a>
+     <a href="{{ path('mg_demo_homepage') }}" class="btn btn-large btn-info">¡Pruébalo!</a>
+    </div> <!-- end screenshot-cta -->
+
+   </div> <!-- end span4 -->
+
+   <div class="span7 screenshot-container">
+
+    <figure class="header-figure space-left screenshot-shadow">
+     <img src="{{ asset('bundles/landingfront/images/tablet_index.png') }}" alt="Mi Gestión Online" />
+    </figure>
+
+   </div> <!-- end span8 -->
+
+  </div> <!-- end row -->
+
+ </div> <!-- end container -->
+
+</div> <!-- end banner-container -->
+
+
+<!-- FEATURES -->
+<section class="container">
+
+ <h2 id="section-features" class="spy-hook">Características</h2>
+
+ <div class="feature-list">
+
+   <div class="row">
+   <div class="span6 bottom_margin">
+    <figure><img src="{{ asset('bundles/landingfront/images/icons/custom/4.png') }}" alt="Icon" /></figure>
+    <h3>Oficina sin papeles</h3>
+    <p>Ahorra significativamente en papel, impresión, archivo, espacio físico, manipulación de su documentación, tiempo para su organización y posterior búsqueda de documentos.</p>
+   </div>
+
+   <div class="span6 bottom_margin">
+    <figure><img src="{{ asset('bundles/landingfront/images/icons/custom/1.png') }}" alt="Icon" /></figure>
+    <h3>Almacenamiento Online</h3>
+    <p>Dispón de un archivo documental en la red con toda la información almacenada. <strong>Para ti y para tu cliente</strong></p>
+   </div>
+
+  </div> <!-- end row -->
+
+  <div class="row">
+
+   <div class="span6 bottom_margin">
+    <figure><img src="{{ asset('bundles/landingfront/images/icons/custom/17.png') }}" alt="Icon" /></figure>
+    <h3>Seguridad</h3>
+    <p>Minimiza los riesgos de custodia de documentos tuyos y de tu cliente. No más incidencias en la recepción o entrega de documentos.<strong>Para ti y para tu cliente</strong></p>
+   </div>
+
+   <div class="span6 bottom_margin">
+    <figure><img src="{{ asset('bundles/landingfront/images/icons/custom/9.png') }}" alt="Icon" /></figure>
+    <h3>Calidad</h3>
+    <p>Ofrece a tus clientes <strong>SERVICIO</strong>, seguridad y valor añadido.</p>
+   </div>
+
+  </div> <!-- end row -->
+
+  <div class="row">
+   <div class="span6 bottom_margin">
+    <figure><img src="{{ asset('bundles/landingfront/images/icons/custom/7.png') }}" alt="Icon" /></figure>
+    <h3>Optimización</h3>
+    <p>Mejora los tiempos de trabajo y la relación con tu cliente será mucho más fluida.</p>
+   </div>
+
+   <div class="span6 bottom_margin">
+    <figure><img src="{{ asset('bundles/landingfront/images/icons/custom/12.png') }}" alt="Icon" /></figure>
+    <h3>Comodidad</h3>
+    <p>Accede a cualquier documento en cualquier momento y lugar.</p>
+   </div>
+
+
+  </div> <!-- end row -->
+
+  <div class="row">
+   <div class="span6 bottom_margin">
+    <figure><img src="{{ asset('bundles/landingfront/images/icons/custom/8.png') }}" alt="Icon" /></figure>
+    <h3>Actualidad</h3>
+    <p>Estarás en sintonía con los avances tecnológicos y nuevas necesidades y tendencias en tu profesión.</p>
+   </div>
+
+   <div class="span6 bottom_margin">
+    <figure><img src="{{ asset('bundles/landingfront/images/icons/custom/15.png') }}" alt="Icon" /></figure>
+    <h3>Mejora el rendimiento</h3>
+    <p>Evita desplazamientos, transporte, <strong>CITAS</strong>, etc. Optimiza la labor de TUS colaboradores.</p>
+   </div>
+
+  </div> <!-- end row -->
+
+  <div class="row">
+
+   <div class="span6">
+    <figure><img src="{{ asset('bundles/landingfront/images/icons/custom/16.png') }}" alt="Icon" /></figure>
+    <h3>Reducción de costes para mi despacho</h3>
+    <p>Te ayudará a controlar tus costes operativos: tiempo de tratamiento documental, espacio físico, optimización de recursos, papel, impresión, etc.</p>
+   </div>
+
+   <div class="span6">
+    <figure><img src="{{ asset('bundles/landingfront/images/icons/custom/14.png') }}" alt="Icon" /></figure>
+    <h3>Reducción de costes para mi cliente</h3>
+    <p>Genero ahorro a mis clientes: desplazamientos, administración, gastos generales, etc.</p>
+   </div>
+
+
+  </div> <!-- end row -->
+
+ </div> <!-- end feature-list -->
+
+ <hr class="hr-dots" />
+
+</section> <!-- end container -->
+
+
+<!-- VALOR AÑADIDO -->
+<section class="container">
+ <h2 id="section-addvalue" class="spy-hook">Valor Añadido</h2>
+ <div class="row">
+  <div class="addedvalue">
+   <div class="span12 bottom_margin">
+    <h2>¿QUÉ PIDEN TUS CLIENTES?</h2>
+    <p>Una forma de trabajo y de relación contigo <strong>DINÁMICA, SEGURA Y ACCESIBLE</strong>:
+    <ul>
+     <li>Que evite desplazamientos.</li>
+     <li>Que evite concertar citas para hablar de sus necesidades.</li>
+     <li>Que tenga disponible su documentación e información 24 horas al día desde cualquier sitio.</li>
+     <li>Que tenga su documentación organizada y segura.</li>
+     <li>Un archivo documental privado.</li>
+    </ul>
+    </p>
+   </div>
+   <div class="span12" style="margin-bottom: 15px">
+    <h2>¿QUE OFRECES A TUS CLIENTES CON MIGESTIONLINE?</h2>
+    <ul>
+     <li>Nuevos canales de comunicación.</li>
+     <li>Disponibilidad.</li>
+     <li>Comodidad.</li>
+     <li>Eficacia.</li>
+     <li>Inmediatez.</li>
+     <li>Seguridad.</li>
+     <li>Valor añadido (un sistema de archivo digital privado gratis)</li>
+     <li>Tecnología.</li>
+     <li>Innovación</li>
+    </ul>
+   </div>
+  </div>
+ </div>
+</section>
+<!-- END SECTION -->
+
+<!-- CTA SECTION -->
+<div class="cta-section">
+
+ <div class="container">
+
+  <div class="screenshot-cta" style="margin-top: 20px">
+   <a href="{{ path('mg_front_contratacion') }}" class="btn btn-large btn-success">Contrata ya</a>
+   <a href="{{ path('mg_demo_homepage') }}" class="btn btn-large btn-info">¡Pruébalo!</a>
+  </div> <!-- end screenshot-cta -->
+
+ </div> <!-- end container -->
+
+</div> <!-- end cta-section -->
+
+
+<!-- TOUR -->
+<section class="container" style="margin-top: 35px;">
+
+ <h2 id="section-tour" class="spy-hook">Tour</h2>
+ <div class="tabbable row">
+
+  <div class="span3 tour-navigation">
+   <ul>
+    <li class="active"><a href="#tour1" data-toggle="tab">Controla los trámites de un vistazo.</a></li>
+    <li><a href="#tour2" data-toggle="tab">Gestiona los trámites en un solo panel.</a></li>
+    <li><a href="#tour3" data-toggle="tab">Utiliza nuestros repositorios.</a></li>
+    <li><a href="#tour4" data-toggle="tab">Ten control sobre los repostiorios.</a></li>
+    <li><a href="#tour5" data-toggle="tab">Controla el acceso a los ficheros de una forma fácil.</a></li>
+    <li><a href="#tour6" data-toggle="tab">Mantén el contacto con tus clientes.</a></li>
+    <li><a href="#tour7" data-toggle="tab">Ten un histórico de todos tus mensajes.</a></li>
+    <li><a href="#tour8" data-toggle="tab">¡Proporciona a tu cliente una completa herramienta!</a></li>
+    <li><a href="#tour9" data-toggle="tab">Sencillo sistema para crear trámites</a></li>
+    <li><a href="#tour10" data-toggle="tab">Y el trámite para tu cliente en un solo vistazo.</a></li>
+   </ul>
+
+  </div> <!-- end span3 -->
+
+  <div class="tab-content span9">
+
+   <div class="tab-pane active clearfix" id="tour1">
+
+    <a class="tourimg" href="{{ asset('bundles/landingfront/images/demo/tour/or/gestb.png') }}">
+     <img src="{{ asset('bundles/landingfront/images/demo/tour/gest.jpg') }}" alt="" >
+    </a>
+
+   </div> <!-- end tab-pane -->
+
+   <div class="tab-pane" id="tour2">
+    <a class="tourimg" href="{{ asset('bundles/landingfront/images/demo/tour/or/detailgestb.png') }}">
+     <img src="{{ asset('bundles/landingfront/images/demo/tour/detailgest.jpg') }}" alt="" >
+    </a>
+
+
+   </div> <!-- end tab-pane -->
+
+   <div class="tab-pane" id="tour3">
+    <a class="tourimg" href="{{ asset('bundles/landingfront/images/demo/tour/or/reposb.png') }}">
+     <img src="{{ asset('bundles/landingfront/images/demo/tour/repos.jpg') }}" alt="" >
+    </a>
+
+
+   </div> <!-- end tab-pane -->
+   <div class="tab-pane" id="tour4">
+    <a class="tourimg" href="{{ asset('bundles/landingfront/images/demo/tour/or/detrepob.png') }}">
+     <img src="{{ asset('bundles/landingfront/images/demo/tour/detrepo.jpg') }}" alt="" >
+    </a>
+
+
+   </div> <!-- end tab-pane -->
+
+   <div class="tab-pane" id="tour5">
+    <a class="tourimg" href="{{ asset('bundles/landingfront/images/demo/tour/or/reposassigb.png') }}">
+     <img src="{{ asset('bundles/landingfront/images/demo/tour/reposassig.jpg') }}" alt="" ></a>
+
+
+   </div> <!-- end tab-pane -->
+
+   <div class="tab-pane" id="tour6">
+    <a class="tourimg" href="{{ asset('bundles/landingfront/images/demo/tour/or/msgb.png') }}">
+     <img src="{{ asset('bundles/landingfront/images/demo/tour/msg.jpg') }}" alt="" >
+    </a>
+
+
+   </div> <!-- end tab-pane -->
+
+   <div class="tab-pane" id="tour7">
+    <a class="tourimg" href="{{ asset('bundles/landingfront/images/demo/tour/or/msgpb.png') }}">
+     <img src="{{ asset('bundles/landingfront/images/demo/tour/msgp.jpg') }}" alt="" >
+    </a>
+
+
+   </div> <!-- end tab-pane -->
+
+
+   <div class="tab-pane" id="tour8">
+    <a class="tourimg" href="{{ asset('bundles/landingfront/images/demo/tour/or/mainb.png') }}">
+     <img src="{{ asset('bundles/landingfront/images/demo/tour/main.jpg') }}" alt="" >
+    </a>
+
+
+   </div> <!-- end tab-pane -->
+
+   <div class="tab-pane" id="tour9">
+    <a class="tourimg" href="{{ asset('bundles/landingfront/images/demo/tour/or/newgestb.png') }}">
+     <img src="{{ asset('bundles/landingfront/images/demo/tour/newgest.jpg') }}" alt="" >
+    </a>
+
+
+   </div> <!-- end tab-pane -->
+
+   <div class="tab-pane" id="tour10">
+    <a class="tourimg" href="{{ asset('bundles/landingfront/images/demo/tour/or/managegestb.png') }}">
+     <img src="{{ asset('bundles/landingfront/images/demo/tour/managegest.jpg') }}" alt="" >
+    </a>
+
+
+   </div> <!-- end tab-pane -->
+
+
+  </div> <!-- end tab-content -->
+
+ </div> <!-- end tabbable -->
+
+ <hr class="hr-dots" />
+
+</section> <!-- end container -->
+
+<!-- VALOR AÑADIDO -->
+<section class="container">
+ <h2 id="section-moveon" class="spy-hook">¡Avanza!</h2>
+ <div class="row">
+  <div class="addedvalue">
+   <div class="span12" >
+    <h2>HASTA AHORA:</h2>
+    <ul>
+     <li>Se acabó el: “no consigo concretar una cita contigo… tengo que comentarte algo 	y no puedo ajustarme a tu horario”</li>
+     <li>Ya no más: “ya te entregué esa documentación... no se ha podido extraviar.”</li>
+     <li>O: “estás comunicando todo el tiempo y necesito urgentemente una copia de mi declaración de iva del año pasado…” </li>
+    </ul>
+   </div>
+   <div class="span12" style="margin-bottom: 15px">
+    <h2>DESDE AHORA:</h2>
+    <ul>
+     <li>“Tienes a tu disposición un canal de mensajería en la plataforma para contactar conmigo en cualquier momento”</li>
+     <li>“Tu documentación está disponible para ti en la plataforma. La tienes organizada de tal forma que sólo tienes que acceder a ella según tu criterio y bajarla, imprimirla o consultarla”</li>
+     <li>“Ya no más cajas y archivos en papel. Incómodos, inseguros, pesados, voluminosos y de difícil búsqueda de sus contenidos."</li>
+    </ul>
+   </div>
+  </div>
+ </div>
+ <hr class="hr-dots">
+</section>
+<!-- END SECTION -->
+
+
+<!--TODO lalalalla -->
+<!-- TESTIMONIALS -->
+<section class="container">
+
+ <h2 id="section-testimonials" >Lo que opinan nuestros clientes</h2>
+
+ <div class="slider-wrapper">
+
+  <ul class="slider">
+
+   <li>
+    <p>&quot;Por fin somos un despacho sin papeles. Nos lo pedían nuestros clientes cada día y
+
+     hemos dado el salto. Ojala lo hubiéramos hecho antes…. Y además fácil y cómodo.
+
+     No nos hemos visto en nada, nos mandaron el enlace y a empezar. Fabuloso. Los
+
+     recomiendo… &quot; </p>
+    <p class="author">- Ana Ibáñez - Consulting Gandía C.B. -</p>
+
+   </li>
+   <li>
+    <p>&quot;Nunca habíamos dado tanto servicio a nuestros clientes de una sola vez. De repente les
+
+     ofrecimos todo eso que nos venían pidiendo de un día para otro. Ellos muy satisfechos
+
+     y nosotros hemos ganado una confianza con ellos difícilmente superable. Gracias MI
+
+     GESTIÓN ONLINE.&quot; </p>
+    <p class="author">- Ramón Sanjuán - Ava Gestión -</p>
+   </li>
+   <li>
+    <p>&quot;Desde que pusimos en marcha la plataforma hemos crecido considerablemente. Hemos
+
+     ganado clientes y fidelizado al resto. De hecho hemos incrementado nuestra cartera en
+
+     un más de un 20%. Estamos dando ucho más servicio por muy poco dinero.&quot; </p>
+    <p class="author">- Silvia Aznar Asesores Tributarios Gesta S.L. - </p>
+   </li>
+
+   <li>
+    <p>&quot;He ajustado la estructura de mi despacho en todas las áreas y ahora trabajamos mucho
+
+     más cómodamente y con un control en la gestión que nunca habíamos logrado. La
+
+     puesta en marcha muy sencilla y su uso realmente fácil. Estoy encantado.&quot; </p>
+    <p class="author">- Antonio García-Pelayo - Torrenueva - </p>
+   </li>
+
+   <li>
+    <p>&quot;Hemos logrado una cobertura en la zona rural en la que trabajamos que nos permite
+
+     llegar a clientes que antes ni imaginábamos. Nos hemos hecho con el mercado de esta
+
+     zona.&quot; </p>
+    <p class="author">- Raúl Traviesa Martínez - Asesoría y Consulting R & M - </p>
+   </li>
+
+   <li>
+    <p>&quot;Lo que más me gusta es que puedo gestionar mi despacho desde cualquier lugar y
+
+     momento. Estoy muy cerca de mis clientes que me lo agradecen y yo tengo la libertad
+
+     que siempre he soñado. Fenomenal.&quot; </p>
+    <p class="author">- Jaime Muñiz Urquijo - </p>
+   </li>
+
+
+  </ul>
+
+ </div> <!-- end slider-wrapper -->
+
+ <ul class="slider-controls"></ul>
+
+ <hr class="hr-dots" />
+
+</section> <!-- end container -->
+
+<!-- PRICING -->
+<section class="container">
+
+ <h2 id="section-pricing" class="spy-hook">Nuestros paquetes</h2>
+
+ <div class="row">
+
+  <div class="span4 pricing-table-column">
+
+   <span class="featured-icon"></span>
+   <h3>Standard</h3>
+
+   <div class="pricing">
+
+    <p>24.50€<sup>*</sup></p>
+    <span>al mes</span>
+
+   </div> <!-- end pricing -->
+
+   <div class="row">
+    <ul class="span4">
+     <li>100Gb.</li>
+     <li>100 usuarios.</li>
+     <li>1 Repositorio.</li>
+     <li>Personalización de servicios ofrecidos.</li>
+     <li>Multisubida de ficheros.</li>
+     <li>Roles de usuario.
+
+      <ul class="small-ul">
+       <li>Administrador/a</li>
+       <li>Gestor/a</li>
+       <li>Cliente/a</li>
+      </ul>
+     </li>
+     <li>Acceso al repositorio por empresas y clientes</li>
+     <li>Gestión de permisos de usuario.</li>
+     <li>Acceso seguro SSL.</li>
+     <li>Backup diario.</li>
+     <li>Compatible con Windows, Mac y Linux.</li>
+     <li>Compatible con móviles y tablets.</li>
+     <li>Gestión de ficheros subidos.</li>
+     <li>Mensajería entre usuarios.</li>
+     <li>Filtros de contenido.</li>
+    </ul>
+   </div>
+
+   <div class="cta-area"><a href="{{ path('mg_front_contratacion') }}" class="btn btn-large btn-success"><i class="icon-white icon-briefcase"></i> ¡Contrata ya! </a></div>
+
+  </div> <!-- end span4 -->
+
+
+
+  <div class="span4 pricing-table-column special most-popular">
+
+   <span class="featured-icon hidden-tablet hidden-phone"></span>
+   <h3>Advance</h3>
+
+   <div class="inversed_pricing">
+
+    <p>39.50€<sup>*</sup></p>
+    <span>al mes</span>
+
+   </div> <!-- end pricing -->
+
+   <div class="row">
+    <ul class="span4">
+     <li>300Gb.</li>
+     <li>300 usuarios.</li>
+     <li>5 Repositorios.</li>
+     <li>Personalización de servicios ofrecidos.</li>
+     <li>Multisubida de ficheros.</li>
+     <li>Roles de usuario.
+      <ul class="small-ul-inverted">
+       <li>Administrador/a</li>
+       <li>Gestor/a</li>
+       <li>Cliente/a</li>
+      </ul>
+     </li>
+     <li>Acceso al repositorio por empresas y clientes</li>
+     <li>Gestión de permisos de usuario.</li>
+     <li>Acceso seguro SSL.</li>
+     <li>Backup diario.</li>
+     <li>Compatible con Windows, Mac y Linux.</li>
+     <li>Compatible con móviles y tablets.</li>
+     <li>Gestión de ficheros subidos.</li>
+     <li>Mensajería entre usuarios.</li>
+     <li>Filtros de contenido.</li>
+    </ul>
+   </div>
+
+   <div class="cta-area"><a href="{{ path('mg_front_contratacion') }}" class="btn btn-large btn-success"><i class="icon-white icon-briefcase"></i> ¡Contrata ya! </a></div>
+
+  </div> <!-- end span4 -->
+
+  <div class="span4 pricing-table-column">
+
+   <span class="featured-icon"></span>
+   <h3>Plus</h3>
+
+   <div class="pricing">
+
+    <p>49.50€<sup>*</sup></p>
+    <span>al mes</span>
+
+   </div> <!-- end pricing -->
+
+   <div class="row">
+    <ul class="span4">
+     <li>500Gb.</li>
+     <li>500 usuarios.</li>
+     <li>10 Repositorios.</li>
+     <li>Personalización de servicios ofrecidos.</li>
+     <li>Multisubida de ficheros.</li>
+     <li>Roles de usuario.
+      <ul class="small-ul">
+       <li>Administrador/a</li>
+       <li>Gestor/a</li>
+       <li>Cliente/a</li>
+      </ul>
+     </li>
+     <li>Acceso al repositorio por empresas y clientes</li>
+     <li>Gestión de permisos de usuario.</li>
+     <li>Acceso seguro SSL.</li>
+     <li>Backup diario.</li>
+     <li>Compatible con Windows, Mac y Linux.</li>
+     <li>Compatible con móviles y tablets.</li>
+     <li>Gestión de ficheros subidos.</li>
+     <li>Mensajería entre usuarios.</li>
+     <li>Filtros de contenido.</li>
+    </ul>
+   </div>
+
+   <div class="cta-area"><a href="{{ path('mg_front_contratacion') }}" class="btn btn-large btn-success"><i class="icon-white icon-briefcase"></i> ¡Contrata ya! </a></div>
+
+  </div> <!-- end span3 -->
+
+ </div> <!-- end row -->
+
+ <div class="container" style="margin-top:25px">
+  <div class="span12">
+   <p class="small-advice"><sup>*</sup> IVA no incluido en el precio.</p>
+  </div>
+ </div>
+
+ <hr class="hr-dots" />
+
+</section> <!-- end container -->
+
+<!-- GET IN TOUCH -->
+<section class="container">
+
+ <h2 id="section-contact" class="spy-hook">Contacto</h2>
+
+ <div class="row">
+
+  <div class="span8">
+
+   <p>Si tienes alguna duda o necesitas asistencia puedes contactar con nosotros a través del siguiente formulario:</p>
+
+   <form action="{{ path('mg_landing_front_homepage') }}" method="POST">
+    {{ form_errors(contactForm) }}
+
+    {{ form_label(contactForm.Nombre) }}
+    {{ form_widget(contactForm.Nombre) }}
+
+    {{ form_label(contactForm.Email) }}
+    {{ form_widget(contactForm.Email) }}
+
+    {{ form_label(contactForm.Asunto) }}
+    {{ form_widget(contactForm.Asunto) }}
+
+    {{ form_label(contactForm.Mensaje) }}
+    {{ form_widget(contactForm.Mensaje) }}
+
+    <div class="groupedControls">
+     {{ form_widget(contactForm.Politica) }}
+
+     {# {{ form_label(contactForm.Politica, 'Acepto la política de privacidad', { 'label_attr': {'class': 'chboxpol'} }) }} #}
+     <label for="contact_Politica">Acepto la <a id="show_pp_main_2" data-path="{{ path('mg_front_politica') }}">política de privacidad</a></label>
+     {{ form_widget(contactForm.Publicidad) }}
+     <label for="contact_Publicidad ">Deseo recibir informacion comercial.</label>
+    </div>
+
+    {{ form_rest(contactForm) }}
+    <p><input type="submit" value="Envíar" class="btn btn-info" /></p>
+   </form>
+
+   <div id="ajax-console-success"></div>
+
+  </div> <!-- end span8 -->
+
+  <div class="span4">
+
+   <ul class="footer-information">
+
+    <li class="phone-info">
+     <p>¿Preguntas?</p>
+     <p><strong>Llama al 976-436-030</strong></p>
+    </li>
+    <li class="email-info">
+     <p>Envíanos un email a:</p>
+     <p><a href="mailto:dudas@migestionline.com">dudas@migestionline.com</a></p>
+    </li>
+
+   </ul>
+
+   {#<p>Además puedes encontrarnos en las siguientes redes sociales</p>
+
+   <ul class="social-links clearfix">
+    <li><a href="" class="twitter">Twitter</a></li>
+    <li><a href="" class="facebook">Facebook</a></li>
+    <li><a href="" class="googleplus">Google+</a></li>
+    <li><a href="" class="linkedin">LinkedIn</a></li>
+    <li><a href="" class="skype">Skype</a></li>
+    <li><a href="" class="youtube">YouTube</a></li>
+   </ul> #}
+
+  </div> <!-- end span4 -->
+
+ </div> <!-- end row -->
+
+</section> <!-- end container -->
+
+<div class="copyright-container">
+ <ul class="footerul">
+  <li><a id="show_pp_main" class="no-link" data-path="{{ path('mg_front_politica') }}" >Política de privacidad</a></li>
+  <li><a id="show_main_av" class="no-link" data-path="{{ path('mg_front_aviso') }}">Aviso Legal</a></li>
+  <li><a id="show_main_cc" class="no-link" data-path="{{ path('mg_front_condiciones') }}">Condiciones de contratación</a></li>
+  <li><span>&copy; 2013 Mi Gestión Online.</span></li>
+ </ul>
+
+<!-- COPYRIGHT -->
+</div>
+
+
+
+<!-- JS -->
+<script src="{{ asset('bundles/landingfront/js/jquery-1.8.0.min.js') }}"></script>
+<script src="{{ asset('bundles/landingfront/js/functions.js') }}"></script>
+<script src="{{ asset('bundles/landingfront/js/jquery.colorbox-min.js') }}"></script>
+<script src="{{ asset('bundles/landingfront/js/jquery.colorbox-es.js') }}"></script>
+<script src="{{ asset('bundles/landingfront/js/jquery.cookie.js') }}"></script>
+
+
+{# ------------------ MODAL ------------------ #}
+<div id="mod_pp" class="modal hide fade">
+ <div class="modal-header">
+  <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+  <h1>Política de Protección de Datos de Carácter Personal </h1>
+ </div>
+ <div class="modal-body">
+ <section>
+     <p>En cumplimiento de la Ley Orgánica 15/1999, de 13 de diciembre, sobre Protección de Datos de Carácter Personal (LOPD), SABER NUEVAS TECNOLOGÍAS, S.L.  informa a los usuarios de que: los Datos de Carácter personal que recoge por diferentes medios tales como: encuestas al interesado, formularios de petición de información y fuentes accesibles al público u otros, son objeto de tratamiento automatizado y se incorporan en los ficheros correspondientes, debidamente registrados en la Agencia Española de Protección de Datos.
+     </p>
+     <p>La recogida y tratamiento automatizado de los Datos de Carácter Personal tiene como finalidad el mantenimiento de la relación contractual que en su caso se establezca con SABER NUEVAS TECNOLOGÍAS, S.L., así como el desempeño de las tareas de información, formación, comercialización (tarea esta última siempre identificada como tal) y otras actividades propias de la empresa.
+     </p>
+     <p>Igualmente le comunicamos que dichos datos podrán ser cedidos a empresas relacionadas o vinculadas con SABER NUEVAS TECNOLOGÍAS, S.L. cuya actividad sea la producción, distribución o comercialización de contenidos, productos o servicios relacionados con el sector informático o de la asesoría y consultoría con el propósito de, mantener al usuario de informado de novedades,  promociones, concursos, lanzamiento de nuevos productos o servicios o cualquier acción comercial relacionados con sus productos o servicios.
+     </p>
+     <p>El usuario podrá, en todo momento, ejercitar los derechos reconocidos en la LOPD, de Acceso, Rectificación, Cancelación y Oposición. El ejercicio de estos derechos puede realizarlo el propio usuario mediante comunicación escrita a la siguiente Dirección:
+         SABER NUEVAS TECNOLOGÍAS, S.L.  Plaza Azteca, local 50012 Zaragoza.
+     </p>
+     <p>O enviando un correo electrónico a la dirección: <a href="mailto:lopd@migestionline.com">lopd@migestionline.com</a>
+     <p>También puede ejercitar estos derechos en los términos que la normativa aplicable establece y que pueden consultar en la propia Agencia Española de Protección de Datos (www.agpd.es)</p>
+     <p>Asimismo, le comunicamos que, en virtud de lo establecido en la Ley 34/2002, de 11 de julio, de Servicios de la Sociedad de la Información y de Comercio Electrónico, SABER NUEVAS TECNOLOGÍAS, S.L.  informa que podrá utilizar las direcciones de correo electrónico facilitadas por usted, para mantenerle informado de sus novedades comerciales y sus distintas promociones respecto e sus productos o servicios, así como de las empresas relacionadas directamente con SABER NUEVAS TECNOLOGÍAS, S.L.  Usted da su consentimiento expreso para que  SABER NUEVAS TECNOLOGÍAS, S.L.  pueda utilizar su dirección de correo electrónico con este fin concreto.</p>
+     <p>En el supuesto que SABER NUEVAS TECNOLOGÍAS, S.L. , tuviera acceso a datos de carácter personal responsabilidad del Cliente, será considerado encargado del tratamiento de dicha información, comprometiéndose a cumplir las obligaciones que le corresponda por Ley, en especial, las establecidas en el artículo 12 de la vigente Ley Orgánica de Protección de Datos de Carácter Personal. SABER NUEVAS TECNOLOGÍAS, S.L.  tratará los datos a los que tiene acceso conforme a las instrucciones del Cliente, no aplicándolos o utilizándolos con fines distintos a los establecidos en el presente Contrato.</p>
+     <p>SABER NUEVAS TECNOLOGÍAS, S.L.  se compromete a adoptar las medidas de seguridad que establece la normativa de Protección de Datos, acorde con el Documento de seguridad.</p>
+     <p>Una vez finalizado el presente Contrato, SABER NUEVAS TECNOLOGÍAS, S.L.  previa solicitud del Cliente, destruirá o devolverá al Cliente toda la información sobre datos personales que haya recopilado.</p>
+ </section>
+ </div>
+ <div class="modal-footer">
+  <button class="btn closeMod">Cerrar</button>
+ </div>
+</div>
+{# ---------------- FIN MODAL ---------------- #}
+
+{# ------------------ MODAL ------------------ #}
+<div id="mod_cc" class="modal hide fade">
+ <div class="modal-header">
+  <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+  <h1 style="margin: 10px 0">Condiciones Generales de Contratación</h1>
+ </div>
+ <div class="modal-body modal_legal">
+  <section>
+   <p>De una parte la compañía Mercantil SABER NUEVAS TECNOLOGÍAS S.L. como explotador del dominio www.migestionline.com (En adelante MIGESTION ONLINE), con N.I.F.: B-99183576 inscrita en el Registro Mercantil de Zaragoza en el tomo 3579, Folio 95, Hoja nº Z-45384, Inscripción 1ª, 06/11/2007. N.I.F. B- 99183576
+    Y de otra EL CLIENTE, ambas partes, reconociéndose mutuamente capacidad legal para obligarse, manifiestan que están interesadas en concertar un contrato de prestación de servicios de acuerdo a las siguientes CONDICIONES PARTICULARES:
+   </p>
+  </section>
+
+  <section>
+   <h2>1. Objeto de la contratación</h2>
+   <p>Las Condiciones de Contratación tienen por objeto regular los términos contractuales para la prestación de los Servicios ofrecidos por parte de MIGESTION ONLINE y contratados por parte del Cliente previo pago de los mismos de acuerdo a la tarifa de precios correspondiente de cada uno de ellos y que es aceptada por el Cliente.</p>
+   <p>Dicha prestación de servicios se llevará a cabo mediante los medios técnicos, tecnológicos y humanos disponibles en cada momento por MIGESTION ONLINE y que son retribuidos por el Cliente con el pago del precio de cada uno de ellos vigente en cada momento.</p>
+  </section>
+
+  <section>
+   <h2>2. Ámbito</h2>
+   <p>MIGESTION ONLINE pone a disposición de sus Clientes el acceso a una serie de productos informáticos definidos cada uno de ellos por sus particulares características y que se encuentran publicadas en el sitio web de Internet www.migestionline.com conocidas y suficientes para el Cliente. El catálogo de productos recoge aplicaciones de gestión y de servicio sobre una materia concreta para uso exclusivo individual e intransferible del contratante de acuerdo con la licencia de uso adquirida. Este catálogo de productos podrá ser ampliado, reducido y modificado en cualquier momento por parte de MIGESTION ONLINE a su sola discreción sin que ello altere en modo alguno el compromiso adquirido entre las partes por el uso de las licencias en vigor.</p>
+   <p>Todos los Productos y Servicios ofertados por MIGESTION ONLINE se regirán por las Condiciones de Contratación aquí recogidas y por las Condiciones Particulares que en su caso se apliquen a cada uno de ellos. </p>
+  </section>
+
+  <section>
+   <h2>3. Contratación</h2>
+   <p>MIGESTION ONLINE se reserva el derecho de aceptar o rechazar cualquier nueva Contratación o renovación del servicio a un cliente actual o solicitante atendiendo al criterio individual y exclusivo de MIGESTION ONLINE.</p>
+   <p>El periodo inicial de contratación de Servicios es de UN AÑO natural desde el alta efectiva del mismo. </p>
+   <p>Además de ello podrá suspender, limitar o rescindir totalmente el acceso al producto o servicio contratado de uno o varios clientes cuando se den determinadas circunstancias:</p>
+   <ol class="modal-list-let">
+    <li>La falta de pago.</li>
+    <li>El acceso ilícito.</li>
+    <li>El uso por distinto del contratante.</li>
+    <li>El mal uso.</li>
+    <li>El exceso de lo contratado.</li>
+   </ol>
+  </section>
+
+  <section>
+   <h2>4. Obligaciones de MIGESTION ONLINE</h2>
+   <h3>4.1 Obligaciones</h3>
+   <p>MIGESTION ONLINE se compromete:</p>
+   <ol class="modal-list-num">
+    <li>A prestar los Servicios contratados de acuerdo con los términos establecidos en las Condiciones de Contratación de cada uno de ellos.</li>
+    <li>A realizar el máximo esfuerzo para garantizar la prestación de los referidos Servicios de forma ininterrumpida las veinticuatro horas al día durante el plazo de vigencia de la contratación efectuada por el Cliente.</li>
+   </ol>
+   <h4>4.1.1 Limitaciones de responsabilidad.</h4>
+   <p>MIGESTION ONLINE no será responsable en ningún caso de la interrupción o suspensión temporal o definitiva de un producto o servicio cuando esta interrupción o suspensión sea por circunstancias ajenas a su responsabilidad o se encuentren fuera de su control, especialmente (aunque no limitada a ellas) las que sean causadas por acciones u omisiones de terceros proveedores, operadores, titulares de acceso a redes o Internet, entre otros, cuya actuación o mal funcionamiento sea consecuencia directa o indirecta de tales deficiencias parciales o totales de los servicios.</p>
+   <p>Asimismo MIGESTION ONLINE no será responsable del mal funcionamiento parcial o total de sus compromisos cuando estos sean causados por casos fortuitos, inesperados, insalvables o de fuerza mayor.</p>
+   <h3>4.2. Derechos:</h3>
+   <p>MIGESTION ONLINE tiene derecho:</p>
+   <ol class="modal-list-num">
+    <li>A cobrar al Cliente el precio por la prestación de los Servicios en las cantidades y forma de pago establecidas;</li>
+    <li>A introducir modificaciones tecnológicas en los Servicios prestados, siempre que éstas no afecten negativamente al producto o servicio contratado por el Cliente. Estas modificaciones no incrementarán el precio del servicio durante la vigencia del servicio contratado.</li>
+    <li>A reclamar al Cliente datos fehacientes que aseguren y demuestren el buen uso del servicio contratado.</li>
+    <li>A interrumpir el servicio para acometer todas aquellas tareas que MIGESTION ONLINE entienda necesarias y/o convenientes para la mejora de los servicios o la subsanación de incidencias observadas en la prestación del mismo, así como para realizar operaciones de mantenimiento del Servicio. </li>
+    <li>A modificar los Servicios existentes con el fin de adecuarlos a la evolución técnica del mercado cuando ello lo estime de interés general de los clientes y tenga la capacidad técnica de desarrollo y a las modificaciones, correcciones o nuevas versiones de sus productos o servicios.</li>
+   </ol>
+  </section>
+
+  <section>
+   <h2>5. Derechos y Obligaciones del Cliente</h2>
+   <h3>5.1 Derechos</h3>
+   <p>El Cliente tendrá derecho a utilizar el Servicio contratado en los términos y condiciones pactados en las Condiciones de Contratación durante el plazo de vigencia de la Licencia de Uso y de acuerdo a sus características técnicas.</p>
+   <h3>5.2 Obligaciones</h3>
+   <p>El Cliente estará obligado a:</p>
+   <ol class="modal-list-let">
+    <li>Cumplir con las obligaciones de pago en los términos, plazos y condiciones acordados.</li>
+    <li>Colaborar de forma activa con MIGESTION ONLINE para hacer posible la prestación de los Servicios contratados, especialmente, aunque no limitado a ello, a cumplir con los requisitos técnicos de su instalación informática de acuerdo con las prescripciones técnicas fijadas por MIGESTION ONLINE</li>
+    <li>A no utilizar los Servicios para la realización de actividades contrarias a las leyes, a la moral, al orden público ni a utilizar los Servicios con fines o efectos ilícitos, prohibidos, lesivos de derechos e intereses de terceros. MIGESTION ONLINE declinará cualquier responsabilidad que pudieran derivarse de estos actos y usos.</li>
+    <li>Poner los medios necesarios para proteger el código fuente de la aplicación a que pudiera tener acceso parcial o totalmente tanto el titular como otras personas que tuvieran acceso al mismo. Asimismo pondrá los medios necesarios para que ningún usuario bajo su responsabilidad haga uso de un número mayor de licencias que las contratadas ni exceda los límites técnicos de la misma.</li>
+   </ol>
+  </section>
+
+  <section>
+   <h2>6. Condiciones económicas</h2>
+   <h3>6.1 Pago del Servicio</h3>
+   <p>Como contraprestación por los Servicios prestados, el Cliente abonará a MIGESTION ONLINE la cantidad total resultante de los precios en vigor de el/los producto/s contratados que son aceptados en el momento de la contratación de esos productos o servicios. A la citada cantidad se aplicará el IVA y cualquier otro impuesto en vigor.</p>
+   <p>Caso de tratarse de un producto o servicio de renovación temporal, ésta se producirá de forma automática a la expiración de la vigencia del servicio en cada momento. Su precio podrá verse incrementado con el IPC publicado en el mes que se produzca la renovación siempre que esta sea anual o coincida con la renovación en plazos inferiores cuando cumplan un año ese la contratación inicial o su aniversario. También podrán experimentar incrementos de precio los productos o servicios de acuerdo con la política económica y comercial de MIGESTION ONLINE. En este último caso, el incremento deberá ser admitido por el Cliente cuando se produzca la renovación del servicio.</p>
+   <p>En el supuesto de que el Cliente no desee renovar el Servicio deberá comunicarlo por escrito a través de un medio fehaciente que garantice la recepción de la comunicación a MI GESTION ONLINE y siempre en un plazo máximo de 15 días antes de la expiración de vigencia del mismo.</p>
+
+   <h3>6.2 Forma, plazo y lugar de pago</h3>
+   <p> 6.2 Forma, plazo y lugar de pago
+    El pago de los importes resultantes de la contratación de el/los servicio/s o producto/s contratado/s se realizará a través del sistema descrito en el apartado “CONTRATAR” de la web www.migestionline.com utilizado al hacer efectivo el pedido por parte del Cliente. Este sistema puede ser modificado en cualquier momento por parte de MI GESTION ONLINE produciendo los mismos efectos en todos los casos y/o complementado con la ratificación del pedido mediante la firma personal del contrato en papel que pueda ser enviado al cliente por correo postal. En su caso, este deberá ser remitido a MI GESTION ONLINE una vez firmado por el cliente en el plazo de 15 días naturales.
+   </p>
+   <p>El alta efectiva del Servicio se completará por parte de MI GESTION ONLINE cuando haya sido totalmente satisfecho por el Cliente.</p>
+   <p>En el caso de pagos recurrentes temporalmente (ejemplo, mensualmente) estos pagos serán efectivos en todos y cada uno de los casos, no sirviendo el último pago como garantía de pago de lo anteriores que estuvieran pendientes. La falta de pago o devolución de un recibo o efecto bancario en su caso, será suficiente para facultar a MI GESTION ONLINE para suspender temporal o definitivamente el Servicio al Cliente.</p>
+   <p>En la opción de pago mediante domiciliación bancaria, la cuenta aportada por el Cliente será el destino de los recibos emitidos por MI GESTION ONLINE entendiéndose la misma como domicilio de pago. Los datos deberán ser correctos, actualizados y el Cliente se asegurará de disponer de los fondos suficientes para atender los recibos emitidos por MI GESTION ONLINE.</p>
+   <p>Cuando se produzca una modificación en los datos de cuenta bancaria, esta deberá ser comunicada a  MI GESTION ONLINE  en un plazo no inferior a quince (15) días anteriores a la emisión del próximo recibo con el fin de que no se produzcan incidencias de cobro.</p>
+
+   <h3>6.3 Reactivación de servicios</h3>
+   <p>En caso de devolución, demora o impago de los recibos, MIGESTION ONLINE  podrá suspender total o parcialmente y temporal o definitivamente los productos o Servicios sin necesidad de aviso previo.  MIGESTION ONLINE  se reserva el derecho de reactivarlos una vez cumplido el pago de la deuda producida. Asimismo la reactivación del servicio devengará un coste de 30 € + iva que podrá ser facturada al Cliente con carácter previo al restablecimiento de los servicios.</p>
+   <p>A estos costes extraordinarios se añadirán todos los devengados, en su caso,  por los gastos de devolución, comisiones y otros repercutidos por la entidad bancaria y que deberán ser satisfechos a MIGESTION ONLINE  con carácter previo al restablecimiento de los servicios.</p>
+
+   <h3>6.4 Gastos Reembolsables</h3>
+   <p>El Cliente deberá asimismo abonar a MI GESTION ONLINE  los gastos reembolsables, entendiendo por estos, las cantidades desembolsadas por MI GESTION ONLINE  como consecuencia de aquellos consumos justificados realizados por cuenta del Cliente que excedieran los contratados.</p>
+
+    <h3>6.5 Servicio Técnico</h3>
+    <p>En el supuesto de necesidad por parte del Cliente de la asistencia técnica de personal asignado por MI GESTION ONLINE esta será facturada al Cliente y se incluirán los gastos de desplazamiento e intervención técnica de la/s persona/s intervinientes. Serán también facturados y presentados al cobro todos aquellos gastos o costes en que se haya incurrido bien propios o de terceros.</p>
+    <p>Las tarifas aplicables aquí publicadas estarán en vigor desde el día de contratación efectiva del Servicio hasta la finalización de la vigencia del mismo. Su renovación automática estará sujeta a la modificación del precio teniendo en cuenta la actualización e precios prevista en el punto 6.1 de estas Condiciones Generales</p>
+
+  </section>
+
+  <section>
+    <h2>7. Baja del Servicio y  terminación.</h2>
+    <p>Transcurrido el plazo inicial de un año, el Producto o Servicio se entenderá automática y tácitamente prorrogado por períodos sucesivos iguales al periodo de duración inicial contratado. En el supuesto de que cualquiera de las partes decida no continuar con la prórroga del contrato, deberá comunicar a la otra parte su decisión con al menos  un (1) mes de antelación al vencimiento del plazo inicialmente pactado o, en su caso, con el mismo periodo de preaviso antes del vencimiento de cualquiera de sus prórrogas.</p>
+    <h3>Terminación</h3>
+    <p>Las presentes Condiciones de Contratación terminarán por aquellas causas admitidas y previstas tanto en el Código Civil como en el de Comercio y en concreto, por las siguientes:</p>
+    <ol class="modal-list-let">
+        <li>Por la finalización del plazo de vigencia o de cualesquiera de sus prórrogas.</li>
+        <li>Por mutuo acuerdo entre las partes manifestado expresamente por escrito.</li>
+        <li>Por incumplimiento por parte del beneficiario de los pactos y condiciones que se especifican en este contrato.</li>
+        <li>Por la resolución anticipada de las Condiciones de Contratación de conformidad con los términos y condiciones que se desarrollan en la siguiente cláusula. En cualquier caso, la terminación de la relación contractual no exonerará a las partes del cumplimiento de las obligaciones pendientes.</li>
+    </ol>
+  </section>
+
+  <section>
+   <h2>8. Modificación de Condiciones Generales</h2>
+   <p>MI GESTION ONLINE se reserva la facultad de modificar, ampliar o eliminar las actuales Condiciones de Contratación según su criterio o aconsejados por la promulgación de normas que afecten a las condiciones del Servicio o a su prestación.</p>
+   <p>Cuando las modificaciones no sean de obligado cumplimiento por normas que lo exijan, las Condiciones Generales que afectaran al Cliente seguirán siendo válidas durante la vigencia inicial del Servicio y serán las publicadas en el momento de contratación no siendo de aplicación las modificaciones generadas posteriormente. Si lo serán cuando se produzca la renovación del Servicio tras el primer plazo de vigencia contratado.</p>
+  </section>
+
+  <section>
+   <h2>9. Calidad del Servicio. Responsabilidad y Fuerza Mayor</h2>
+   <p>Calidad del Servicio. MI GESTION ONLINE se compromete a realizar el mayor esfuerzo en mantener un nivel aceptable de calidad de servicio en el cumplimiento de sus compromisos. No obstante MI GESTION ONLINE no puede garantizar, explícita o implícitamente, la continuidad ni evolución de los Servicios así como su adecuación a la evolución de la técnica.</p>
+   <p>Responsabilidad. MI GESTION ONLINE no será responsable de los problemas ni incidencias ocasionadas en el Servicio derivados de la acción u omisión temporal o definitiva de la prestación de servicios de terceros que sean de obligada concurrencia con la prestación del Servicio de MI GESTION ONLINE como el óptimo estado de los sistemas informáticos del Cliente, acceso a internet en las condiciones necesarias, acceso a la energía eléctrica u otros servicios o suministros.</p>
+   <p>Fuerza Mayor. De igual forma MI GESTION ONLINE no será responsable del Servicio por cualquier causa ajena a su control o que no hayan sido previstas y cuando estas lo hayan sido, MI GESTION ONLINE haya realizado todos los esfuerzos razonables para evitarlas o subsanarlas</p>
+   <p>Ninguna de las partes será responsable del retraso en la ejecución de sus obligaciones ni de la no ejecución de las mismas (exceptuando el incumplimiento de pago a la otra parte) si este incumplimiento estuviese motivado por casos fortuitos o razones de fuerza mayor, de conformidad con lo establecido en el artículo 1.105 del Código Civil. Esta circunstancia se comunicará a la otra parte en el plazo más breve posible. Si la causa de fuerza mayor se prolongara más de dos (2) meses, cualquiera de las partes podrá resolver el presente contrato.</p>
+  </section>
+
+  <section>
+   <h2>10. Propiedad Intelectual</h2>
+   <p>El presente contrato constituye una Licencia de Uso del software utilizado por el Cliente el cual pone a su disposición MI GESTION ONLINE. Esta Licencia de uso comienza con el alta efectiva de el/los servicio/s y termina al finalizar el periodo de vigencia y/o sus renovaciones. En ningún caso la Licencia de Uso o el uso del producto o Servicio supone una cesión de derechos al Cliente sobre los mismos.</p>
+   <p>El Cliente reconoce expresamente la titularidad de la los derechos de propiedad intelectual, industrial, know-how, marcas comerciales, logotipos así como cualquier otro elemento, creación o signo distintivo de titularidad o derecho adquirido de  MI GESTION ONLINE.</p>
+  </section>
+
+  <section>
+   <h2>11. Confidencialidad</h2>
+   <p>Las partes asumen el más estricto deber de confidencialidad sobre el contenido de las conversaciones, negociaciones y actuaciones relativas al Servicio mantenidas entre ellas o con terceros, comprometiéndose a no divulgar ni total ni parcialmente su contenido a terceros sin la autorización previa y escrita de la otra parte.</p>
+  </section>
+
+  <section>
+   <h2>12. Datos de Carácter Personal</h2>
+   <p>En cumplimiento de la Ley Orgánica 15/1999, de 13 de diciembre, sobre Protección de Datos de Carácter Personal (LOPD), SABER NUEVAS TECNOLOGÍAS, S.L.  informa a los usuarios de que: los Datos de Carácter personal que recoge por diferentes medios tales como: encuestas al interesado, formularios de petición de información y fuentes accesibles al público u otros, son objeto de tratamiento automatizado y se incorporan en los ficheros correspondientes, debidamente registrados en la Agencia Española de Protección de Datos.</p>
+   <p>La recogida y tratamiento automatizado de los Datos de Carácter Personal tiene como finalidad el mantenimiento de la relación contractual que en su caso se establezca con SABER NUEVAS TECNOLOGÍAS, S.L., así como el desempeño de las tareas de información, formación, comercialización (tarea esta última siempre identificada como tal) y otras actividades propias de la empresa.</p>
+   <p>Igualmente le comunicamos que dichos datos podrán ser cedidos a empresas relacionadas o vinculadas con SABER NUEVAS TECNOLOGÍAS, S.L. cuya actividad sea la producción, distribución o comercialización de contenidos, productos o servicios relacionados con el sector informático o de la asesoría y consultoría con el propósito de, mantener al usuario de informado de novedades,  promociones, concursos, lanzamiento de nuevos productos o servicios o cualquier acción comercial relacionados con sus productos o servicios.</p>
+   <p>El usuario podrá, en todo momento, ejercitar los derechos reconocidos en la LOPD, de Acceso, Rectificación, Cancelación y Oposición. El ejercicio de estos derechos puede realizarlo el propio usuario mediante comunicación escrita a la siguiente Dirección:</p>
+   <p>SABER NUEVAS TECNOLOGÍAS, S.L.  Plaza Azteca, local 50012 Zaragoza.</p>
+   <p>O enviando un correo electrónico a la dirección: <a href="mailto:lopd@migestionline.com">lopd@migestionline.com</a></p>
+   <p>También puede ejercitar estos derechos en los términos que la normativa aplicable establece y que pueden consultar en la propia Agencia Española de Protección de Datos (www.agpd.es)</p>
+   <p>Asimismo, le comunicamos que, en virtud de lo establecido en la Ley 34/2002, de 11 de julio, de Servicios de la Sociedad de la Información y de Comercio Electrónico, SABER NUEVAS TECNOLOGÍAS, S.L.  informa que podrá utilizar las direcciones de correo electrónico facilitadas por usted, para mantenerle informado de sus novedades comerciales y sus distintas promociones respecto e sus productos o servicios, así como de las empresas relacionadas directamente con SABER NUEVAS TECNOLOGÍAS, S.L.  Usted da su consentimiento expreso para que  SABER NUEVAS TECNOLOGÍAS, S.L.  pueda utilizar su dirección de correo electrónico con este fin concreto.</p>
+   <p>En el supuesto que SABER NUEVAS TECNOLOGÍAS, S.L. , tuviera acceso a datos de carácter personal responsabilidad del Cliente, será considerado encargado del tratamiento de dicha información, comprometiéndose a cumplir las obligaciones que le corresponda por Ley, en especial, las establecidas en el artículo 12 de la vigente Ley Orgánica de Protección de Datos de Carácter Personal. SABER NUEVAS TECNOLOGÍAS, S.L.  tratará los datos a los que tiene acceso conforme a las instrucciones del Cliente, no aplicándolos o utilizándolos con fines distintos a los establecidos en el presente Contrato.</p>
+   <p>SABER NUEVAS TECNOLOGÍAS, S.L.  se compromete a adoptar las medidas de seguridad que establece la normativa de Protección de Datos, acorde con el Documento de seguridad.</p>
+   <p>Una vez finalizado el presente Contrato, SABER NUEVAS TECNOLOGÍAS, S.L.  previa solicitud del Cliente, destruirá o devolverá al Cliente toda la información sobre datos personales que haya recopilado.</p>
+  </section>
+
+  <section>
+   <h2>13. Cesión</h2>
+   <p>Mediante la aceptación del Servicio y consecuentemente la aceptación de las presentes Condiciones Generales, el Cliente disfruta de la Licencia de Uso del Producto o Servicio. Esta licencia de uso es personal (bien persona física o jurídica), limitada al titular de la Licencia e intransferible. El titular no podrá ceder, transferir, gravar o subrogar en favor de terceros, parcial ni totalmente, la presente relación contractual así como los derechos y obligaciones derivados de la misma sin el previo consentimiento por escrito de MI GESTION ONLINE. </p>
+  </section>
+
+  <section>
+   <h2>14. Suspensión del Servicio</h2>
+   <p>Caso de que MI GESTION ONLINE entendiera que existe riesgo de daños tanto en su propia estructura técnica e informática como en la de terceros por actuaciones de cualquier equipo informático perteneciente a un Cliente, MI GESTION ONLINE se reserva el derecho de suspender su acceso a la red o al Servicio de forma temporal o definitiva en tanto el riesgo no haya cesado.</p>
+  </section>
+
+  <section>
+   <h2>15. Legislación Aplicable</h2>
+   <p>Los pactos y cláusulas recogidos en este Contrato se interpretarán y regirán por la Ley española.</p>
+  </section>
+
+  <section>
+   <h2>16. Jurisdicción Competente</h2>
+   <p>En el supuesto de diferencias de interpretación del presente Contrato, SABER NUEVAS TECNOLOGÍAS hará los esfuerzos necesarios para una resolución del conflicto de forma amistosa y extrajudicial. En el supuesto de no alcanzar tal acuerdo las partes, con renuncia expresa al fuero que pudiera corresponderles, se someten para la resolución de conflictos a los Juzgados de Zaragoza.</p>
+  </section>
+
+  <section>
+   <h2>17. Condiciones Particulares de MI GESTIÓN ONLINE TOOL.</h2>
+      <h3>17.1 Cobertura de la  Licencia de Uso de MI Gestión Online Tool </h3>
+      <ul class="modal-list-num">
+          <li>Acceso a la aplicación en las condiciones pactadas con garantía de funcionamiento de la misma con las excepciones citadas en el presente condicionado.</li>
+          <li>Seguridad en los datos alojados atendiendo a las garantías y excepciones recogidas en el presente condicionado y limitado hasta el último back up producido por www.migestionline.com.</li>
+          <li>Servicio de atención a consultas realizadas telefónicamente en el número publicado y en el horario establecido, o bien por los formularios de contacto ofrecidos en la web o a través del correo electrónico <a href="mailto:contacto@migestionline.com">contacto@migestionline.com</a></li>
+          <li>Backup periódico de los datos, consistente en un (1) backup diario por parte del Servidor de alojamiento contrato por MI GESTIÓN ONLINE.</li>
+          <li>Recuperación de los datos del cliente en cualquier momento a petición escrita del cliente y en el formato estándar de www.migestionline.com En este proceso se recuperará la información existente en el momento de la solicitud y que coincidan con el último back up realizado.</li>
+          <li>Una vez transcurrido el periodo inicial de un (1) año de constante servicio contratado y habiendo estado al corriente de los pagos resultantes, el Cliente podrá solicitar por escrito la remisión por parte de MI GESTIÓN ONLINE de los datos y documentación alojados en los servidores de  MI GESTIÓN ONLINE.</li>
+          <li>Reembolso de servicio en caso de incidencias. Caso de suspensión temporal del servicio de la Aplicación por causas directamente reconocidas por MI GESTIÓN ONLINE que supongan la inoperatividad de la Plataforma, el Cliente podrá solicitar una compensación en términos de periodos de tiempo extraordinarios y sin coste, consistentes en el mismo plazo de tiempo por el que se extendió la incidencia más un 20% del tiempo como compensación de la misma.</li>
+      </ul>
+      <h3>17.2 Limitación de responsabilidad de  MI GESTIÓN ONLINE.</h3>
+      <p>MI GESTIÓN ONLINE no estará  obligada al cumplimiento de sus compromisos técnicos de acceso al servicio contratado cuando existan anomalías en el cualquier elemento del equipamiento informático del Cliente, acceso a la energía eléctrica y a Internet de forma regular y satisfactoria, así como a la falta de aplicación correcta de la aplicación informática contratada.</p>
+   </section>
+
+    <section>
+        <h2>18. Precios. </h2>
+        <p>El producto MI GESTIÓN ONLINE TOOL se presenta en tres posibilidades de contratación VERSIÓN STÁNDAR , VERSIÓN ADVANCE y VERSIÓN PLUS.</p>
+        <h3>Características comunes:</h3>
+        <ul class="modal-list-num">
+            <li>Repositorio con acceso Empresa y Cliente.</li>
+            <li>Personalización de servicios ofrecidos.</li>
+            <li>Multisubida de ficheros.</li>
+            <li>Roles de usuario. Administrador/a, empleado/a, cliente/a</li>
+            <li>Gestión de permisos de usuario.</li>
+            <li>Acceso seguro SSL.</li>
+            <li>Backup diario.</li>
+            <li>Compatible con Windows, Mac y Linux.</li>
+            <li>Compatible con móviles y tablets</li>
+            <li>Gestión de ficheros subidos.</li>
+            <li>Mensajería entre usuarios.</li>
+            <li>Filtros de contenido.</li>
+        </ul>
+        <h3>Características particulares</h3>
+        <table class="table table-bordered table-condensed">
+            <thead>
+            <tr>
+                <td></td>
+                <td>VERSION STANDAR</td>
+                <td>VERSION ADVANCE</td>
+                <td>VERSION PLUS</td>
+            </tr>
+            </thead>
+            <tbody>
+            <tr>
+                <td>Usuarios</td>
+                <td>100</td>
+                <td>300</td>
+                <td>500</td>
+            </tr>
+            <tr>
+                <td>Capacidad de almacenamiento</td>
+                <td>100 Gb</td>
+                <td>300 Gb</td>
+                <td>500 Gb</td>
+            </tr>
+            <tr>
+                <td>Número de repositorios	</td>
+                <td>1</td>
+                <td>5</td>
+                <td>10</td>
+            </tr>
+            <tr>
+                <td>Precio mensual antes de impuestos</td>
+                <td>24.50€</td>
+                <td>39.50€</td>
+                <td>49.50€</td>
+            </tr>
+            <tr>
+                <td colspan="4">Precios con pago mensual. Para formas de pago en plazos superiores, se establecen los siguientes descuentos:</td>
+            </tr>
+            <tr>
+                <td colspan="2">Semestral: 10%</td>
+                <td colspan="2">Anual: 15%</td>
+            </tr>
+            </tbody>
+        </table>
+
+        <h3>Forma de pago</h3>
+        <p>Emisión de recibo bancario por parte de MI GESTIÓN ONLINE con destino la cuenta del Cliente informada por éste. El cargo se emitirá dentro de los cinco (5) primeros días hábiles del mes con carácter anticipado respecto del plazo de tiempo contratado.</p>
+        <p>El cliente podrá contratar la versión superior desde la Estándar en cualquier momento siendo operativa la nueva versión desde el primer plazo de facturación inmediatamente en vigor (típicamente un mes). Será facturado el precio del siguiente plazo desde el primer periodo completo (ej. Un mes)</p>
+    </section>
+ </div>
+
+ <div class="modal-footer">
+  <button class="btn closeMod">Cerrar</button>
+ </div>
+</div>
+{# ---------------- FIN MODAL ---------------- #}
+
+{# ------------------ MODAL ------------------ #}
+<div id="mod_av" class="modal hide fade">
+    <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+        <h1 style="margin: 10px 0">AVISO LEGAL</h1>
+        <h3>SABER NUEVAS TECNOLOGÍAS, S.L.</h3>
+    </div>
+
+    <div class="modal-body">
+        <section>
+            <h2>Información legal correspondiente al sitio web.</h2>
+            <p>Nombre o denominación social: SABER NUEVAS TECNOLOGÍAS, S.L.</p>
+            <p>C.I.F: B99183576</p>
+            <p>Domicilio fiscal: Plaza Azteca, s/n local 50012 Zaragoza (España)</p>
+            <p>Teléfono 976 436030 y 679182420</p>
+            <p>Dirección de correo electrónico: <a href="mailto:contacto@migestionline.com">contacto@migestionline.com</a></p>
+            <p>Inscrita en el  Registro Mercantil de Zaragoza  en el tomo 3579, Folio 95,  Hoja nº Z-45384, Inscripción 1ª, 06/11/2007.</p>
+        </section>
+    </div>
+    <div class="modal-footer">
+        <button class="btn closeMod">Cerrar</button>
+    </div>
+</div>
+{# ---------------- FIN MODAL ---------------- #}
+
+</body>
+
+<script>
+
+    $(document).ready(function(){
+
+        if($.cookie('accepted_cookies') == null)
+        {
+            $('.topamsg').fadeIn('slow');
+        }
+
+        $('#closemsg').click(function(){
+            $.cookie("accepted_cookies", "accepted",{ expires: 365, path: '/' } );
+        })
+    });
+
+    (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+        (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+            m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+    })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+    ga('create', 'UA-44569448-1', 'migestionline.com');
+    ga('send', 'pageview');
+
+</script>
+</html>

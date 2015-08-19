@@ -1,0 +1,159 @@
+{% extends 'MGAdminBundle:Bases:base.html.twig' %}
+
+{% block content %}
+<div class="container">
+    <div class="span12">
+        <div class="span8">
+            <h2>
+            {% if(rolId == 2) %}
+                Gestores de
+            {% elseif (rolId == 3) %}
+                Trabajadores de
+            {% elseif (rolId == 4) %}
+                Clientes de
+            {% endif %}
+
+                {{ nombre_emp }}</h2>
+        </div>
+
+     <div class="span11">
+
+         {% if empresas|length > 1 %}
+             <div class="span4">
+                 <form>
+                     <fieldset>
+                         <label for="sel_empresa">Mostrar usuarios por empresa</label>
+                         <select id="sel_empresa">
+                             <option value="none">- Seleccione una empresa -</option>
+                             {% if empresas|length < 1 %}
+                                 <option value="none">No existen empresas asociadas.</option>
+                             {% else %}
+                                 {% for empresa in empresas %}
+                                     <option value="{{ empresa.id }}">{{ empresa.nombre }}</option>
+                                 {% endfor %}
+                             {% endif %}
+                         </select>
+
+                     </fieldset>
+                 </form>
+             </div>
+         {% endif %}
+
+         <div class="span4">
+             <form>
+                 <fieldset>
+                     <label for="sel_role">Mostrar usuarios por tipo</label>
+                     <select id="sel_role" data-emp="{{ empId }}">
+                         <option value="none" data-emp="none">- Seleccione un tipo de usuario -</option>
+                         {% if is_granted('ROLE_ADMIN') %}<option value="2">Gestores</option>{% endif %}
+                         <option value="3">Trabajadores</option>
+                         <option value="4">Clientes</option>
+                     </select>
+                 </fieldset>
+             </form>
+         </div>
+
+     </div>
+
+
+        <table class="table table-bordered table-condensed table-striped table-hover">
+            <thead>
+            <tr>
+                <td>Usuario</td>
+                <td>Email</td>
+                <td>Nombre</td>
+                <td>Apellidos</td>
+                <td>Telefono</td>
+                <td>Móvil</td>
+                <td colspan="3">Acciones</td>
+            </tr>
+            </thead>
+        {% for user in usuarios %}
+            {% if user.locked != 0 %}
+            <tr class="error">
+            {% else %}
+            <tr>
+            {% endif %}
+                <td>{{ user.username }}</td>
+                <td>{{ user.email }}</td>
+                <td>{{ user.name }}</td>
+                <td>{{ user.apellidos }}</td>
+                <td>{{ user.telefono }}</td>
+                <td>{{ user.telefonoMvl }}</td>
+                <td style="text-align: center"><a href="{{ path('mg_user_detail', {'userName': user.username, 'empId':empId}) }}" class="btn">Detalles</a></td>
+                {% if(user.locked != 1 and user.rolId > app.user.rolId) %}
+                    <td style="text-align: center"><a href="{{ path('mg_user_edit', {'userName':user.username, 'empId':empId}) }}" class="btn btn-info">Editar</a></td>
+                {% else %}
+                    <td style="text-align: center"><button class="btn btn-info" disabled>Editar</button></td>
+                {% endif %}
+
+                {% if (is_granted('ROLE_ADMIN') and user.rolId > app.user.rolId) %}
+                    {% if user.locked != 1  %}
+                        <td style="text-align: center"><button class="btn btn-danger delUserFilter" data-user="{{ user.username }}" style="padding: 4px 24px">Bloquear</button></td>
+                    {% else %}
+                        <td style="text-align: center"><button class="btn btn-sucess delUserFilter" data-user="{{ user.username }}">Desbloquear</button></td>
+                    {% endif %}
+                {% else %}
+                    {% if user.locked != 1 %}
+                        <td style="text-align: center"><button class="btn btn-danger delUserFilter" style="padding: 4px 24px" disabled>Bloquear</button></td>
+                    {% else %}
+                        <td style="text-align: center"><button class="btn btn-success delUserFilter" disabled>Desbloquear</button></td>
+                    {% endif %}
+                {% endif %}
+
+            </tr>
+            {% endfor %}
+        </table>
+
+        <div class="pagination">
+            <ul>
+                {% if first is defined and first == true %}
+                    <li class="active"><a href="{{ path('mg_user_by_empresa_rol', {'empresaID': empId, 'page': page-1, 'rolId':rolId }) }}"><span>&laquo;</span></a></li>
+                {% else %}
+                    <li class="disabled"><span>&laquo;</span></li>
+                {% endif %}
+
+                {% if pages is defined %}
+                    {% for i in 1..pages %}
+                        <li><a href="{{ path('mg_user_by_empresa_rol', {'empresaID': empId, 'page': i, 'rolId':rolId }) }}">{{ i }}</a></li>
+                    {% endfor %}
+                {% endif %}
+
+                {% if last is defined and last == true %}
+                    <li class="disabled"><span>&raquo;</span></li>
+                {% else %}
+                    <li class="active"><a href="{{ path('mg_user_by_empresa_rol', {'empresaID': empId, 'page': page+1,'rolId':rolId  }) }}"><span>&raquo;</span></a></li>
+                {% endif %}
+            </ul>
+        </div>
+        <div class="container">
+            <div class="span7">
+                <a href="{{ path('mg_user_create', {'empId': empId}) }}" class="btn btn-success btn-large">Nuevo Usuario</a>
+                <button id="showPop4" data-content="Un usuario puede ser un cliente o un empleado, diferenciado por rol." data-original-title="¿Que es un Usuario?" class="btn toolTip">?</button>
+            </div>
+        </div>
+
+    </div>
+</div>
+
+{# ------------------ MODAL ------------------  #}
+    <div id="delModal" class="modal hide fade">
+        <div class="modal-header">
+            <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+            <h3>¿Seguro que desea bloquear/desbloquear al usuario?</h3>
+        </div>
+        <div class="modal-body">
+            <p>Recuerde que un usuario bloqueado no podrá acceder a ninguna de las secciones de la aplicación.</p>
+        </div>
+        <div class="modal-footer">
+            <button class="btn closeMod">Cerrar</button>
+            <a class="btn btn-primary okDelFilter">Confirmar</a>
+        </div>
+    </div>
+{# ---------------- FIN MODAL ----------------  #}
+
+{% endblock %}
+
+{% block customjs %}
+    <script src="{{ asset('bundles/adminbundle/js/custom.js') }}"></script>
+{% endblock %}

@@ -1,0 +1,7 @@
+parameters:
+#    mg_user.example.class: MG\UserBundle\Example
+
+services:
+#    mg_user.example:
+#        class: %mg_user.example.class%
+#        arguments: [@service_id, "plain_value", %parameter%]

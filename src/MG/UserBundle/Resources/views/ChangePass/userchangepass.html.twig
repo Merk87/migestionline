@@ -1,0 +1,20 @@
+{% extends 'MGRepoBundle:Base:basenolat.html.twig' %}
+{% trans_default_domain 'FOSUserBundle' %}
+
+{% block content %}
+<div class="main">
+    <div class="container-fluid" style="margin-top: 50px">
+        <div class="span12">
+            <form action="{{ path('fos_user_change_password') }}" {{ form_enctype(form) }} method="POST" class="fos_user_change_password">
+                {{ form_errors(form) }}
+                {{ form_widget(form) }}
+                <div>
+                    <input type="submit" class="btn btn-success" value="{{ 'change_password.submit'|trans }}" />
+                    <a href="{{ path('mg_user_profile') }}" class="btn btn-danger">Volver</a>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+
+{% endblock %}

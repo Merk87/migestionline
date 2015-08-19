@@ -1,0 +1,122 @@
+{% extends 'MGAdminBundle:Bases:base.html.twig' %}
+
+{% block content %}
+
+    <div class="container">
+        <div class="span9 hero-unit" style="min-width: 320px">
+            <div class="row">
+                <div class="span7" style="padding-top: 10px">
+                    <h4>Detalles de usuario</h4>
+                    <table class="table table-bordered table-condensed table-striped">
+                        {% if userInfo.locked == 1 %}
+                            <tr class="error">
+                                <td colspan="2" style="font-weight: bold">Bloqueado</td>
+                            </tr>
+                        {% endif %}
+                        <tr>
+                            <td>Usuario</td>
+                            <td>{{ userInfo.username }}</td>
+                        </tr>
+
+                        <tr>
+                            <td>Email</td>
+                            <td>{{ userInfo.email }}</td>
+                        </tr>
+
+                        {% if userInfo.enabled == 1 %}
+                            <tr class="success">
+                                <td>Estado</td>
+                                <td class="success">Activo</td>
+                            </tr>
+                        {% else %}
+                            <tr class="warning">
+                                <td>Estado</td>
+                                <td class="error">Inactivo</td>
+                            </tr>
+                        {% endif %}
+                        <tr>
+                            <td>Última conexión</td>
+                            <td>{{ userInfo.lastLogin|date('d-m-Y H:i:s') }}</td>
+                        </tr>
+                        <tr>
+                            <td>Nombre</td>
+                            <td>{{ userInfo.name }}</td>
+                        </tr>
+                        <tr>
+                            <td>Apellidos</td>
+                            <td>{{ userInfo.apellidos }}</td>
+                        </tr>
+                        <tr>
+                            <td>NIF</td>
+                            <td>{{ userInfo.nif }}</td>
+                        </tr>
+                        <tr>
+                            <td>Fecha Nacimiento</td>
+                            <td>{{ userInfo.fechaNacimiento|date('d-m-Y') }}</td>
+                        </tr>
+                        <tr>
+                            <td>Telefono</td>
+                            <td>{{ userInfo.telefono }}</td>
+                        </tr>
+                        <tr>
+                            <td>Tfno. Móvil</td>
+                            <td>{{ userInfo.telefonoMvl }}</td>
+                        </tr>
+                        <tr>
+                            <td>Dirección</td>
+                            <td>{{ userInfo.direccion }}</td>
+                        </tr>
+                        <tr>
+                            <td>Ciudad</td>
+                            <td>{{ userInfo.ciudad }}</td>
+                        </tr>
+                        <tr>
+                            <td>Codigo Postal</td>
+                            <td>{{ userInfo.codigoPostal }}</td>
+                        </tr>
+                        <tr>
+                            <td>País</td>
+                            <td>{{ userInfo.pais }}</td>
+                        </tr>
+                        <tr>
+                            {% if empresas|length > 1 %}
+                                <td>Empresas</td>
+                                <td>
+                                   <table class="inner-table">
+                                    {% for empresa in empresas %}
+                                            <tr><td style="border-style: none">
+                                                {{ empresa.nombre }}
+                                            </td></tr>
+                                     {% endfor %}
+                                   </table>
+                                </td>
+                            {% elseif empresas|length == 1 %}
+                                <td>Empresa</td>
+                                <td>{{ empresas[0].nombre }}</td>
+                            {% endif %}
+                        </tr>
+                    </table>
+                </div>
+                <div class="span9">
+                    {% if(is_granted('ROLE_SUPER_ADMIN')) %}
+                    <a class="btn btn-large btn-info margined" href="{{ path('mg_user_edit', {'empId': 0, 'userName':userInfo.username}) }}">Editar</a>
+                    {% else %}
+                        <a class="btn btn-large btn-info margined" href="{{ path('mg_user_edit', {'empId': empSelected, 'userName':userInfo.username}) }}">Editar</a>
+                    {% endif %}
+                    {% if userInfo.locked  != 1%}
+                        <a class="btn btn-large btn-danger margined" href="{{ path('mg_user_block', {'userName': userInfo.username}) }}">Bloquear</a>
+                    {% else %}
+                        <a class="btn btn-large btn-danger margined" href="{{ path('mg_user_block', {'userName': userInfo.username}) }}">Desbloquear</a>
+                    {% endif %}
+                    {% if is_granted('ROLE_SUPER_ADMIN') %}
+                        <a class="btn btn-large margined" href="{{ path('mg_useradmin_homepage', {'page': 1 }) }}">Volver</a>
+                    {% else %}
+                        <a class="btn btn-large margined" href="{{ path('mg_user_by_empresa', {'empresaID': empSelected, 'page': 1 }) }}">Volver</a>
+                    {% endif %}
+                </div>
+            </div>
+        </div>
+
+    </div>
+
+{% endblock %}

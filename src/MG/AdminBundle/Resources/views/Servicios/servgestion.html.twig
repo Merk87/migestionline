@@ -1,0 +1,121 @@
+{% extends 'MGAdminBundle:Bases:base.html.twig' %}
+{% block content %}
+<div class="container">
+    <div class="span12">
+        <div class="span4">
+            <h2>Servicios</h2>
+        </div>
+        <div class="span3 pull-right">
+            <form>
+                <fieldset>
+                    <label for="sel_empresaServ">Mostrar servicios por empresa</label>
+                    <select id="sel_empresaServ">
+                        <option value="none">- Seleccione una empresa -</option>
+                        {% for empresa in empresas %}
+                            <option value="{{ empresa.id }}">{{ empresa.nombre }}</option>
+                        {% endfor %}
+                    </select>
+                </fieldset>
+            </form>
+        </div>
+
+        <table class="table table-bordered table-condensed table-striped table-hover">
+            <thead>
+            <tr>
+                <td>Nombre</td>
+                <td>Descripción</td>
+                <td>Tarifa</td>
+                <td colspan="3">Acciones</td>
+            </tr>
+            </thead>
+            {% for serv in servicios %}
+                {% set showTips = loop.index %}
+                {% if serv.enabled != 1 %}
+                    <tr class="error">
+                {% else %}
+                    <tr>
+                {% endif %}
+                <td>{{ serv.nombre }}</td>
+                <td>{{ serv.descripcion }}</td>
+                <td>{{ serv.precio }}€</td>
+                {% if serv.enabled == 0%}
+                    <td><button class="btn btn-primary" disabled>Asignar Usuarios</button></td>
+                    <td><button class="btn btn-success" disabled>Asignar Clientes</button></td>
+                {% else %}
+                    <td>
+                        <a href="{{ path('mg_serv_addusers', {'servId': serv.id, 'empId':0}) }}" class="btn btn-primary">Asignar Usuarios</a>
+                        {% if showTips == 1 %}
+                            <button data-content="Desde esta opción podrás gestionar los servicios activos para tus usuarios empleado/a. Un usuario empleado/a que no tenga un servicio asignado, no será capaz de acceder a las gestiones asociadas al servicio" data-original-title="Asignar Usuarios" class="btn toolTip ">?</button>
+                        {% endif %}
+                    </td>
+
+                    <td>
+                        <a href="{{ path('mg_serv_addclients', {'servId': serv.id, 'empId':0}) }}" class="btn btn-success">Asignar Clientes</a>
+                        {% if showTips == 1 %}
+                            <button data-content="Desde esta opción podrás gestionar la asginación de servicios contratados a los clientes." data-original-title="Asignar Usuarios" class="btn toolTip ">?</button>
+                        {% endif %}
+                    </td>
+                {% endif %}
+                <td><a href="{{ path('mg_serv_detail', {'servId': serv.id}) }}" class="btn">Detalles</a></td>
+                <td><a href="{{ path('mg_serv_update', {'servId': serv.id, 'empId':serv.empresaId}) }}" class="btn btn-info">Editar</a></td>
+                {% if serv.enabled == 1 %}
+                    <td><button class="btn btn-danger blockServ" data-serv="{{ serv.id}}" style="padding: 4px 24px">Bloquear</button></td>
+                {% else %}
+                    <td><button class="btn btn-danger blockServ" data-serv="{{ serv.id }}">Desbloquear</button></td>
+                {% endif %}
+                </tr>
+            {% endfor %}
+        </table>
+
+        <div class="pagination">
+            <ul>
+                {% if first is defined and first == true %}
+                    <li class="active"><a href="{{ path('mg_repoadmin_homepage', {'page': page-1 }) }}"><span>&laquo;</span></a></li>
+                {% else %}
+                    <li class="disabled"><span>&laquo;</span></li>
+                {% endif %}
+
+                {% if pages is defined %}
+                    {% for i in 1..pages %}
+                        <li><a href="{{ path('mg_servadmin_homepage', {'page': i }) }}">{{ i }}</a></li>
+                    {% endfor %}
+                {% endif %}
+
+                {% if last is defined and last == true %}
+                    <li class="disabled"><span>&raquo;</span></li>
+                {% else %}
+                    <li class="active"><a href="{{ path('mg_repoadmin_homepage', {'page': page+1 }) }}"><span>&raquo;</span></a></li>
+                {% endif %}
+            </ul>
+        </div>
+        <div class="container">
+            <div class="span7">
+                <a href="{{ path('mg_serv_create', {'empId':0}) }}" class="btn btn-success btn-large">Nuevo Servicio</a>
+                <button data-content="Los servicios serán las divisiones identificativas de los servicios que ofreces a través de Mi Gestión Online. Por ejemplo Servicios Fiscales, Laborales, etc." data-original-title="¿Que es un Servicio?" class="btn toolTip">?</button>
+            </div>
+        </div>
+
+    </div>
+</div>
+
+{# ------------------ MODAL ------------------  #}
+<div id="servModal" class="modal hide fade">
+    <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+        <h3>¿Seguro que desea bloquear/desbloquear el servicio?</h3>
+    </div>
+    <div class="modal-body">
+        <p>Recuerde que en un servicio bloqueado no se mostrará</p>
+    </div>
+    <div class="modal-footer">
+        <button class="btn closeMod">Cerrar</button>
+        <a class="btn btn-primary okServBlock">Confirmar</a>
+    </div>
+</div>
+{# ---------------- FIN MODAL ----------------  #}
+
+{% endblock %}
+
+{% block customjs %}
+    <script src="{{ asset('bundles/adminbundle/js/custom.js') }}"></script>
+{% endblock %}

@@ -1,0 +1,29 @@
+{% extends 'MGAdminBundle:Bases:base.html.twig' %}
+
+{% block content %}
+    <div class="container">
+        <div class="span12">
+            <div class="row">
+                <h3>Crear Repositorio</h3>
+                <form action="{{  path('mg_repo_create')}}" method="POST" class="update_form">
+                    <fieldset>
+                        {{ form_errors(newRepoForm) }}
+
+                        {{ form_label(newRepoForm.descripcion, 'Descripción') }}
+                        {{ form_widget(newRepoForm.descripcion) }}
+
+                        {{ form_label(newRepoForm.limiteArchivos, 'Número de archivos máximo') }}
+                        {{ form_widget(newRepoForm.limiteArchivos) }}
+
+                        {{ form_label(newRepoForm.enabled, 'Activado') }}
+                        {{ form_widget(newRepoForm.enabled) }}
+                        {{ form_rest(newRepoForm) }}
+
+                    </fieldset>
+                    <input type="submit" class="btn btn-success" value="Guardar">
+                    <a href="{{ path('mg_repoadmin_homepage', {'page': 1}) }}" class="btn btn-danger">Volver</a>
+                </form>
+            </div>
+        </div>
+    </div>
+{% endblock %}

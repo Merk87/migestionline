@@ -1,0 +1,27 @@
+{% extends 'MGAdminBundle:Bases:base.html.twig' %}
+
+{% block content %}
+
+    <div class="container" style="margin-top: 50px">
+        <div class="span10 hero-unit">
+
+            <form style="text-align: center">
+                <fieldset>
+                    <h3 for="sel_empresaRepo">Selecciona la empresa para mostrar los repositorios</h3>
+                        <select class="callToActionOpt" id="sel_empresaRepo">
+                            <option  value="none">- Seleccione una empresa -</option>
+                            {% for empresa in empresas %}
+                                <option value="{{ empresa.id }}">{{ empresa.nombre }}</option>
+                            {% endfor %}
+                        </select>
+                    <a id="showPop4" data-content="Al pertenecer a varias empresas, los repositorios se mostrarán en función de la empresa seleccionada." data-original-title="¿Por qué veo este selector?" class="btn toolTip">?</a>
+                </fieldset>
+            </form>
+        </div>
+    </div>
+
+{% endblock %}
+
+{% block customjs %}
+    <script src="{{ asset('bundles/adminbundle/js/custom.js') }}"></script>
+{% endblock %}

@@ -1,0 +1,7 @@
+parameters:
+#    mg_admin.example.class: MG\AdminBundle\Example
+
+services:
+#    mg_admin.example:
+#        class: %mg_admin.example.class%
+#        arguments: [@service_id, "plain_value", %parameter%]

@@ -1,0 +1,283 @@
+mg_admin_homepage:
+    pattern:  /
+    defaults: { _controller: MGAdminBundle:Admin:index }
+
+mg_useradmin_homepage:
+    pattern: /users/{page}
+    defaults: { _controller: MGAdminBundle:AdminUser:index }
+    requirements:
+        page: \d+
+
+mg_user_create:
+    pattern: /user/{empId}/create
+    defaults: { _controller: MGAdminBundle:AdminUser:create }
+
+mg_user_detail:
+    pattern: /user/{empId}/{userName}/detail
+    defaults: { _controller: MGAdminBundle:AdminUser:detail }
+
+mg_user_edit:
+    pattern: /user/{empId}/{userName}/edit
+    defaults: { _controller: MGAdminBundle:AdminUser:update }
+
+mg_user_block:
+    pattern: /users/block/{userName}
+    defaults: { _controller: MGAdminBundle:AdminUser:block }
+
+mg_user_by_empresa:
+    pattern: /users/filter/{empresaID}/list/{page}
+    defaults: { _controller: MGAdminBundle:AdminUser:listUserEmpresa }
+    requirements:
+            page: \d+
+
+mg_user_by_empresa_rol:
+    pattern: /users/view/{rolId}/{empresaID}/{page}
+    defaults: { _controller: MGAdminBundle:AdminUser:listUserEmpresaRol }
+    requirements:
+            page: \d+
+
+mg_empadmin_homepage:
+    pattern: /empresas/{page}
+    defaults: { _controller: MGAdminBundle:AdminEmpresa:index }
+    requirements:
+        page: \d+
+
+mg_empresa_create:
+    pattern: /empresa/create
+    defaults: { _controller: MGAdminBundle:AdminEmpresa:create }
+
+mg_empresa_detail:
+    pattern: /empresa/{empId}/detail
+    defaults: { _controller: MGAdminBundle:AdminEmpresa:detail }
+
+mg_empresa_update:
+    pattern: /empresa/{empId}/update
+    defaults: { _controller: MGAdminBundle:AdminEmpresa:update }
+
+mg_empresa_block:
+    pattern: /empresa/disable/{empId}
+    defaults: { _controller:MGAdminBundle:AdminEmpresa:block }
+
+mg_repoadmin_homepage:
+    pattern: /repositorios/{page}
+    defaults: { _controller: MGAdminBundle:AdminRepo:index }
+    requirements:
+        page: \d+
+
+mg_repo_create:
+    pattern: /repositorio/create
+    defaults: { _controller: MGAdminBundle:AdminRepo:create }
+
+mg_repo_update:
+    pattern: /repositorio/{repoId}/update
+    defaults: { _controller: MGAdminBundle:AdminRepo:update }
+
+mg_repo_detail:
+    pattern: /repositorio/{empId}/{repoId}/detail
+    defaults: { _controller: MGAdminBundle:AdminRepo:detail }
+
+mg_repo_block:
+    pattern: /repositorio/disable/{repoId}
+    defaults: { _controller: MGAdminBundle:AdminRepo:block }
+
+mg_repo_addusers:
+    pattern: /repositorio/{empId}/add/{repoId}/users
+    defaults: { _controller: MGAdminBundle:AdminRepo:giveUsers }
+
+mg_repo_addclients:
+    pattern: /repositorio/{empId}/add/{repoId}/clients
+    defaults: { _controller: MGAdminBundle:AdminRepo:giveClients }
+
+mg_repo_by_empresa:
+    pattern: /repositorios/filter/{empId}/list/{page}
+    defaults: { _controller: MGAdminBundle:AdminRepo:listRepoEmpresa }
+    requirements:
+        page: \d+
+
+mg_repo_show_all_files:
+    pattern: /repo/show/files/{repoId}/{page}
+    defaults: { _controller: MGAdminBundle:AdminRepo:showFiles }
+    requirements:
+        repoId: \d+
+        page: \d+
+
+mg_repo_show_files_by_user:
+    pattern: /repo/show/files/by/{userId}/{page}
+    defaults: { _controller: MGAdminBundle:AdminRepo:showUserFiles }
+    requirements:
+        userÏd: \d+
+        page: \d+
+
+mg_take_dates_from_user:
+    pattern: /repo/take/dates/{repoId}
+    defaults: { _controller: MGAdminBundle:AdminRepo:takeDateFromUser }
+    requirements:
+        page: \d+
+
+mg_repo_filter_files_repo:
+    pattern: /repo/show/files/date/{fechaIni}/{fechaFin}/{repoId}/{page}
+    defaults: { _controller: MGAdminBundle:AdminRepo:filterDateFiles }
+    requirements:
+        repoId: \d+
+        page: \d+
+
+mg_servadmin_homepage:
+    pattern: /servicios/{page}
+    defaults: { _controller: MGAdminBundle:AdminServicios:index}
+    requirements:
+        page: \d+
+
+mg_serv_detail:
+    pattern: /servicio/{servId}/detail
+    defaults: { _controller: MGAdminBundle:AdminServicios:detail }
+
+mg_serv_create:
+    pattern: /servicio/{empId}/create/
+    defaults: { _controller: MGAdminBundle:AdminServicios:create }
+
+mg_custom_serv_create:
+    pattern: /servicio/custom/{empId}/create/
+    defaults: { _controller: MGAdminBundle:AdminServicios:createCustom }
+
+mg_serv_update:
+    pattern: /servicio/{empId}/{servId}/update
+    defaults: { _controller: MGAdminBundle:AdminServicios:update}
+
+mg_serv_block:
+    pattern: /servicio/disable/{servId}
+    defaults: { _controller: MGAdminBundle:AdminServicios:block}
+
+mg_serv_by_empresa:
+    pattern: /servicios/filter/{empId}/list/{page}
+    defaults: { _controller: MGAdminBundle:AdminServicios:listServEmpresa }
+    requirements:
+        page: \d+
+
+mg_serv_addusers:
+    pattern: /servicio/{empId}/add/{servId}/users
+    defaults: { _controller: MGAdminBundle:AdminServicios:giveUsers }
+
+mg_serv_addclients:
+    pattern: /servicio/{empId}/add/{servId}/clients
+    defaults: { _controller: MGAdminBundle:AdminServicios:giveClients }
+
+mg_catadmin_homepage:
+    pattern: /categorias/{page}
+    defaults: { _controller: MGAdminBundle:AdminCategorias:index }
+    requirements:
+        page: \d+
+
+mg_cat_create:
+    pattern: /categoria/{empId}/create
+    defaults: { _controller: MGAdminBundle:AdminCategorias:create }
+
+mg_cat_update:
+    pattern: /categoria/{empId}/{catId}/update
+    defaults: { _controller: MGAdminBundle:AdminCategorias:update }
+
+mg_cat_detail:
+    pattern: /categoria/{empId}/{catId}/detail
+    defaults: { _controller: MGAdminBundle:AdminCategorias:detail }
+
+mg_cat_block:
+    pattern: /categoria/disable/{catId}
+    defaults: { _controller: MGAdminBundle:AdminCategorias:block}
+
+mg_cat_by_empresa:
+    pattern: /categorias/filter/{empId}/list/{page}
+    defaults: { _controller: MGAdminBundle:AdminCategorias:listCatEmpresa }
+    requirements:
+        page: \d+
+
+mg_gest_homepage:
+    pattern: /gestiones/{page}/{ord}
+    defaults: { _controller: MGAdminBundle:AdminGestion:index }
+    requirements:
+        page: \d+
+
+mg_gest_admin_new:
+    pattern: /gestion/new/{clientId}
+    defaults: { _controller: MGAdminBundle:AdminGestion:createGestAdmin}
+
+mg_gest_by_empresa:
+    pattern: /gestiones/filter/{empId}/list/{page}
+    defaults: { _controller: MGAdminBundle:AdminGestion:listGestEmpresa }
+    requirements:
+        page: \d+
+
+mg_gest_by_empresa_estado:
+    pattern: /gestiones/filter/{empId}/list/{page}/by/{estId}/{ord}
+    defaults: { _controller: MGAdminBundle:AdminGestion:listGestEstadoEmpresa }
+    requirements:
+        page: \d+
+        empId: \d+
+        ord: \d+
+        estId: \d+
+
+mg_gest_new_comment:
+    pattern: /gestion/{gestId}/new/comment
+    defaults: { _controller: MGAdminBundle:AdminGestion:addCommentGest }
+
+mg_manage_gest:
+    pattern: /gestion/{gestId}
+    defaults: { _controller: MGAdminBundle:AdminGestion:manageGest }
+
+mg_close_gest:
+    pattern: /gestion/{gestId}/{status}
+    defaults: { _controller: MGAdminBundle:AdminGestion:closeGest }
+    requirements:
+        gestId: \d+
+
+mg_update_est:
+    pattern: /gestion/update/{gestId}/to/{estadoId}
+    defaults: { _controller: MGAdminBundle:AdminGestion:changeEstado }
+
+mg_reopen_gest:
+    pattern: /gestion/reopen/{gestId}
+    defaults: { _controller: MGAdminBundle:AdminGestion:reopenGest }
+    requirements:
+        gestId: \d+
+
+mg_download_file:
+    pattern: /admin_download/serv_for_the_lulz/{fileId}
+    defaults: { _controller: MGRepoBundle:Gestion:downloadServ}
+
+mg_delete_action:
+    pattern: /admin/del_for_the_lulz/delete/{fileId}
+    defaults: { _controller: MGRepoBundle:Gestion:deleteFile }
+
+mg_delete_action_repo:
+      pattern: /admin//del_for_the_lulz/repo/delete/{fileId}
+      defaults: { _controller: MGRepoBundle:Gestion:deleteRepoFile }
+
+mg_cont_homepage:
+    pattern: /solicitudes/{page}
+    defaults: { _controller: MGAdminBundle:AdminContratacion:index }
+    requirements:
+        page: \d+
+
+mg_client_cont_homepage:
+    pattern: /client/cont/services/{page}
+    defaults: { _controller: MGAdminBundle:AdminClientContratacion:index }
+    requirements:
+        page: \d+
+
+mg_client_cont_detail:
+    pattern: /client/cont/detail/{contId}
+    defaults: { _controller: MGAdminBundle:AdminClientContratacion:detail }
+    requirements:
+        contId: \d+
+
+mg_contactos_homepage:
+    pattern: /contactos/{page}
+    defaults: { _controller: MGAdminBundle:AdminContact:index }
+    requirements:
+        page: \d+
+
+mg_public_conver_detail:
+    pattern: /public_conver/{idConv}
+    defaults: { _controller: MGAdminBundle:AdminContact:show }
+
+mg_discard_conver:
+    pattern: /discard/conver/{convId}
+    defaults: { _controller: MGAdminBundle:AdminContact:discardConvContact }

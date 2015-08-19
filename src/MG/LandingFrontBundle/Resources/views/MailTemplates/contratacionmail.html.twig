@@ -1,0 +1,60 @@
+<html>
+
+<body>
+   <div style="width: 60%;">
+       <header>
+       <div><a href="{{ app.request.scheme ~'://' ~ app.request.httpHost ~ path('mg_landing_front_homepage') }}"><img src="{{ app.request.scheme ~'://' ~ app.request.httpHost ~ asset('bundles/landingfront/images/logo.png') }}" alt="migestion logo"></a></div>
+       </header>
+       <h1 style="color:#005580">¡Solicitud de alta en curso!</h1>
+       <h2>Bienvenido a Mi Gestión Online</h2>
+       <h3>Gracías por contratar nuestros servicios</h3>
+       <p>Estimado {{ name }}</p>
+       <p>Gracias por solicitar los servicios de Mi Gestión Online</p>
+       <p>En breves nos pondremos en contacto contigo para facilitarte los accesos a Mi Gestión Online.</p>
+       <p>A continuación se listan los produtos que ha contratado:</p>
+       <div style="width: 50%">
+           <ul style="list-style: none">
+               <li><h2 style="color:#005580">{{ paquete }}.</h2></li>
+               <li>Precio: {{ precio }} / mes.</li>
+               <li>Periodo de facturacion: {{ periodo }}.</li>
+               <li>Descuento aplicado {{ descuento }}%.</li>
+               {% set coste = precio * duracion  %}
+               {% set desc = (coste * descuento) / 100  %}
+               {% set precioFinal = coste - desc %}
+               {% if descuento == 10 %}
+                   <li>Coste semestral: {{ coste }}€</li>
+                   <li>Descuento: {{ desc }}€</li>
+                   <li>----------------------------</li>
+                   <li>Precio final: {{ precioFinal}}€*</li>
+               {% elseif descuento == 15 %}
+                   <li>Coste anual: {{ coste }}€</li>
+                   <li>Descuento: {{ desc }}€</li>
+                   <li>----------------------------</li>
+                   <li>Precio final: {{ precioFinal}}€*</li>
+               {% elseif descuento == 0 %}
+                   <li>Coste anual: {{ coste }}€</li>
+                   <li>Descuento: <b>SIN DESCUENTO</b></li>
+                   <li>----------------------------</li>
+                   <li>Precio final: {{ precioFinal}}€*</li>
+
+               {% endif %}
+           </ul>
+       </div>
+       <p>El cobro de los servicios se cargará a la cuenta {{ ccc }}****</p>
+       <p>Un cordial saludo.</p>
+       <p>El equipo de Mi Gestión Online.</p>
+       <footer>
+           <p style="font-size: 10px">*IVA NO INCLUIDO</p>
+       </footer>
+   </div>
+   <div style="width: 60%; border-top: 1px solid #cccccc; text-align: justify">
+       <p style="font-size: 10px">Copyright ©2013 Mi Gestion Online. · Todos los derechos reservados<p>
+       <p style="font-size: 10px">SABER NUEVAS TECNOLOGÍAS, S.L · Plaza Azteca, s/n local 50012 Zaragoza (España) · Tel. 976436030 / 679182420</p>
+       <p style="font-size: 10px">Ten en cuenta que este es un mensaje automático, por lo que si lo respondes no recibirás ninguna contestación.</p>
+       <p style="font-size: 10px">Para asegurar que recibes nuestros correos electrónicos, por favor, añade la dirección
+           noreply@migestionline.com a tu lista de remitentes seguros.</p>
+       <p style="font-size: 10px">Si quieres saber cómo tratamos tus datos personales, consulta nuestra <a href="{{ app.request.scheme ~'://' ~ app.request.httpHost ~ path('mg_front_politica') }}">política de privacidad.</a></p>
+       <p style="font-size: 10px">Este correo electrónico y la información que contiene son confidenciales. Si lo ha recibido por error, infórmenos inmediatamente. No deberá copiarlo bajo ningún propósito ni revelar su contenido a un tercero. Las comunicaciones por Internet no son seguras y, por tanto, Mi Gestión Online no asume ninguna responsabilidad jurídica por el contenido de este mensaje, ya que se ha difundido en una red pública. Si sospecha que el mensaje puede haber sido interceptado o modificado, póngase en contacto con nosotros.</p>
+   </div>
+</body
+</html>

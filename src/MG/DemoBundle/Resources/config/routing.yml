@@ -1,0 +1,194 @@
+#ROUTING DEMO ADMIN
+mg_demo_homepage:
+    pattern:  /
+    defaults: { _controller: MGDemoBundle:Default:index }
+
+mg_demologin_action:
+    pattern: /login/{target}
+    defaults: { _controller: MGDemoBundle:Default:loginDemo }
+
+mg_demo_admin:
+    pattern: /admin
+    defaults: { _controller: MGDemoBundle:Default:adminDemo}
+
+mg_demo_cliente:
+    pattern: /admin/panel
+    defaults: { _controller: MGDemoBundle:Default:clienteDemo}
+
+mg_demo_useradmin_homepage:
+    pattern: /admin/users
+    defaults: { _controller: MGDemoBundle:Default:indexUserDemo }
+
+mg_demo_user_create:
+    pattern: /admin/user/create
+    defaults: { _controller: MGDemoBundle:Default:createUserDemo }
+
+mg_demo_user_detail:
+    pattern: /admin/user/detail
+    defaults: { _controller: MGDemoBundle:Default:detailUserDemo }
+
+mg_demo_user_edit:
+    pattern: /admin/user/edit
+    defaults: { _controller: MGDemoBundle:Default:updateUserDemo }
+
+mg_demo_user_by_empresa:
+    pattern: /admin/users/filter/list
+    defaults: { _controller: MGDemoBundle:Default:listUserEmpresaDemo }
+
+mg_demo_user_by_empresa_rol:
+    pattern: /admin/users/view
+    defaults: { _controller: MGDemoBundle:Default:listUserEmpresaRolDemo }
+
+mg_demo_repoadmin_homepage:
+    pattern: /admin/repositorios
+    defaults: { _controller: MGDemoBundle:Default:indexRepoDemo }
+
+mg_demo_repo_detail:
+    pattern: /admin/repositorio/detail
+    defaults: { _controller: MGDemoBundle:Default:detailRepoDemo }
+
+mg_demo_repo_addusers:
+    pattern: /admin/repositorio/add/users
+    defaults: { _controller: MGDemoBundle:Default:giveUsersRepoDemo }
+
+mg_demo_repo_addclients:
+    pattern: /admin/repositorio/add/clients
+    defaults: { _controller: MGDemoBundle:Default:giveClientsRepoDemo }
+
+mg_demo_repo_by_empresa:
+    pattern: /admin/repositorios/filter/list
+    defaults: { _controller: MGDemoBundle:Default:listRepoEmpresaDemo }
+
+mg_demo_show_files:
+    pattern: /admin/repo/show/files
+    defaults: { _controller: MGDemoBundle:Default:viewFilesRepo }
+
+mg_demo_show_files_dates:
+    pattern: /admin/repo/show/files/by/date
+    defaults: { _controller: MGDemoBundle:Default:viewFilesRepoDate }
+
+mg_demo_show_files_user:
+    pattern: /admin/repo/show/files/by/user
+    defaults: { _controller: MGDemoBundle:Default:viewFilesRepoUser }
+
+mg_demo_servadmin_homepage:
+    pattern: /admin/servicios
+    defaults: { _controller: MGDemoBundle:Default:indexServDemo}
+    
+mg_demo_serv_detail:
+    pattern: /admin/servicio/detail
+    defaults: { _controller: MGDemoBundle:Default:detailServDemo }
+
+mg_demo_serv_create:
+    pattern: /admin/servicio/create
+    defaults: { _controller: MGDemoBundle:Default:createServDemo }
+
+mg_demo_serv_update:
+    pattern: /admin/servicio/update
+    defaults: { _controller: MGDemoBundle:Default:updateServDemo}
+
+mg_demo_serv_by_empresa:
+    pattern: /admin/servicios/filter/list
+    defaults: { _controller: MGDemoBundle:Default:listServEmpresaDemo }
+
+mg_demo_serv_addusers:
+    pattern: /admin/servicio/add/users
+    defaults: { _controller: MGDemoBundle:Default:giveUsersServDemo }
+
+mg_demo_serv_addclients:
+    pattern: /admin/servicio/add/clients
+    defaults: { _controller: MGDemoBundle:Default:giveClientsServDemo }
+
+mg_demo_catadmin_homepage:
+    pattern: /admin/categorias
+    defaults: { _controller: MGDemoBundle:Default:indexCatDemo }
+    
+mg_demo_cat_create:
+    pattern: /admin/categoria/create
+    defaults: { _controller: MGDemoBundle:Default:createCatDemo }
+
+mg_demo_cat_update:
+    pattern: /admin/categoria/update
+    defaults: { _controller: MGDemoBundle:Default:updateCatDemo }
+
+mg_demo_cat_detail:
+    pattern: /admin/categoria/detail
+    defaults: { _controller: MGDemoBundle:Default:detailCatDemo }
+
+mg_demo_cat_by_empresa:
+    pattern: /admin/categorias/filter/list
+    defaults: { _controller: MGDemoBundle:Default:listCatEmpresaDemo }
+
+mg_demo_gest_homepage:
+    pattern: /admin/gestiones
+    defaults: { _controller: MGDemoBundle:Default:indexGestDemo }
+
+mg_demo_gest_admin_new:
+    pattern: /admin/gestion/new
+    defaults: { _controller: MGDemoBundle:Default:createGestAdminDemo}
+
+mg_demo_gest_by_empresa:
+    pattern: /admin/gestiones/filter/list
+    defaults: { _controller: MGDemoBundle:Default:listGestEmpresaDemo }
+    
+mg_demo_gest_by_empresa_estado:
+    pattern: /admin/gestiones/filter/list/by
+    defaults: { _controller: MGDemoBundle:Default:listGestEstadoEmpresaDemo }
+   
+mg_demo_manage_gest:
+    pattern: /admin/gestion
+    defaults: { _controller: MGDemoBundle:Default:manageGestDemo }
+
+mg_demo_mensajeria_homepage:
+    pattern:  /admin/msg
+    defaults: { _controller: MGDemoBundle:Default:indexMsgDemo }
+
+mg_demo_new_message_admin:
+    pattern: /admin/msg/new/admin/conv/
+    defaults: { _controller: MGDemoBundle:Default:newChatAdminDemo }
+
+mg_demo_show_conv:
+    pattern: /admin/msg/conv/
+    defaults: { _controller: MGDemoBundle:Default:showChatDemo }
+
+#ROUTING DEMO CLIENTE
+
+mg_demo_user_panel:
+    pattern:  /client/Empresa/
+    defaults: { _controller: MGDemoBundle:Default:userPanelDemo }
+
+mg_demo_gestion_new:
+    pattern: /client/new/gestion
+    defaults: { _controller: MGDemoBundle:Default:newGestionClienteDemo }
+
+mg_demo_manage_cli_gest:
+    pattern: /client/manage/
+    defaults: { _controller:MGDemoBundle:Default:manageGestClientDemo }
+
+mg_demo_user_panel_cat:
+    pattern:  /client/Empresa/filter/1/categoria
+    defaults: { _controller: MGDemoBundle:Default:userPanelFilteredDemo }
+
+mg_demo_user_panel_est:
+    pattern:  /client/Empresa/estado/1/filter/
+    defaults: { _controller: MGDemoBundle:Default:userPanelFilteredEstDemo }
+
+mg_demo_user_messages_panel:
+    pattern: /client/messages/index
+    defaults: { _controller: MGDemoBundle:Default:userMessagesPanelDemo }
+
+mg_demo_user_show_message:
+    pattern: /client/show/message
+    defaults: { _controller: MGDemoBundle:Default:showMessageClientDemo }
+
+mg_demo_user_new_message:
+    pattern: /client/new/message
+    defaults: { _controller: MGDemoBundle:Default:newMessageClientDemo }
+
+mg_demo_show_files_cli:
+    pattern: /client/show/files
+    defaults: { _controller: MGDemoBundle:Default:showClientFilesDemo }
+
+mg_demo_show_files_date_cli:
+    pattern: /client/show/files/date
+    defaults: { _controller: MGDemoBundle:Default:showClientFilesDateDemo }

@@ -1,0 +1,92 @@
+
+{% extends 'MGRepoBundle:Base:base_repo.html.twig' %}
+
+{% set infoClient = app.session.get('infoClient') %}
+{% set empresa = infoClient['empresa'] %}
+
+{% block content %}
+
+        <div class="container-fluid" style="margin-top: 25px; padding: 0">
+            <div class="span10" style="margin-left: 15px">
+                <h1>Tus gestiones</h1>
+            </div>
+        <div class="row-fluid">
+            <table class="table table-striped">
+                <thead>
+                <tr>
+                    <td>Número Gestión</td>
+                    <td>Cliente</td>
+                    <td>Descripción</td>
+                    <td>Fecha Creación</td>
+                    <td>Servicio</td>
+                    <td>Categoría</td>
+                    <td>Estado</td>
+                    <td>Archivos adjuntos</td>
+                    <td>Comentarios</td>
+                    <td colspan="3">Acciones</td>
+                </tr>
+                </thead>
+                {% for gest in gestiones %}
+                    {% if gest.estado.estadoCode == 'GESTION_NUEVA' %}
+                        <tr class="success">
+                    {% elseif gest.estado.estadoCode == 'GESTION_RESUELTA' %}
+                        <tr class="info">
+                    {% elseif gest.estado.estadoCode == 'GESTION_CERRADA_NO_RESUELTA' %}
+                        <tr class="error">
+                    {% elseif gest.estado.estadoCode == 'GESTION_ACCION_REQUERIDA'%}
+                        <tr class="warning">
+                    {% elseif gest.estado.estadoCode == 'GESTION_CERRADA_CLIENTE'%}
+                        <tr class="info">
+                    {% else %}
+                        <tr>
+                    {% endif %}
+                        <td>{{ gest.id + 10000 }}</td>
+                        <td>{{ gest.cliente.username }}</td>
+                        <td>{{ gest.descripcion }}</td>
+                        <td>{{ gest.fechaCreacion|date('d-m-Y H:i:s') }}</td>
+                        <td>{{ gest.categoria.servicio.nombre }}</td>
+                        <td>{{ gest.categoria.nombre }}</td>
+                        <td>{{ gest.estado.nombre }}</td>
+                        <td>{{ gest.archivos|length }}</td>
+                        <td>{{ gest.comentarios|length }}</td>
+                        <td>
+                            <div class="btn-group pull-right dropdown">
+                                <a class="btn btn-info dropdown-toggle" data-toggle="dropdown" href="#">
+                                    <i class="icon-white icon-cog"></i> Acciones
+                                    <span class="caret"></span>
+                                </a>
+                                <ul class="dropdown-menu" role="menu">
+                                    <li><a href="{{ path('mg_manage_cli_gest', {'gestId':gest.id}) }}">Gestionar</a></li>
+                                    <li class="divider"></li>
+                                    <li><a href="{{ path('mg_gestion_close', {'gestId':gest.id}) }}" class="btn-danger" style="color: white">Cerrar gestión</a></li>
+                                </ul>
+                            </div>
+                        </td>
+                    </tr>
+                {% endfor %}
+            </table>
+            <div class="pagination">
+                <ul>
+                    {% if first is defined and first == true %}
+                        <li class="active"><a href="{{ path('mg_user_panel', {'page': page-1, 'empName': empresa.nombre}) }}"><span>&laquo;</span></a></li>
+                    {% else %}
+                        <li class="disabled"><span>&laquo;</span></li>
+                    {% endif %}
+
+                    {% if pages is defined %}
+                        {% for i in 1..pages %}
+                            <li><a href="{{ path('mg_user_panel', {'page': i, 'empName': empresa.nombre}) }}">{{ i }}</a></li>
+                        {% endfor %}
+                    {% endif %}
+
+                    {% if last is defined and last == true %}
+                        <li class="disabled"><span>&raquo;</span></li>
+                    {% else %}
+                        <li class="active"><a href="{{ path('mg_user_panel', {'page': page+1, 'empName': empresa.nombre}) }}"><span>&raquo;</span></a></li>
+                    {% endif %}
+                </ul>
+            </div>
+        </div>
+    </div>
+
+{% endblock %}

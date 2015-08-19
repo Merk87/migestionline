@@ -1,0 +1,75 @@
+{% extends 'MGAdminBundle:Bases:base.html.twig' %}
+
+{% block content %}
+    <div class="container-fluid">
+           <h2>Solicitudes</h2>
+            <table class="table table-bordered table-condensed table-striped table-hover">
+                <thead>
+                <tr>
+                    <td>Usuario</td>
+                    <td>Fecha</td>
+                    <td>Actual cliente de:</td>
+                    <td>Servicio/s solicitados</td>
+                    <td>Comentarios</td>
+
+                    <td colspan="3">Acciones</td>
+                </tr>
+                </thead>
+                {% for contratacion in contrataciones|reverse %}
+                    <tr>
+                        <td>{{ contratacion.cliente.username }}</td>
+                        <td>{{ contratacion.fechaSolicitud|date('d-m-Y') }}</td>
+                        <td>
+                            {% for e in contratacion.cliente.empresas %}
+                                {% if loop.last %}
+                                    {{ e.nombre }}
+                                {% else %}
+                                    {{ e.nombre }},
+                                {% endif %}
+                            {% endfor %}
+                        </td>
+                        <td>
+                            {% for serv_sol in contratacion.serviciosSolicitados %}
+                                {% if loop.last %}
+                                    {{ serv_sol.displayName }}
+                                {% else %}
+                                    {{ serv_sol.displayName }},
+                                {% endif %}
+                            {% endfor %}
+                        </td>
+                        <td>{{ contratacion.serviciosPersonalizados }}</td>
+                        <td>
+                            <a href="{{ path('mg_client_cont_detail', {'contId':contratacion.id}) }}" class="btn btn-success">Detalles</a>
+                            <a href="{{ path('mg_delete_contratacion', {'contId':contratacion.id}) }}" class="btn btn-danger">Descartar</a>
+                        </td>
+                    </tr>
+                {% endfor %}
+            </table>
+
+            <div class="pagination">
+                <ul>
+                    {% if first is defined and first == true %}
+                        <li class="active"><a href="{{ path('mg_client_cont_homepage', {'page': page-1 }) }}"><span>&laquo;</span></a></li>
+                    {% else %}
+                        <li class="disabled"><span>&laquo;</span></li>
+                    {% endif %}
+
+                    {% if pages is defined %}
+                        {% for i in 1..pages %}
+                            <li><a href="{{ path('mg_client_cont_homepage', {'page': i }) }}">{{ i }}</a></li>
+                        {% endfor %}
+                    {% endif %}
+
+                    {% if last is defined and last == true %}
+                        <li class="disabled"><span>&raquo;</span></li>
+                    {% else %}
+                        <li class="active"><a href="{{ path('mg_client_cont_homepage', {'page': page+1 }) }}"><span>&raquo;</span></a></li>
+                    {% endif %}
+                </ul>
+            </div>
+    </div>
+{% endblock %}
+
+{% block customjs %}
+    <script src="{{ asset('bundles/adminbundle/js/custom.js') }}"></script>
+{% endblock %}

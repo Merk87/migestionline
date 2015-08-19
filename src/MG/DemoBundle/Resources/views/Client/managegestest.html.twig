@@ -1,0 +1,53 @@
+{% extends 'MGDemoBundle:Bases:base_client.html.twig' %}
+
+{% block content %}
+
+        <div class="container-fluid" style="margin-top: 50px; padding: 0">
+
+        <div class="row-fluid">
+            <table class="table table-striped">
+                <thead>
+                <tr>
+                    <td>Número Gestión</td>
+                    <td>Descripción</td>
+                    <td>Fecha Creación</td>
+                    <td>Servicio</td>
+                    <td>Categoría</td>
+                    <td>Estado</td>
+                    <td>Archivos adjuntos</td>
+                    <td>Comentarios</td>
+                    <td colspan="3">Acciones</td>
+                </tr>
+                </thead>
+                <tr class="success">
+                    <td>100002 </td>
+                    <td>Entregar Balance de situación</td>
+                    <td>01/08/2013</td>
+                    <td>Fiscal PYME</td>
+                    <td>Impuestos</td>
+                    <td>Resuelta</td>
+                    <td>0</td>
+                    <td>2</td>
+                    <td>
+                        <div class="btn-group pull-right dropdown">
+                            <button class="btn btn-info dropdown-toggle" data-toggle="dropdown" disabled>
+                                <i class="icon-white icon-cog"></i> Acciones
+                                <span class="caret"></span>
+                            </button>
+                        </div>
+                    </td>
+                </tr>
+              </table>
+            <div class="pagination">
+                <ul>
+
+                    <li class="active"><a href="{{ path('mg_demo_user_panel') }}"><span>&laquo;</span></a></li>
+                    <li class="active"><span><a href="{{ path('mg_demo_user_panel') }}">1</span></a></li>
+                    <li class="disabled"><span>&raquo;</span></li>
+
+                </ul>
+            </div>
+        </div>
+    </div>
+
+{% endblock %}

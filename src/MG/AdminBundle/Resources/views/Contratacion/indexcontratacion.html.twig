@@ -1,0 +1,82 @@
+{% extends 'MGAdminBundle:Bases:base.html.twig' %}
+
+{% block content %}
+    <div class="container-fluid">
+           <h2>Solicitudes</h2>
+            <table class="table table-bordered table-condensed table-striped table-hover">
+                <thead>
+                <tr>
+                    <td>Nombre</td>
+                    <td>CIF</td>
+                    <td>Domicilio fiscal</td>
+                    <td>Domicilio facturación</td>
+                    <td>Fecha</td>
+                    <td>Teléfono</td>
+                    <td>Teléfono móvil</td>
+                    <td>Paquete contratado / Precio</td>
+                    <td>Perido facturación / Descuento</td>
+                    <td>Email</td>
+                    <td>Web</td>
+                    <td colspan="3">Acciones</td>
+                </tr>
+                </thead>
+                {% for contratacion in contrataciones|reverse %}
+                    <tr>
+                        <td>{{ contratacion.name }}</td>
+                        <td>{{ contratacion.nif }}</td>
+                        <td>{{ contratacion.domicilioFiscal}}</td>
+                        <td>{{ contratacion.domicilioFacturacion }}</td>
+                        <td>{{ contratacion.fechaContratacion|date('d-m-Y') }}</td>
+                        <td>{{ contratacion.telefono }}</td>
+                        <td>{{ contratacion.telefonoMvl }}</td>
+                        <td>{{ contratacion.paquete.displayNombre }} - {{ contratacion.paquete.precio }}€</td>
+                        <td>{{ contratacion.periodo.displayDuracion }} - {{ contratacion.periodo.descuento }}%</td>
+                        <td>{{ contratacion.email }}</td>
+                        <td>{{ contratacion.web }}</td>
+                        <td style="text-align: center"><button class="btn btn-success showcc" data-info="{{ contratacion.cuentaDomiciliacion }}"><i class="icon-white icon-eye-open" style="margin-right: 5px"></i>Ver Nº Cuenta</button></td>
+                    </tr>
+                {% endfor %}
+            </table>
+
+            <div class="pagination">
+                <ul>
+                    {% if first is defined and first == true %}
+                        <li class="active"><a href="{{ path('mg_cont_homepage', {'page': page-1 }) }}"><span>&laquo;</span></a></li>
+                    {% else %}
+                        <li class="disabled"><span>&laquo;</span></li>
+                    {% endif %}
+
+                    {% if pages is defined %}
+                        {% for i in 1..pages %}
+                            <li><a href="{{ path('mg_cont_homepage', {'page': i }) }}">{{ i }}</a></li>
+                        {% endfor %}
+                    {% endif %}
+
+                    {% if last is defined and last == true %}
+                        <li class="disabled"><span>&raquo;</span></li>
+                    {% else %}
+                        <li class="active"><a href="{{ path('mg_cont_homepage', {'page': page+1 }) }}"><span>&raquo;</span></a></li>
+                    {% endif %}
+                </ul>
+            </div>
+
+            {# ------------------ MODAL ------------------  #}
+            <div id="ccModal" class="modal hide fade">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                    <h3>El número de cuenta del cliente es:</h3>
+                    <p class="cccnt" style="margin-top: 15px">El número facilitado por el cliente para domicilar los pagos es:</p>
+                    <p class="cccn"></p>
+                </div>
+                <div class="modal-footer">
+                    <button class="btn closeMod">Cerrar</button>
+                </div>
+            </div>
+            {# ---------------- FIN MODAL ----------------  #}
+
+    </div>
+{% endblock %}
+
+{% block customjs %}
+    <script src="{{ asset('bundles/adminbundle/js/custom.js') }}"></script>
+{% endblock %}

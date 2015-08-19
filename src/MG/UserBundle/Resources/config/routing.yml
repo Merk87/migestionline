@@ -1,0 +1,7 @@
+mg_user_profile:
+    pattern:  /profile
+    defaults: { _controller: MGUserBundle:Default:show }
+
+mg_client_update:
+    pattern: /client/update
+    defaults: { _controller: MGUserBundle:Default:clientUpdate }

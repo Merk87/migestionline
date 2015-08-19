@@ -1,0 +1,41 @@
+{% extends 'MGRepoBundle:Base:basenolat.html.twig' %}
+
+{% block content %}
+    <div class="main">
+        <div class="container" style="margin-top:55px">
+            <div class="span12">
+                <h1>Solicitud nuevos servicios.</h1>
+                <p class="justify-text">Para poder ofrecerte los mejores servicios, selecciona los que necesites en la siguiente lista y si quieres puedes escribirnos los detalles de tu solicitud en el campo de texto que aparecerá.</p>
+                <p class="justify-text">Si el servicio que necesitas no esta listado haz clic en "Otros" y amplianos la solicitud a través del espacio que aparecerá para ello.</p>
+            </div>
+            <div class="span12">
+                <form action="{{ path('mg_home_contratacion') }}" method="POST">
+                    {{ form_errors(selectServForm) }}
+                    <h3>Servicios generales</h3>
+                    <fieldset class="span8 checklist">
+                        {{ form_widget(selectServForm.serviciosSolicitados) }}
+
+                    </fieldset>
+                    <fieldset class="span12">
+                        {% for type in servTypes %}
+                            <div class="span3" style="margin: 10px">
+                                <button class="servBut" data-id="{{ type.id }}">{{ type.displayName }}</button>
+                            </div>
+                        {% endfor %}
+                    </fieldset>
+                    <fieldset class="span8 offset2 field_custom_s">
+                        {{ form_widget(selectServForm.serviciosPersonalizados) }}
+                    </fieldset>
+                    <div class="span4 offset4" id="butwrap" style="margin-top: 25px">
+                        <input type="submit" value="Solicitar" id="doContra" class="btn btn-large btn-success">
+                        <a href="{{ path('mg_repo_homepage') }}" class="btn btn-large btn-danger butBack2">Volver</a>
+                    </div>
+                    {{ form_rest(selectServForm) }}
+                </form>
+            </div>
+            <div class="span12">
+                <a href="{{ path('mg_repo_homepage') }}" class="btn btn-large btn-danger butBack">Volver</a>
+            </div>
+        </div>
+    </div>
+{% endblock %}
